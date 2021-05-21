@@ -1,0 +1,8 @@
+setenv HIPO4ROOT $PWD/hipo
+
+setenv HIPO4LIB $HIPO4ROOT/lib
+
+setenv HIPO4INC $HIPO4ROOT/hipo4
+
+setenv LZ4DIR $HIPO4ROOT/lz4
+
