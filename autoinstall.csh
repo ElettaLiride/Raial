@@ -6,10 +6,10 @@ if ( ! -d "hipo" ) then
 
   cd hipo
 
-  source setenv.csh
-
   make
   cd ../
+
+  source setenv.csh
 
   cd RichAI_FilterC
 
