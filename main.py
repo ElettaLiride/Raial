@@ -16,6 +16,8 @@ if __name__=="__main__":
     provider = cc.connecting_ccdb(calibration_connection)
     old_pars_table = cc.reading_ccdb(provider, calibration_table, variation)
     new_pars_table = pm.changing_parameters(pars, old_pars_table, module[0], module[1], module[2])
+
+    toadd = new_pars_table.values.tolist()
     cc.adding_to_ccdb(pars, provider, calibration_table, variation)
 
     print(pars)
