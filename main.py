@@ -2,8 +2,8 @@ import sys
 import pandas as pd
 import numpy as np
 
-import ccdb_connector as cc
-import parameters_manipulator as pm
+import ccdb_connection as cc
+import parameters_setting as pm
 
 if __name__=="__main__":
     calibration_connection = "sqlite:////work/clas12/users/costantini/RICH_alignement/Costantini_script/ccdb_4.3.2.sqlite"

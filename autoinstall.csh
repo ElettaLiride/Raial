@@ -1,4 +1,8 @@
 #!/bin/tcsh
+source /group/clas12/packages/setup.csh
+
+module load clas12/2.1
+
 cd mirazita_code
 
 if ( ! -d "hipo" ) then
