@@ -13,7 +13,7 @@ def reading_ccdb(provider, mis_table, variation, run=0):
 
     variation = provider.get_variation(variation)  # That is how you get variation
     table = provider.get_type_table(mis_table)
-    assignment = provider.get_assignment(1, table, variation)
+    assignment = provider.get_assignment(table, variation, 1)
 
     columns = ['sector', 'layer', 'component', 'dx', 'dy', 'dz', 'dthx', 'dthy', 'dthz']
     pars = pd.DataFrame(assignment.constant_set.data_table, columns=columns)
