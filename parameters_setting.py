@@ -13,5 +13,5 @@ def changing_parameters(parameters, table, sector=4, layer=0, component=0):
         print('some problem here: line {}'.format(db.line_numb()))
         raise ValueError
 
-    return parameters
+    return table
 
