@@ -20,20 +20,36 @@ def reading_ccdb(provider, mis_table, variation, run=0):
 
     return pars
 
+def create_variation(provider, variation, parent = "default", comment=""):
+    from ccdb import Variation
+    parent_var = provider.create_variation(variation, comment, parent)
 
 def adding_to_ccdb(parameters, provider, table, variation, comment=""):
-    if isinstance(parameters,list):
-        provider.create_assignment(
-            data=parameters,
-            path=table,
-            variation_name=variation,
-            min_run=0,
-            max_run=ccdb.INFINITE_RUN,
-            comment=comment)
-
-    else:
-        print('some problem here: line {}'.format(db.line_numb()))
-        raise ValueError
+    try:
+        if isinstance(parameters,list):
+            provider.create_assignment(
+                data=parameters,
+                path=table,
+                variation_name=variation,
+                min_run=0,
+                max_run=ccdb.INFINITE_RUN,
+                comment=comment)
+        else:
+            print('some problem here: line {}'.format(db.line_numb()))
+            raise ValueError
+    except:
+        create_variation(provider, variation)
+        if isinstance(parameters,list):
+            provider.create_assignment(
+                data=parameters,
+                path=table,
+                variation_name=variation,
+                min_run=0,
+                max_run=ccdb.INFINITE_RUN,
+                comment=comment)
+        else:
+            print('some problem here: line {}'.format(db.line_numb()))
+            raise ValueError
 
     return 0
 
