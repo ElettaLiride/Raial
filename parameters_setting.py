@@ -3,8 +3,8 @@ import debugging_tools as db
 
 
 def changing_parameters(parameters, table, sector=4, layer=0, component=0):
-    if isinstance(table,pd.DataFrame):
-            if isinstance(parameters,list):
+    if isinstance(table, pd.DataFrame):
+            if isinstance(parameters, list):
                 table[sector][layer][component] = parameters
             else:
                 print('some problem here: line {}'.format(db.line_numb()))

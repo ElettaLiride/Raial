@@ -8,13 +8,14 @@ import parameters_manipulator as pm
 if __name__=="__main__":
     calibration_connection = "sqlite:////work/clas12/users/costantini/RICH_alignement/Costantini_script/ccdb_4.3.2.sqlite"
     calibration_table      = '/calibration/rich/misalignments'
-    variation              = 'misalignments_test'
+    variation              = 'default'
     user                   = "Costantini"
     module = [4,201,1]
+    pars = [0,0,1,1,1,0]
 
-    provider=cc.connecting_ccdb(calibration_connection)
-    pars = cc.reading_ccdb(provider,calibration_table, variation)
-    pars = pm.changing_parameters(pars,calibration_table,module[0],module[1],module[2])
+    provider = cc.connecting_ccdb(calibration_connection)
+    old_pars_table = cc.reading_ccdb(provider, calibration_table, variation)
+    new_pars_table = pm.changing_parameters(pars, calibration_table, module[0], module[1], module[2])
     cc.adding_to_ccdb(pars, provider, calibration_table, variation)
 
     print(pars)

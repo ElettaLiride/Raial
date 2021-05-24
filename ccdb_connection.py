@@ -16,7 +16,7 @@ def reading_ccdb(provider, mis_table, variation, run=0):
     assignment = provider.get_assignment(1, table, variation)
 
     columns = ['sector', 'layer', 'component', 'dx', 'dy', 'dz', 'dthx', 'dthy', 'dthz']
-    pars = pd.DataFrame(assignment, columns=columns)
+    pars = pd.DataFrame(assignment.constant_set.data_table, columns=columns)
 
     return pars
 
