@@ -18,7 +18,7 @@ if __name__=="__main__":
     new_pars_table = pm.changing_parameters(pars, old_pars_table, module[0], module[1], module[2])
 
     toadd = new_pars_table.values.tolist()
-    cc.adding_to_ccdb(pars, provider, calibration_table, variation)
+    cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
 
     print(pars)
     # ##Reading environment variable
