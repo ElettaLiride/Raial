@@ -1,4 +1,6 @@
 #!/bin/tcsh
+cd mirazita_code
+
 if [ ! -d "hipo" ]
 then
   git clone --recurse-submodules https://github.com/gavalian/hipo
