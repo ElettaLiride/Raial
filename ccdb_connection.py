@@ -3,7 +3,7 @@ import ccdb
 import debugging_tools as db
 import numpy as np
 
-def connecting_ccdb(calibration_connection, user="anonymous"):
+def connecting_ccdb(calibration_connection, variation, user="anonymous"):
     provider = ccdb.AlchemyProvider()
     provider.connect(calibration_connection)
     provider.authentication.current_user_name = user
