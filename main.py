@@ -1,12 +1,6 @@
-import sys
-import os
 import subprocess
 
-import ccdb_connection as cc
-import parameters_setting as pm
 
-def getrunnumber(file):
-    return file.split("_")[2]
 
 
 if __name__ == "__main__":
@@ -37,11 +31,14 @@ if __name__ == "__main__":
 
     # executing reconstruction
     # subprocess.run(["./", exereco, "-i", fileIN, "-o", fileOUT, "-y", yalm])
+
     bashCommand = "/work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yalm
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
+
     #execute evaluation
     # subprocess.run([exeplot, "-R"+runnumber, dirOUT + "/*"])
+
     bashCommand = "./"+exeplot+" -R"+runnumber+" "+dirOUT+"/*"
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
