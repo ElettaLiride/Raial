@@ -32,19 +32,24 @@ if __name__ == "__main__":
     filetofilter = "file"
 
     # executing Mirazita code for filtering
-    if sys.argv[0] == '-f':
-        subprocess.run(["./mirazita_code/RichAI_FilterC/filterHipo", "-R" + RunNumber, "-L" + Layer, filetofilter])
+    # if sys.argv[0] == '-f':
+    #     subprocess.run(["./mirazita_code/RichAI_FilterC/filterHipo", "-R" + RunNumber, "-L" + Layer, filetofilter])
 
     # executing reconstruction
-    subprocess.run(["./" + exereco, "-i", fileIN, "-o", fileOUT, "-y", yalm])
-
+    # subprocess.run(["./", exereco, "-i", fileIN, "-o", fileOUT, "-y", yalm])
+    bashCommand = ".//work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yalm
+    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
     #execute evaluation
-    subprocess.run([exeplot, "-R"+runnumber, dirOUT + "/*"])
-
+    # subprocess.run([exeplot, "-R"+runnumber, dirOUT + "/*"])
+    bashCommand = "./"+exeplot+" -R"+runnumber+" "+dirOUT+"/*"
+    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
     #execute drawing
-    subprocess.run(["root", "-l", "-p", "-q", DrawingFile + "(\"RichPlots_" + runnumber + "\")"])
-    subprocess.run(["mv", "RichPlots_*", dirOUT])
-    # execute Costantini code for update ccdb
+
+    # subprocess.run(["root", "-l", "-p", "-q", DrawingFile + "(\"RichPlots_" + runnumber + "\")"])
+    # subprocess.run(["mv", "RichPlots_*", dirOUT])
+    # # execute Costantini code for update ccdb
 
     # update ccdb
 
