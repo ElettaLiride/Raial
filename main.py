@@ -52,10 +52,10 @@ if __name__ == "__main__":
     # # execute Costantini code for update ccdb
 
     # update ccdb
-
-    provider = cc.connecting_ccdb(calibration_connection, variation)
-    old_pars_table = cc.reading_ccdb(provider, calibration_table, variation)
-    new_pars_table = pm.changing_parameters(pars, old_pars_table, module)
-
-    toadd = new_pars_table.values.tolist()
-    cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
+    #
+    # provider = cc.connecting_ccdb(calibration_connection, variation)
+    # old_pars_table = cc.reading_ccdb(provider, calibration_table, variation)
+    # new_pars_table = pm.changing_parameters(pars, old_pars_table, module)
+    #
+    # toadd = new_pars_table.values.tolist()
+    # cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
