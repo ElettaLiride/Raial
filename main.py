@@ -5,7 +5,19 @@ import subprocess
 import ccdb_connection as cc
 import parameters_setting as pm
 
+def getrunnumber(file):
+    return file.split()[2]
+
 if __name__ == "__main__":
+    exereco = "/work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/bin/recon-util"
+    exeplot = "mirazita_code/RichAI_Plots/richPlots"
+    fileIN = "data/rec_clas_5208_AIskim1.hipo"
+    fileOUT = "5208_AIskim1.hipo"
+    runnumber = getrunnumber(fileIN)
+    DrawingFile = "mirazita_code/RichAI_plots/DrawRichPlots.C"
+    yalm = "rich.yaml"
+    dirOUT = "out/"
+
     calibration_connection = "sqlite:///$PWD/ccdb_4.3.2.sqlite "
     calibration_table = '/calibration/rich/misalignments'
     variation = 'misalignements'
@@ -22,11 +34,18 @@ if __name__ == "__main__":
     if sys.argv[0] == '-f':
         subprocess.run(["./mirazita_code/RichAI_FilterC/filterHipo", "-R" + RunNumber, "-L" + Layer, filetofilter])
 
-    # executing Mirazita code for Reconstruction and comparison
-    subprocess.run(["/mirazita_code/RichAI_script/run.sh", "list.file"])
+    # executing reconstruction
+    subprocess.run([exereco, "-i",fileIN,"-o",fileOUT"-y", yalm])
 
+    #execute evaluation
+    subprocess.run([exeplot, "-R"+runnumber, dirOUT + "/*"])
+
+    #execute drawing
+    subprocess.run(["root","-l","-p","-q",DrawingFile+"(\"RichPlots_"+runnumber+"\")"])
+    subprocess.run(["mv", "RichPlots_*",dirOUT])
     # execute Costantini code for update ccdb
-    #  update ccdb
+
+    # update ccdb
 
     provider = cc.connecting_ccdb(calibration_connection, variation)
     old_pars_table = cc.reading_ccdb(provider, calibration_table, variation)
