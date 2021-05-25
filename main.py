@@ -12,7 +12,7 @@ def getrunnumber(file):
 if __name__ == "__main__":
     exereco = "/work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/bin/recon-util"
     exeplot = "mirazita_code/RichAI_Plots/richPlots"
-    fileIN = "data/rec_clas_5208_AIskim1.hipo"
+    fileIN = "../RICH_alignement/Mirazita_script/RichAI_FilterC/rec_clas_5208_AIskim1.hipo"
     fileOUT = "5208_AIskim1.hipo"
     runnumber = getrunnumber(fileIN)
     DrawingFile = "mirazita_code/RichAI_plots/DrawRichPlots.C"
