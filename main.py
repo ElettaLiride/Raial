@@ -16,7 +16,7 @@ if __name__ == "__main__":
     fileOUT = "5208_AIskim1.hipo"
     runnumber = getrunnumber(fileIN)
     DrawingFile = "mirazita_code/RichAI_plots/DrawRichPlots.C"
-    yalm = "rich.yaml"
+    yalm = "mirazita_code/RichAI_script/rich.yaml"
     dirOUT = "out/"
 
     calibration_connection = "sqlite:///$PWD/ccdb_4.3.2.sqlite "
