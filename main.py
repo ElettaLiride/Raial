@@ -37,22 +37,13 @@ if __name__ == "__main__":
 
     # executing reconstruction
     # subprocess.run(["./", exereco, "-i", fileIN, "-o", fileOUT, "-y", yalm])
-    bashCommand = "echo ==============INIZIO-LA-RECO============== "
-    process = subprocess.run(bashCommand.split())
-    print(process.stdout)
-
     bashCommand = "/work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yalm
-    process = subprocess.run(bashCommand.split())
+    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
     #execute evaluation
-
-    bashCommand = "echo ==============INIZIO-I-PLOT============== "
-    process = subprocess.run(bashCommand.split())
-    output, error = process.communicate()
-
     # subprocess.run([exeplot, "-R"+runnumber, dirOUT + "/*"])
     bashCommand = "./"+exeplot+" -R"+runnumber+" "+dirOUT+"/*"
-    process = subprocess.run(bashCommand.split())
+    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
     #execute drawing
 
@@ -68,6 +59,3 @@ if __name__ == "__main__":
     #
     # toadd = new_pars_table.values.tolist()
     # cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
-
-
-# /work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/bin/recon-util -i ../RICH_alignement/Mirazita_script/RichAI_FilterC/rec_clas_5208_AIskim1.hipo -o 5208_AIskim1.hipo -y  mirazita_code/RichAI_script/rich.yaml
