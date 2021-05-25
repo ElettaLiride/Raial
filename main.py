@@ -6,9 +6,8 @@ import ccdb_connection as cc
 import parameters_setting as pm
 
 def getrunnumber(file):
-    runN = file.split()
-    print(runN)
-    return runN
+    return file.split("_")[2]
+
 
 if __name__ == "__main__":
     exereco = "/work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/bin/recon-util"
