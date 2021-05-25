@@ -3,6 +3,7 @@ import ccdb
 import debugging_tools as db
 import numpy as np
 
+
 def connecting_ccdb(calibration_connection, variation, user="anonymous"):
     provider = ccdb.AlchemyProvider()
     provider.connect(calibration_connection)
@@ -16,7 +17,6 @@ def connecting_ccdb(calibration_connection, variation, user="anonymous"):
 
 
 def reading_ccdb(provider, mis_table, variation, run=0):
-
     variation = provider.get_variation(variation)  # That is how you get variation
     table = provider.get_type_table(mis_table)
     assignment = provider.get_assignment(table, 1, variation)
@@ -27,25 +27,22 @@ def reading_ccdb(provider, mis_table, variation, run=0):
     return pars
 
 
-def create_variation(provider, variation, parent = "default", comment=""):
+def create_variation(provider, variation, parent="default", comment=""):
     from ccdb import Variation
     parent_var = provider.create_variation(variation, comment, parent)
 
 
 def adding_to_ccdb(parameters, provider, table, variation, comment=""):
-
-    if isinstance(parameters,list):
+    if isinstance(parameters, list):
         provider.create_assignment(
-        data=parameters,
-        path=table,
-        variation_name=variation,
-        min_run=0,
-        max_run=ccdb.INFINITE_RUN,
-        comment=comment)
+            data=parameters,
+            path=table,
+            variation_name=variation,
+            min_run=0,
+            max_run=ccdb.INFINITE_RUN,
+            comment=comment)
     else:
         print('some problem here: line {}'.format(db.line_numb()))
         raise ValueError
 
     return 0
-
-

@@ -25,10 +25,6 @@ if ( ! -d "hipo" ) then
 
   cd ../
 
-else
-
- source setenv.csh
-
 endif
 
 end
