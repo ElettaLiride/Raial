@@ -6,6 +6,7 @@ import ccdb_connection as cc
 import parameters_setting as pm
 
 def getrunnumber(file):
+    print(file.split()[2])
     return file.split()[2]
 
 if __name__ == "__main__":
