@@ -37,10 +37,19 @@ if __name__ == "__main__":
 
     # executing reconstruction
     # subprocess.run(["./", exereco, "-i", fileIN, "-o", fileOUT, "-y", yalm])
+    bashCommand = "echo ==============INIZIO-LA-RECO============== "
+    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
+
     bashCommand = "/work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yalm
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
     output, error = process.communicate()
     #execute evaluation
+
+    bashCommand = "echo ==============INIZIO-I-PLOT============== "
+    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+    output, error = process.communicate()
+
     # subprocess.run([exeplot, "-R"+runnumber, dirOUT + "/*"])
     bashCommand = "./"+exeplot+" -R"+runnumber+" "+dirOUT+"/*"
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
