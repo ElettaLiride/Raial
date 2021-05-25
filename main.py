@@ -36,14 +36,14 @@ if __name__ == "__main__":
         subprocess.run(["./mirazita_code/RichAI_FilterC/filterHipo", "-R" + RunNumber, "-L" + Layer, filetofilter])
 
     # executing reconstruction
-    subprocess.run([exereco, "-i", fileIN, "-o", fileOUT, "-y", yalm])
+    subprocess.run(["./" + exereco, "-i", fileIN, "-o", fileOUT, "-y", yalm])
 
     #execute evaluation
     subprocess.run([exeplot, "-R"+runnumber, dirOUT + "/*"])
 
     #execute drawing
-    subprocess.run(["root","-l","-p","-q",DrawingFile+"(\"RichPlots_"+runnumber+"\")"])
-    subprocess.run(["mv", "RichPlots_*",dirOUT])
+    subprocess.run(["root", "-l", "-p", "-q", DrawingFile + "(\"RichPlots_" + runnumber + "\")"])
+    subprocess.run(["mv", "RichPlots_*", dirOUT])
     # execute Costantini code for update ccdb
 
     # update ccdb
