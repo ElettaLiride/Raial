@@ -25,9 +25,9 @@ if __name__ == "__main__":
     cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
 
 
-    filterdir = "output/filter/"
-    recodir = "output/reco/"
-    plotsdir = "output/plots/"
+    filterdir = "$PWD/output/filter/"
+    recodir = "$PWD/output/reco/"
+    plotsdir = "$PWD/output/plots/"
 
     # OUT FROM THE LOOP
     run = run_filter.runcommand(sys.argv[1], sys.argv[2])
