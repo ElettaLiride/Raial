@@ -1,7 +1,6 @@
 import sys
 
-from costantini_code import tools as t
-from costantini_code import ccdb_connection
+import costantini_code.tools as t
 
 
 # executing Mirazita code for build histogram
@@ -13,4 +12,4 @@ def runcommand(filetoread):
 
 
 if __name__ == "__main__":
-    runcommand(sys.argv[0], sys.argv[1])
+    runcommand(sys.argv[0])
