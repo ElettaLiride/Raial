@@ -21,6 +21,9 @@ if __name__ == "__main__":
             break
         else:
             old_pars_table[col].values[:] = 0
+    toadd = old_pars_table.values.tolist()
+    cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
+    cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
 
     filterdir = "output/filter"
     recodir = "output/reco"
@@ -49,10 +52,6 @@ if __name__ == "__main__":
 
     # execute Costantini code for update ccdb
     # update ccdb
-
-
-
     new_pars_table = pm.changing_parameters(pars, old_pars_table, module)
-
     toadd = new_pars_table.values.tolist()
     cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
