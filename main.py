@@ -42,7 +42,7 @@ if __name__ == "__main__":
 
     # INTO THE LOOP
     run_reco.runcommand(fileforreco)
-    fileforplot = recodir + "rec_clas_" + run + "_AIskim1.hipo"
+    fileforplot = recodir + "rec_clas_" + run + "_AISkim1.hipo"
 
     run_plots.runcommand(fileforplot)
 
