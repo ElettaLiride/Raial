@@ -14,6 +14,9 @@ def runcommand(filetofilter, Layer="-1", eventsnumber=" "):
     stdout = t.runcommand(command)
     print(stdout[0])
 
+    runnumber = int(runnumber)
+    runnumber = str(runnumber)
+
     command = "mv rec_clas_" + runnumber + "_AIskim1.hipo output/filter/"
     stdout = t.runcommand(command)
     command = "mv rec_clas_" + runnumber + "_AIskim1_events.out output/filter/"
