@@ -32,7 +32,7 @@ if __name__ == "__main__":
     plotsdir = maindir + "output/plots/"
 
     # OUT FROM THE LOOP
-    if len(sys.argv) == 2:
+    if len(sys.argv) == 3:
         nevents = " "
     else:
         nevents = sys.argv[3]
