@@ -20,7 +20,7 @@ if __name__ == "__main__":
     old_pars_table = cc.reading_ccdb(provider, calibration_table, variation)
     for col in old_pars_table.columns:
         if col == "sector" or col == "layer" or col == "component":
-            break
+            continue
         else:
             old_pars_table[col].values[:] = 0
     toadd = old_pars_table.values.tolist()
