@@ -12,4 +12,4 @@ def runcommand(filetoread):
 
 
 if __name__ == "__main__":
-    runcommand(sys.argv[0])
+    runcommand(sys.argv[1])
