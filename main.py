@@ -33,11 +33,11 @@ if __name__ == "__main__":
 
     # OUT FROM THE LOOP
     run = run_filter.runcommand(sys.argv[1], sys.argv[2], sys.argv[3])
-    fileforreco = filterdir + "rec_clas_" + run + "_AISkim1.hipo"
+    fileforreco = filterdir + "rec_clas_" + run + "_AIskim1.hipo"
 
     # INTO THE LOOP
     run_reco.runcommand(fileforreco)
-    fileforplot = recodir + "rec_clas_" + run + "_AISkim1.hipo"
+    fileforplot = recodir + "rec_clas_" + run + "_AIskim1.hipo"
 
     run_plots.runcommand(fileforplot)
 
