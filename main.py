@@ -1,4 +1,5 @@
 import sys
+import os
 
 from costantini_code import ccdb_connection as cc, parameters_setting as pm
 
@@ -9,7 +10,8 @@ import run_filter
 if __name__ == "__main__":
     ## INIT CCDB
 
-    calibration_connection = "sqlite:////work/clas12/users/costantini/RICH_alignement/Costantini_script/ccdb_4.3.2.sqlite"
+    maindir = os.getcwd() + "/"
+    calibration_connection = "sqlite:///" + maindir + "ccdb_4.3.2.sqlite"
     calibration_table = "/calibration/rich/misalignments"
     variation = "misalignments"
     user = "Costantini"
@@ -25,9 +27,9 @@ if __name__ == "__main__":
     cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
 
 
-    filterdir = "$PWD/output/filter/"
-    recodir = "$PWD/output/reco/"
-    plotsdir = "$PWD/output/plots/"
+    filterdir = maindir + "output/filter/"
+    recodir = maindir + "output/reco/"
+    plotsdir = maindir + "output/plots/"
 
     # OUT FROM THE LOOP
     run = run_filter.runcommand(sys.argv[1], sys.argv[2], sys.argv[3])
