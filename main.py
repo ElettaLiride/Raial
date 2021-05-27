@@ -52,7 +52,7 @@ if __name__ == "__main__":
     # table misalignment), for each module. An example below The function change one module of the "old_pars_table"
     # at the time so the table has to be updated every time.
 
-    module = [4, 201, 1]
+    module = [4, 201, 0]
     pars = [0, 0, 1, 1, 1, 0]
 
 
