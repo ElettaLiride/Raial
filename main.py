@@ -32,7 +32,12 @@ if __name__ == "__main__":
     plotsdir = maindir + "output/plots/"
 
     # OUT FROM THE LOOP
-    run = run_filter.runcommand(sys.argv[1], sys.argv[2], sys.argv[3])
+    if len(sys.argv) == 2:
+        nevents = " "
+    else:
+        nevents = sys.argv[3]
+
+    run = run_filter.runcommand(sys.argv[1], sys.argv[2], nevents)
     fileforreco = filterdir + "rec_clas_" + run + "_AIskim1.hipo"
 
     # INTO THE LOOP
