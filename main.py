@@ -9,7 +9,7 @@ import run_filter
 if __name__ == "__main__":
     ## INIT CCDB
 
-    calibration_connection = "sqlite:///$PWD/ccdb_4.3.2.sqlite"
+    calibration_connection = "sqlite:////work/clas12/users/costantini/RICH_alignement/Costantini_script/ccdb_4.3.2.sqlite"
     calibration_table = "/calibration/rich/misalignments"
     variation = "misalignments"
     user = "Costantini"
