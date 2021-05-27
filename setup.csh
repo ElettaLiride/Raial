@@ -11,7 +11,7 @@ cd mirazita_code
 source setenv.csh
 cd ../
 
-setenv CCDB_CONNECTION sqlite:////$PWD/ccdb_4.3.2.sqlite
+setenv CCDB_CONNECTION sqlite:///$PWD/ccdb_4.3.2.sqlite
 
 
 
