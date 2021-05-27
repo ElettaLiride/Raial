@@ -12,6 +12,7 @@ def connecting_ccdb(calibration_connection, variation, user="anonymous"):
         provider.get_variation(variation)  # That is how you get variation
     except:
         create_variation(provider, variation)
+
     return provider
 
 
