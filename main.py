@@ -1,11 +1,7 @@
-import subprocess
-from costantini_code import ccdb_connection as cc
-from costantini_code import parameters_setting as pm
+from costantini_code import ccdb_connection as cc, parameters_setting as pm
 
-import run_filter
 import run_reco
 import run_plots
-import run_drawing
 
 if __name__ == "__main__":
     exereco = "/work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/bin/recon-util"

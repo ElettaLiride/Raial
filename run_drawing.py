@@ -1,6 +1,6 @@
 import sys
 
-import tools as t
+from costantini_code import tools as t
 
 
 # executing Mirazita code for drawing
