@@ -1,6 +1,6 @@
 import sys
 
-import costantini_code.tools as t
+import tools as t
 
 
 # executing Mirazita code for build histogram

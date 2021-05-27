@@ -1,7 +1,6 @@
 import pandas as pd
 import ccdb
 import tools as db
-import numpy as np
 
 
 def connecting_ccdb(calibration_connection, variation, user="anonymous"):
@@ -28,7 +27,6 @@ def reading_ccdb(provider, mis_table, variation, run=0):
 
 
 def create_variation(provider, variation, parent="default", comment=""):
-    from ccdb import Variation
     parent_var = provider.create_variation(variation, comment, parent)
 
 

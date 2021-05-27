@@ -1,6 +1,6 @@
 import sys
 
-from costantini_code import tools as t
+import tools as t
 
 
 # executing Mirazita code for filtering

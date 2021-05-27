@@ -1,7 +1,6 @@
 import sys
 
-from costantini_code import tools as t
-from costantini_code import ccdb_connection
+import tools as t
 
 
 # executing Mirazita code for filtering
