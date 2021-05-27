@@ -12,7 +12,7 @@ if __name__ == "__main__":
     # runnumber = getrunnumber(fileIN)
     DrawingFile = "mirazita_code/RichAI_plots/DrawRichPlots.C"
     yalm = "mirazita_code/RichAI_script/rich.yaml"
-    dirOUT = "out/"
+    dirOUT = "output/"
 
     calibration_connection = "sqlite:////$PWD/ccdb_4.3.2.sqlite "
     calibration_table = '/calibration/rich/misalignments'

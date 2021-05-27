@@ -10,6 +10,9 @@ def runcommand(fileIN, fileOUT, yalm):
     stdout = t.runcommand(command)
     print(stdout[0])
 
+    command = "mv " + fileOUT + " output/reco/"
+    stdout = t.runcommand(command)
+
 
 if __name__ == "__main__":
-    runcommand(sys.argv[0], sys.argv[1], sys.argv[2])
+    runcommand(sys.argv[1], sys.argv[2], sys.argv[3])

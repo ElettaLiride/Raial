@@ -10,6 +10,11 @@ def runcommand(filetofilter, Layer, eventsnumber=" "):
     stdout = t.runcommand(command)
     print(stdout[0])
 
+    command = "mv rec_clas_" + runnumber + "AIskim1.hipo output/filter/"
+    stdout = t.runcommand(command)
+    command = "mv rec_clas_" + runnumber + "AIskim1_events.out output/filter/"
+    stdout = t.runcommand(command)
+
 
 if __name__ == "__main__":
-    runcommand(sys.argv[0], sys.argv[1], sys.argv[2])
+    runcommand(sys.argv[1], sys.argv[2], sys.argv[3])

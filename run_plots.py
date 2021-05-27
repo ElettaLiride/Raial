@@ -10,6 +10,10 @@ def runcommand(filetoread):
     stdout = t.runcommand(command)
     print(stdout[0])
 
+    command = "mv RichPlots_" + runnumber + ".out output/plots/"
+    stdout = t.runcommand(command)
+    command = "mv RichPlots_" + runnumber + ".root output/plots/"
+    stdout = t.runcommand(command)
 
 if __name__ == "__main__":
     runcommand(sys.argv[1])
