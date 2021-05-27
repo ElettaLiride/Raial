@@ -55,7 +55,7 @@ if __name__ == "__main__":
     module = [4, 201, 0]
     pars = [0, 0, 1, 1, 1, 0]
 
-
+    # SHOULD LOOP OVER EACH MODULE
     # execute Costantini code for update ccdb
     # update ccdb
     new_pars_table = pm.changing_parameters(pars, old_pars_table, module)
