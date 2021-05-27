@@ -7,8 +7,10 @@ from costantini_code import tools as t
 # executing Mirazita code for filtering
 def runcommand(filetofilter, Layer="-1", eventsnumber=" "):
     f = os.path.basename(filetofilter)
+    print(f)
     runnumber = t.getrunnumber(f)
-    command = "./mirazita_code/RichAI_FilterC/filterHipo -n" + eventsnumber + "-R" + runnumber + " -L " + Layer + " " + filetofilter
+    print(runnumber)
+    command = "./mirazita_code/RichAI_FilterC/filterHipo -n" + eventsnumber + " -R" + runnumber + " -L" + Layer + " " + filetofilter
     stdout = t.runcommand(command)
     print(stdout[0])
 
