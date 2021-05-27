@@ -9,7 +9,7 @@ def connecting_ccdb(calibration_connection, variation, user="anonymous"):
     provider.authentication.current_user_name = user
 
     try:
-        provider.get_variation(variation)  # That is how you get variation
+        provider.get_variation(variation)  # cheking if there is a variation
     except:
         create_variation(provider, variation)
 

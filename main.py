@@ -9,9 +9,9 @@ import run_filter
 if __name__ == "__main__":
     ## INIT CCDB
 
-    calibration_connection = "sqlite:///$PWD/ccdb_4.3.2.sqlite "
-    calibration_table = 'calibration/rich/misalignments'
-    variation = 'misalignements'
+    calibration_connection = "sqlite:///$PWD/ccdb_4.3.2.sqlite"
+    calibration_table = "/calibration/rich/misalignments"
+    variation = "misalignments"
     user = "Costantini"
 
     provider = cc.connecting_ccdb(calibration_connection, variation)
@@ -23,12 +23,11 @@ if __name__ == "__main__":
             old_pars_table[col].values[:] = 0
     toadd = old_pars_table.values.tolist()
     cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
-    cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
+
 
     filterdir = "output/filter"
     recodir = "output/reco"
     plotsdir = "output/plots"
-
 
     # OUT FROM THE LOOP
     run = run_filter.runcommand(sys.argv[1], sys.argv[2])
