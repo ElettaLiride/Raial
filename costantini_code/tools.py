@@ -8,7 +8,10 @@ def line_numb():
 
 
 def getrunnumber(file):
-    return file.split("_")[2]
+    r = file.split("_")[2]
+    r = int(r)
+    r = str(r)
+    return r
 
 
 def runcommand(bashCommand):

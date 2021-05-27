@@ -27,4 +27,13 @@ if ( ! -d "hipo" ) then
 
 endif
 
+if ( ! -d "output" ) then
+
+  mkdir output
+  mkdir output/plots
+  mkdir output/filter
+  mkdir output/reco
+
+endif
+
 end
