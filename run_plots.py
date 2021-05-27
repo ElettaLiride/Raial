@@ -5,10 +5,9 @@ from costantini_code import tools as t
 
 # executing Mirazita code for build histogram
 def runcommand(filetoread):
-    f = os.path.basename(filetoread)
-    runnumber = t.getrunnumber(f)
+    runnumber = t.getrunnumber(os.path.basename(filetoread))
 
-    command = ".//mirazita_code/RichAI_Plots/richPlots" + " -R" + runnumber + " " + f
+    command = ".//mirazita_code/RichAI_Plots/richPlots" + " -R" + runnumber + " " + filetoread
     stdout = t.runcommand(command)
     print(stdout[0])
 
