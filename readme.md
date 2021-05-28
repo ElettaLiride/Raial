@@ -1,53 +1,60 @@
-## Software for the alignment of Rich's components of CLAS12
+# Rich AI ALignments
 
-This software uses NN and Bayesian optimization for finding optimal geometric parameter (angles and positions) of the
-mirrors, aerogel panels and photomultiplier plane which constitue the main part of the RICH detector of CLAS12.
+This software uses NN and Bayesian optimization for finding optimal geometric parameters (rotational angles and traslational displacement) of the
+mirrors, aerogel panels and photomultiplier plane which compose the main part of the [RICH](https://clasweb.jlab.org/wiki/index.php/Clas12_RICH) detector of CLAS12.
 
 This software is structured as follows:
 
-At the moment we are working only on the aerogel panels. For the alignment of these components we use as input
+###CODE
+To install the code run:
+```bash
+source setup.csh
+```
+This will run the autoinstall.csh code, which install the Hipo4 libraries and compile the Mirazita code.
+To run the code ccdb python api, pandas, numpy and root and the clas12 eventbuilder are needed. The best solution is to run it on the Jlab farm loading module clas12/2.1 (this is loaded with the setup.csh script).
 
-This has been implemented in the autoisntall script which is called with 
+mirazita_code direcotories contain anaylis of hipo files for rich code. 
+- The FilterC directory has a script for filtering events with direct photon produced by an electron passing trough  one of Aerogel layer (or all the layers).
+- The Plots directory has a script which outputs a root file and txt file.  
 
-> source setup.csh
+costantini_code has scripts for updating the ccdb.
 
-1) Download and install the hipo libraries
-> git clone --recurse-submodules https://github.com/gavalian/hipo
-> cd hipo
-> make
-> cd ../
+###CCDB
+The [CCDB](https://clasweb.jlab.org/wiki/index.php/CLAS12_Constants_Database) is the CLAS12 databese which contains all the constants for the events reconstraction.
+For the research of the optimal parameters multiple reconstructions of the events have to be done. For each reconstruction the CCDB has to be updated with the new choice of the paramters and the event_builder is called. 
+The table in the ccdb which has to be updated is [/calibration/rich/misalignments](https://clasweb.jlab.org/cgi-bin/ccdb/versions?table=/calibration/rich/misalignments).
 
-2) Copy the analysis programs
-> tar -xvf RichAI.tar
-> source setenv.csh
-> cd RichAI_FilterC
-> make
-> cd ../RichAI_Plots/
-> make
-> cd ../
+We will work with a local snapshot of this database, on a variation dedicated to the misalignments called misalignments (we lack of fantasy). 
 
-3) Run the code
-> cd RichAI_script/
+The table is like this:
+![Misalignments table](https://github.com/ElettaLiride/raial/tree/master/fig/ccdb.png)
 
-Make the list of input hipo files
-> ls /hipodir/hipofiles > files.list
-> ./run.sh files.list
+the first three columns define the component of the detecotr. The fourth sector is the sector of the RICH, the 20* layer are the 4 layers of the aerogel, the 30* layers are the mirrors and finally 401 is the photomultiplyer (PMT) plane.
+The other six columns are the six parameters three translations and three rotations.
 
-Directories with semi-raw data for misalignments are: 
+###DATA
+For the moment we use two hipo files as a proof of concept. One from an inbending run (5206), the other from an outbending run (5424).
 
-/lustre19/expphy/volatile/clas12/RICH/pass1_v2/torus-1/skim1
-/lustre19/expphy/volatile/clas12/RICH/pass1_v2/torus+1/skim1
-/lustre19/expphy/volatile/clas12/RICH/pass1_v1/torus-1/skim1
-/lustre19/expphy/volatile/clas12/RICH/pass1_v1/torus-1/skim1_AllBanks
-/lustre19/expphy/volatile/clas12/RICH/pass1_v1/torus+1/skim1
+Directories with semi-raw data for misalignments studies are in:
+* /lustre19/expphy/volatile/clas12/RICH/pass1_v2/torus-1/skim1
+* /lustre19/expphy/volatile/clas12/RICH/pass1_v2/torus+1/skim1
+* /lustre19/expphy/volatile/clas12/RICH/pass1_v1/torus-1/skim1
+* /lustre19/expphy/volatile/clas12/RICH/pass1_v1/torus+1/skim1
+* /lustre19/expphy/volatile/clas12/RICH/pass1_v1/torus-1/skim1_AllBanks
 
-Mirazita code direcotories contain anaylis of hipo files for rich code. 
-The FilterC has a script for filtering events with direct photon produced by an electron passing trough 
-one of Aerogel layer (or all the layers). To choose one layer one has to input -L(0/1/2) for choosing layer 0,1 or 2 and input nothing for choosing all the layers.
+semi-raw data means events which has at least one charged particle in the rich and at least one direct photon (a photon produced in the aerogel which goes directly to the PMT) 
+##Alignment procedure
+Here below described the alignment procedure which are made at present. This could change when bayesian optimization method is applied since this are thought in roder to align the rich's component separately.
+###PMT
+The PMT are align via a chi2 parameter which is present directly in a bank of the hipo files. This is a squared difference between the cluster position made by particle passing directly trough the PMT and the predicted position from the track reconstruction. 
+At present the PMT are not align separatly, but the layer 0 paramters are changed, so that the entire rich move when the PMT are aligned. 
+###AEROGEL
+The aerogel is on three layers and each layer has a different number of tiles. 
+The procedure for aligning the aerogel layer is based on comparing the cherenkov angle of electron measured by the rich computed only with direct photon with the theorical angle computed with the nominal refractive index. The angle difference is computed for each aerogel tile, but the parameters are referred to the layers.
+Here the scheme of the four layers and tiles: 
+[Layer 201-202](https://github.com/ElettaLiride/raial/tree/master/fig/layer201-202.png)
+[Layer 203-204](https://github.com/ElettaLiride/raial/tree/master/fig/layer203-204.png)
 
-The Plots has a script which outputs a root file and txt file. The root files has histograms, here an example (to output the pdf of the histogram
-the Drawing script is used):
 
-and the txt files contain the chi2 for the clusters and difference between the predicted Cherenkov angle and the measured one. 
-
-Costantini code has scripts for updating the ccdb.
+The root files has histograms, here an example (to output the pdf of the histogram the Drawing script is used) and the txt files contain the chi2 for the clusters and difference between the predicted Cherenkov angle and the measured one.
+To choose one layer one has to input -L(0/1/2) for choosing layer 0,1 or 2 and input nothing for choosing all the layers.
