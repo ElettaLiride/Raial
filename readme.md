@@ -15,9 +15,13 @@ To run the code ccdb python api, pandas, numpy and root and the clas12 eventbuil
 
 mirazita_code direcotories contain anaylis of hipo files for rich code. 
 - The FilterC directory has a script for filtering events with direct photon produced by an electron passing trough  one of Aerogel layer (or all the layers).
-- The Plots directory has a script which outputs a root file and txt file.  
+- The Plots directory has a script which outputs a root file and txt file. The root files has histograms, here an example (to output the pdf of the histogram the Drawing script is used) and the txt files contain the chi2 for the clusters and difference between the predicted Cherenkov angle and the measured one.
+To choose one layer one has to input -L(0/1/2) for choosing layer 0,1 or 2 and input nothing for choosing all the layers.
 
 costantini_code has scripts for updating the ccdb.
+
+the run_* script run separately the various step for the alignment.
+the main script run one step of the loop for the alignment. One has to provide the file (or a file with the list of files NOT YET IMPLEMENTED) with data and the layer of reference.
 
 ###CCDB
 The [CCDB](https://clasweb.jlab.org/wiki/index.php/CLAS12_Constants_Database) is the CLAS12 databese which contains all the constants for the events reconstraction.
@@ -55,6 +59,3 @@ Here the scheme of the four layers and tiles:
 ![Layer 201-202](/fig/layer201-202.png)
 ![Layer 203-204](/fig/layer203-204.png)
 
-
-The root files has histograms, here an example (to output the pdf of the histogram the Drawing script is used) and the txt files contain the chi2 for the clusters and difference between the predicted Cherenkov angle and the measured one.
-To choose one layer one has to input -L(0/1/2) for choosing layer 0,1 or 2 and input nothing for choosing all the layers.
