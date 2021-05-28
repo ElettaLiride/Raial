@@ -52,8 +52,8 @@ At present the PMT are not align separatly, but the layer 0 paramters are change
 The aerogel is on three layers and each layer has a different number of tiles. 
 The procedure for aligning the aerogel layer is based on comparing the cherenkov angle of electron measured by the rich computed only with direct photon with the theorical angle computed with the nominal refractive index. The angle difference is computed for each aerogel tile, but the parameters are referred to the layers.
 Here the scheme of the four layers and tiles: 
-[Layer 201-202](/fig/layer201-202.png)
-[Layer 203-204](/fig/layer203-204.png)
+![Layer 201-202](/fig/layer201-202.png)
+![Layer 203-204](/fig/layer203-204.png)
 
 
 The root files has histograms, here an example (to output the pdf of the histogram the Drawing script is used) and the txt files contain the chi2 for the clusters and difference between the predicted Cherenkov angle and the measured one.
