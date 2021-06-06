@@ -5,6 +5,10 @@ from costantini_code import tools as t
 
 
 # executing Mirazita code for filtering
+# 3 argument:
+# -file to filter
+# -layer to filter
+# -number of events to read from file (not necessary)
 def runcommand(filetofilter, Layer="-1", eventsnumber=" "):
     f = os.path.basename(filetofilter)
     runnumber = t.getrunnumber(f)
