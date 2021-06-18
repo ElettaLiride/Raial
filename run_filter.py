@@ -26,4 +26,8 @@ def runcommand(filetofilter, Layer="-1", eventsnumber=" "):
     return runnumber
 
 if __name__ == "__main__":
-    runcommand(sys.argv[1], sys.argv[2], sys.argv[3])
+    if len(sys.argv) == 3:
+        nevents = " "
+    else:
+        nevents = sys.argv[3]
+    runcommand(sys.argv[1], sys.argv[2], nevents)
