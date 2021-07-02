@@ -3,9 +3,7 @@ import os
 
 from costantini_code import ccdb_connection as cc, parameters_setting as pm
 
-import run_reco
-import run_plots
-import run_filter
+from run_control import run_filter, run_plots, run_reco
 
 if __name__ == "__main__":
     ## INIT CCDB
@@ -38,12 +36,12 @@ if __name__ == "__main__":
         nevents = sys.argv[3]
 
     run = run_filter.runcommand(sys.argv[1], sys.argv[2], nevents)
-    fileforreco = filterdir + "rec_clas_" + run + "_AIskim1.hipo"
 
     # INTO THE LOOP
+    fileforreco = filterdir + "rec_clas_" + run + "_AIskim1.hipo"
     run_reco.runcommand(fileforreco)
-    fileforplot = recodir + "rec_clas_" + run + "_AIskim1.hipo"
 
+    fileforplot = recodir + "rec_clas_" + run + "_AIskim1.hipo"
     run_plots.runcommand(fileforplot)
 
     # HERE ADDING OPTIMIZATION PROCEDURE
@@ -59,7 +57,7 @@ if __name__ == "__main__":
 
     # execute Costantini code for update ccdb
     # update ccdb
-    new_pars_table = pm.changing_parameters(pars, old_pars_table, module)
+    new_pars_table = pm.changing_parameters(old_pars_table, module, pars)
     toadd = new_pars_table.values.tolist()
 
     cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
