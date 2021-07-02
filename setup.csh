@@ -8,7 +8,7 @@ source mirazita_code/setenv.csh
 #installing mirazita code
 if (! -d "mirazita_code/hipo") then
   cd mirazita_code
-  ./autoinstall.csh
+  source autoinstall.csh
   cd ../
 endif
 
