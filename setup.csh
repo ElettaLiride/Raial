@@ -3,7 +3,7 @@
 
 source /group/clas12/packages/setup.csh
 module load clas12/2.1
-source mirazita_code/setenv.csh
+#source mirazita_code/setenv.csh
 
 #installing mirazita code
 if (! -d "mirazita_code/hipo") then
@@ -12,6 +12,9 @@ if (! -d "mirazita_code/hipo") then
   cd ../
 endif
 
+cd mirazita_code/
+source setenv.csh
+cd ../
 
 #making output direcotries
 if ( ! -d "output" ) then
