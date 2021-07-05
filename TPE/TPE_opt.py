@@ -69,7 +69,7 @@ def objective(params):
 
     reco_time = sub_time2 - sub_time1
     plot_time = sub_time3 - sub_time2
-
+    print("finish")
     return score, reco_time, plot_time
 
 
