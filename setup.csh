@@ -32,6 +32,17 @@ endif
 #connecting CCDB to local snapshot
 setenv CCDB_CONNECTION sqlite:///$PWD/ccdb_4.3.2.sqlite
 
+#praparing python env
+if (! -d "raial-env") then
+  module load python3/3.9.5
+  pip3 install virtualenv --user
+  module unload python/3.9.5
+  module load python/2.7.18
+  $HOME/.local/bin/virtualenv -p /apps/python/2.7.18/bin/python raial-env
+endif
+
+source raial-env/bin/activate.csh
+
 end
 
 
