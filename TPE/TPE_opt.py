@@ -35,7 +35,7 @@ def pass_dict_param_to_table(dict, table):
     for layer, val in dict.items():
         module = [4, int(layer.split('_')[1]), 0]
         pars = [layer.split('_')[0], val]
-        pm.changing_one_parameter(table, pars, module)
+        pm.changing_one_parameter(table, module, pars)
 
     return table
 
