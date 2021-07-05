@@ -76,7 +76,7 @@ def objective(params):
 if __name__ == '__main__':
 
     filterdir = "output/filter/"
-    plotdir = "output/plot/"
+    plotdir = "output/plots/"
     recodir = "output/reco/"
     fileforreco = filterdir + "rec_clas_5206_AIskim1_-1.hipo"
     fileforplot = recodir + "rec_clas_5206_AIskim1_-1.hipo"
