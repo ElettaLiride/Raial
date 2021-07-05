@@ -77,8 +77,9 @@ if __name__ == '__main__':
 
     filterdir = "output/filter/"
     plotdir = "output/plot/"
+    recodir = "output/reco/"
     fileforreco = filterdir + "rec_clas_5206_AIskim1_-1.hipo"
-    fileforplot = plotdir + "rec_clas_5206_AIskim1_-1.hipo"
+    fileforplot = recodir + "rec_clas_5206_AIskim1_-1.hipo"
     filefromplot = plotdir + "RichPlots_5206.out"
 
     print("-----------------------------------------------------------------------------------------------")
