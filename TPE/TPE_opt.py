@@ -3,6 +3,7 @@ from __future__ import print_function
 # Import libraries:
 import hyperopt
 import pandas as pd
+import time
 
 from hyperopt import hp, tpe
 from hyperopt.fmin import fmin
@@ -11,7 +12,6 @@ import os
 from costantini_code import parameters_setting as pm
 from run_control import run_plots
 from run_control import run_reco
-import datetime as dt
 from functools import partial
 
 
@@ -49,23 +49,28 @@ def objective(params):
     toadd = old_pars_table.values.tolist()
     cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
 
+    sub_time1 = time.clock()
     # RUN EVENTBUILDER
     print("-----------------------------------------------------------------------------------------------")
     print("----------------------------------- START RECO -----------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
-
     run_reco.runcommand(fileforreco)
+    sub_time2 = time.clock()
 
     # RUN ANGLE ANALYSIS
     print("-----------------------------------------------------------------------------------------------")
     print("----------------------------------- START PLOTTING -----------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
     run_plots.runcommand(fileforplot)
+    sub_time3 = time.clock()
 
     # SCORING
     score = make_mean(filefromplot)
 
-    return score
+    reco_time = sub_time2 - sub_time1
+    plot_time = sub_time3 - sub_time2
+
+    return score, reco_time, plot_time
 
 
 if __name__ == '__main__':
@@ -80,7 +85,8 @@ if __name__ == '__main__':
     print("----------------------------------- START OF ANALYSIS -----------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
 
-    start_time = dt.datetime.now()
+    start_time = time.clock()
+
 
     print(("Start time: ", start_time))
     print("Init CCDB to zero ")
@@ -120,7 +126,17 @@ if __name__ == '__main__':
         'dthz_202': 1.,
     }
 
-    print(objective(parameters))
+    test_obj, reco_time, plot_time = objective(parameters)
+
+    print("test score: ", test_obj)
+
+    t1 = time.clock() - start_time
+
+    print("Total time elapsed: ", t1)
+    print("Time for reco:", reco_time)
+    print("Time for plot:", reco_time)
+
+
     # space = {
     #     'dx_401': hp.uniform('dx401', -10, 10, 0.001),
     #     'dy_401': hp.uniform('dy401', -10, 10, 0.001),
