@@ -32,7 +32,7 @@ def make_mean(file):
 
 
 def pass_dict_param_to_table(dict, table):
-    for layer, val in dict:
+    for layer, val in dict.items():
         module = [4, int(layer.split(sep='_')[1]), 0]
         pars = [layer.split(sep='_')[0], val]
         pm.changing_one_parameter(table, pars, module)
@@ -94,23 +94,23 @@ if __name__ == '__main__':
     cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
 
     parameters = {'dx_401': 1,
-        'dy_401': 1,
-        'dz_401': 4,
-        'dthx_401': 4,
-        'dthy_401': 1,
-        'dthz_401': 0,
-        'dx_201': 1,
-        'dy_201': 1,
-        'dz_201': 1,
-        'dthx_201': 0,
-        'dthy_201': 0,
-        'dthz_201': 0,
-        'dx_202': 2,
-        'dy_202': 1,
-        'dz_202': 0,
-        'dthx_202': 0,
-        'dthy_202': 3,
-        'dthz_202': 1,
+        'dy_401': 1.,
+        'dz_401': 4.,
+        'dthx_401': 4.,
+        'dthy_401': 1.,
+        'dthz_401': 0.,
+        'dx_201': 1.,
+        'dy_201': 1.,
+        'dz_201': 1.,
+        'dthx_201': 0.,
+        'dthy_201': 0.,
+        'dthz_201': 0.,
+        'dx_202': 2.,
+        'dy_202': 1.,
+        'dz_202': 0.,
+        'dthx_202': 0.,
+        'dthy_202': 3.,
+        'dthz_202': 1.,
     }
 
     print(objective(parameters))
