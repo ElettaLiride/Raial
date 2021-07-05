@@ -50,9 +50,16 @@ def objective(params):
     cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
 
     # RUN EVENTBUILDER
+    print("-----------------------------------------------------------------------------------------------")
+    print("----------------------------------- START RECO -----------------------------------------")
+    print("-----------------------------------------------------------------------------------------------")
+
     run_reco.runcommand(fileforreco)
 
     # RUN ANGLE ANALYSIS
+    print("-----------------------------------------------------------------------------------------------")
+    print("----------------------------------- START PLOTTING -----------------------------------------")
+    print("-----------------------------------------------------------------------------------------------")
     run_plots.runcommand(fileforplot)
 
     # SCORING
@@ -63,8 +70,8 @@ def objective(params):
 
 if __name__ == '__main__':
 
-    filterdir = "../output/filter/"
-    plotdir = "../output/plot/"
+    filterdir = "output/filter/"
+    plotdir = "output/plot/"
     fileforreco = filterdir + "rec_clas_5206_AIskim1_-1.hipo"
     fileforplot = plotdir + "rec_clas_5206_AIskim1_-1.hipo"
     filefromplot = plotdir + "RichPlots_5206.out"
