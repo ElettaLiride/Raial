@@ -25,7 +25,7 @@ def make_mean(file):
         if not line:
             break
 
-        mean = mean + float(line.split()[-1].split(sep='=')[-1])
+        mean = mean + abs(float(line.split()[-1].split('=')[-1]))
     mean = mean / nline
     f.close()
     return mean
