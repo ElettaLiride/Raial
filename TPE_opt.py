@@ -70,7 +70,7 @@ def objective(params):
     # SCORING
     score = make_mean(filefromplot)
 
-    print("finish")
+    print("score: ", score)
     return score, reco_time, plot_time
 
 
@@ -182,7 +182,7 @@ if __name__ == '__main__':
         n_startup_jobs=200
     )
 
-    best = fmin(fn=objective, space=space, algo=tpe, trials=trials, max_evals=1)
+    best = fmin(fn=objective, space=space, algo=tpe, trials=trials, max_evals=30)
 
     print("Hyperopt estimated optimum {}".format(best))
 
