@@ -29,6 +29,8 @@ endif
 #connecting CCDB to local snapshot
 setenv CCDB_CONNECTION sqlite:///$PWD/ccdb_4.3.2.sqlite
 
+python3 setup.py
+
 end
 
 
