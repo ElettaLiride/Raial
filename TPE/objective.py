@@ -86,12 +86,14 @@ def objective(space):
 
 
 if __name__=="__main__":
-    filterdir = "output/filter/"
-    plotdir = "output/plots/"
-    recodir = "output/reco/"
+    maindir = os.getcwd() + "/"
+    filterdir = maindir + "output/filter/"
+    plotdir = maindir + "output/plots/"
+    recodir = maindir + "output/reco/"
     fileforreco = filterdir + "rec_clas_5206_AIskim1_-1.hipo"
     fileforplot = recodir + "rec_clas_5206_AIskim1_-1.hipo"
     filefromplot = plotdir + "RichPlots_5206.out"
+
     calibration_connection = "sqlite:///../ccdb_4.3.2.sqlite"
     calibration_table = "/calibration/rich/misalignments"
     variation = "misalignments"
