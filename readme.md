@@ -34,19 +34,20 @@ The table is like this:
 ![Misalignments table](/fig/ccdb.png)
 
 the first three columns define the component of the detecotr. The fourth sector is the sector of the RICH, the 20* layer are the 4 layers of the aerogel, the 30* layers are the mirrors and finally 401 is the photomultiplyer (PMT) plane.
-The other six columns are the six parameters three translations and three rotations.
+The other six columns are the six parameters three translations (in cm) and three rotations (in mrad). 
 
 ###DATA
 For the moment we use two hipo files as a proof of concept. One from an inbending run (5206), the other from an outbending run (5424).
 
-Directories with semi-raw data for misalignments studies are in:
-* /lustre19/expphy/volatile/clas12/RICH/pass1_v2/torus-1/skim1
-* /lustre19/expphy/volatile/clas12/RICH/pass1_v2/torus+1/skim1
-* /lustre19/expphy/volatile/clas12/RICH/pass1_v1/torus-1/skim1
-* /lustre19/expphy/volatile/clas12/RICH/pass1_v1/torus+1/skim1
-* /lustre19/expphy/volatile/clas12/RICH/pass1_v1/torus-1/skim1_AllBanks
+Semi-raw data are in three main directories:
 
-semi-raw data means events which has at least one charged particle in the rich and at least one direct photon (a photon produced in the aerogel which goes directly to the PMT) 
+/lustre19/expphy/volatile/clas12/richskims/skim1/
+/lustre19/expphy/volatile/clas12/richskims/skim2/
+/lustre19/expphy/volatile/clas12/richskims/skim3/
+
+Here a screenshot of the readme for the specs of the files in each directory. In each directory files are also divided in inbending and outbending runs.
+![Misalignments table](/fig/data_repos.png)
+
 ##Alignment procedure
 Here below described the alignment procedure which are made at present. This could change when bayesian optimization method is applied since this are thought in roder to align the rich's component separately.
 ###PMT
