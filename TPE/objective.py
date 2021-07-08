@@ -2,7 +2,18 @@ from TPE_opt import *
 
 
 if __name__=="__main__":
+    filterdir = "output/filter/"
+    plotdir = "output/plots/"
+    recodir = "output/reco/"
+    fileforreco = filterdir + "rec_clas_5206_AIskim1_-1.hipo"
+    fileforplot = recodir + "rec_clas_5206_AIskim1_-1.hipo"
+    filefromplot = plotdir + "RichPlots_5206.out"
+    calibration_connection = "sqlite:///../ccdb_4.3.2.sqlite"
+    calibration_table = "/calibration/rich/misalignments"
+    variation = "misalignments"
+    user = "Costantini"
 
+    provider = cc.connecting_ccdb(calibration_connection, variation)
     space = {
         'dx_401': 0.,
         'dy_401': 0.,
