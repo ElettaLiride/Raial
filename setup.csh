@@ -39,14 +39,15 @@ if (! -f "ccdb_4.3.2.sqlite") then
   wget https://clasweb.jlab.org/clas12offline/sqlite/ccdb/clas12tags/ccdb_4.3.2.sqlite $PWD
 endif
 
-setenv PATH_CCDB_L=$PWD/ccdb_$lat.sqlite
-setenv PATH_CCDB_t=$PWD/ccdb_4.3.2.sqlite
+setenv PATH_CCDB_L $PWD/ccdb_$lat.sqlite
+setenv PATH_CCDB_t $PWD/ccdb_4.3.2.sqlite
 
 #connecting CCDB to local snapshot
 
 setenv CCDB_CONNECTION sqlite:///$PATH_CCDB_L
 
 unset lat
+cd ../
 
 #praparing python env
 if (! -d "raial-env") then
