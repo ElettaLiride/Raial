@@ -6,14 +6,16 @@ module load clas12/2.1
 
 #installing mirazita code
 if (! -d "scoring/hipo") then
-  cd mirazita_code
+  cd scoring
   source autoinstall.csh
   cd ../
-endif
 
-cd mirazita_code/
-source setenv.csh
-cd ../
+elif
+  cd scoring/
+  source setenv.csh
+  cd ../
+
+endif
 
 #making output direcotries
 if ( ! -d "output" ) then
