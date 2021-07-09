@@ -10,7 +10,7 @@ if (! -d "scoring/hipo") then
   source autoinstall.csh
   cd ../
 
-elif
+else
   cd scoring/
   source setenv.csh
   cd ../
@@ -57,8 +57,7 @@ if (! -d "raial-env") then
 endif
 
 source raial-env/bin/activate.csh
-
-
+ll
 end
 
 
