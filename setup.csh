@@ -5,7 +5,7 @@ module load clas12/2.1
 #source mirazita_code/setenv.csh
 
 #installing mirazita code
-if (! -d "mirazita_code/hipo") then
+if (! -d "scoring/hipo") then
   cd mirazita_code
   source autoinstall.csh
   cd ../
