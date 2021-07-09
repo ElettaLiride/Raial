@@ -1,3 +1,4 @@
 output/filter/*
 output/plots/*
 output/reco/*
+ccd*

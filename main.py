@@ -3,9 +3,7 @@ import os
 
 from costantini_code import ccdb_connection as cc, parameters_setting as pm
 
-import run_reco
-import run_plots
-import run_filter
+from run_control import run_reco, run_filter, run_plots
 
 if __name__ == "__main__":
     ## INIT CCDB
