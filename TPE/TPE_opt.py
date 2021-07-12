@@ -8,7 +8,7 @@ import pandas as pd
 
 from hyperopt import hp, tpe
 from hyperopt.fmin import fmin
-from costantini_code import ccdb_connection as cc, parameters_setting as pm
+from database import ccdb_connection as cc, parameters_setting as pm
 
 from run_control import run_plots
 from run_control import run_reco
@@ -96,7 +96,7 @@ def objective(space):
 
 if __name__ == '__main__':
 
-    maindir = os.getcwd() + "/"
+    maindir = os.getcwd() + "/../database/"
     filterdir = maindir + "output/filter/"
     plotdir = maindir + "output/plots/"
     recodir = maindir +  "output/reco/"
@@ -115,6 +115,7 @@ if __name__ == '__main__':
     print("Init CCDB to zero ")
 
     calibration_connection = "sqlite:///" + maindir + "ccdb_4.3.2.sqlite"
+    print(calibration_connection)
     calibration_table = "/calibration/rich/misalignments"
     variation = "misalignments"
     user = "Costantini"
@@ -202,10 +203,10 @@ if __name__ == '__main__':
         # First XX trials are going to be random
         n_startup_jobs=200
     )
-
-    best = fmin(fn=objective, space=space, algo=tpe, trials=trials, max_evals=3)
-
-    print("Hyperopt estimated optimum {}".format(best))
+    #
+    # best = fmin(fn=objective, space=space, algo=tpe, trials=trials, max_evals=3)
+    #
+    # print("Hyperopt estimated optimum {}".format(best))
 
     tot_time = int(time.time() - start_time)
     print('{:02d}:{:02d}:{:02d}'.format(tot_time // 3600, (tot_time % 3600 // 60), tot_time % 60))

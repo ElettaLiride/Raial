@@ -3,7 +3,11 @@ import os
 
 from costantini_code import ccdb_connection as cc, parameters_setting as pm
 
+<<<<<<< HEAD
 from run_control import run_filter, run_plots, run_reco
+=======
+from run_control import run_reco, run_filter, run_plots
+>>>>>>> master
 
 if __name__ == "__main__":
     ## INIT CCDB
