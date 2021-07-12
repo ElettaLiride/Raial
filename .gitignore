@@ -1,5 +1,6 @@
 output/filter/*
 output/plots/*
 output/reco/*
-ccd*
+databese/*.sqlite
 scoring/hipo/**
+database/ccdb/**

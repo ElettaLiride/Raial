@@ -1,11 +1,11 @@
 import sys
 import os
 
-from costantini_code import tools as t
+from database import tools as t
 
 
 # executing Mirazita code for filtering
-def runcommand(fileIN, fileOUT=None, yalm="mirazita_code/RichAI_script/rich.yaml"):
+def runcommand(fileIN, fileOUT=None, yalm="mirazita_code/RichAI_reco/rich.yaml"):
     f = os.path.basename(fileIN)
     if fileOUT is None:
         fileOUT = f
