@@ -3,4 +3,5 @@ output/plots/*
 output/reco/*
 databese/*.sqlite
 scoring/hipo/**
-database/ccdb/**
+database/ccdb
+database/ccdb/python/ccdb/**
