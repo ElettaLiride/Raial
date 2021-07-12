@@ -1,0 +1,7 @@
+export HIPO4ROOT=$PWD/hipo
+
+export HIPO4LIB=$HIPO4ROOT/lib
+
+export HIPO4INC=$HIPO4ROOT/hipo4
+
+export LZ4DIR=$HIPO4ROOT/lz4

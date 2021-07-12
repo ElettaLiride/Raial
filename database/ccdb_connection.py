@@ -1,6 +1,6 @@
 import pandas as pd
 import ccdb
-import tools as db
+from database import tools as db
 
 
 def connecting_ccdb(calibration_connection, variation, user="anonymous"):
@@ -31,7 +31,7 @@ def create_variation(provider, variation, parent="default", comment=""):
     parent_var = provider.create_variation(variation, comment, parent)
 
 
-def adding_to_ccdb(parameters, provider, table, variation, comment=""):
+def adding_to_ccdb(parameters, provider, table, variation, comment='ciao'):
     if isinstance(parameters, list):
         provider.create_assignment(
             data=parameters,
@@ -39,7 +39,7 @@ def adding_to_ccdb(parameters, provider, table, variation, comment=""):
             variation_name=variation,
             min_run=0,
             max_run=ccdb.INFINITE_RUN,
-            comment=comment)
+            comment='ciao')
     else:
         print('some problem here: line {}'.format(db.line_numb()))
         raise ValueError
