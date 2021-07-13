@@ -51,14 +51,12 @@ cd ../
 
 #praparing python env
 if (! -d "raial-env") then
-  module load python3/3.9.5
   pip3 install virtualenv --user
   $HOME/.local/bin/virtualenv raial-env
 endif
 
 source raial-env/bin/activate.csh
-ll
->>>>>>> master
+
 end
 
 
