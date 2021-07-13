@@ -7,7 +7,7 @@ from database import tools as t
 def runcommand(filetoread):
     runnumber = t.getrunnumber(os.path.basename(filetoread))
 
-    command = ".//optimization/RichAI_Plots/richPlots" + " -R" + runnumber + " " + filetoread
+    command = ".//scoring/RichAI_Plots/richPlots" + " -R" + runnumber + " " + filetoread
     stdout = t.runcommand(command)
     print(stdout[0])
 
