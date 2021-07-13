@@ -203,10 +203,10 @@ if __name__ == '__main__':
         # First XX trials are going to be random
         n_startup_jobs=200
     )
-    #
-    # best = fmin(fn=objective, space=space, algo=tpe, trials=trials, max_evals=3)
-    #
-    # print("Hyperopt estimated optimum {}".format(best))
+
+    best = fmin(fn=objective, space=space, algo=tpe, trials=trials, max_evals=3)
+
+    print("Hyperopt estimated optimum {}".format(best))
 
     tot_time = int(time.time() - start_time)
     print('{:02d}:{:02d}:{:02d}'.format(tot_time // 3600, (tot_time % 3600 // 60), tot_time % 60))
