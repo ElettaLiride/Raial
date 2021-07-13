@@ -13,7 +13,7 @@ def runcommand(filetofilter, Layer="-1", eventsnumber=" "):
     f = os.path.basename(filetofilter)
     runnumber = t.getrunnumber(f)
 
-    command = "./mirazita_code/RichAI_FilterC/filterHipo -n" + eventsnumber + " -R" + runnumber + " -L" + Layer + " " + filetofilter
+    command = "./optimization/RichAI_FilterC/filterHipo -n" + eventsnumber + " -R" + runnumber + " -L" + Layer + " " + filetofilter
     stdout = t.runcommand(command)
     print(stdout[0])
 
