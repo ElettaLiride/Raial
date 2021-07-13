@@ -1,9 +1,8 @@
-from costantini_code import parameters_setting as pm
-from costantini_code import ccdb_connection as cc
+from database import parameters_setting as pm
+from database import ccdb_connection as cc
 from run_control import run_plots
 from run_control import run_reco
-from functools import partial
-
+import os
 
 def make_mean(file):
     f = open(file, "r")
