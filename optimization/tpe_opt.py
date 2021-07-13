@@ -96,7 +96,7 @@ def objective(space):
 
 if __name__ == '__main__':
 
-    maindir = os.getcwd() + "/../database/"
+    maindir = os.getcwd() + "/database/"
     filterdir = maindir + "output/filter/"
     plotdir = maindir + "output/plots/"
     recodir = maindir +  "output/reco/"
