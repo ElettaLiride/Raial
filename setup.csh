@@ -51,6 +51,7 @@ cd ../
 
 #praparing python env
 if (! -d "raial-env") then
+  module load python/3.4.3
   pip3 install virtualenv --user
   $HOME/.local/bin/virtualenv raial-env
 endif
