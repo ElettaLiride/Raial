@@ -100,9 +100,9 @@ if __name__ == '__main__':
     filterdir = maindir + "output/filter/"
     plotdir = maindir + "output/plots/"
     recodir = maindir +  "output/reco/"
-    fileforreco = filterdir + "rec_clas_5206_AIskim1_-1.hipo"
-    fileforplot = recodir + "rec_clas_5206_AIskim1_-1.hipo"
-    filefromplot = plotdir + "RichPlots_5206.out"
+    fileforreco = filterdir + "rec_clas_5137_AIskim1_-1.hipo"
+    fileforplot = recodir + "rec_clas_5137_AIskim1_-1.hipo"
+    filefromplot = plotdir + "RichPlots_5137.out"
 
     print("-----------------------------------------------------------------------------------------------")
     print("----------------------------------- START OF ANALYSIS -----------------------------------------")
