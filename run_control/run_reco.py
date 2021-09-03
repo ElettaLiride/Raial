@@ -1,23 +1,35 @@
 import sys
 import os
 
-from database import tools as t
+from run_control import tools as t
 
 
-# executing Mirazita code for filtering
-def runcommand(fileIN, fileOUT=None, yalm="scoring/RichAI_reco/rich.yaml"):
+def runcommand(fileIN, fileOUT=None, yaml="scoring/rich.yaml"):
+    '''
+
+    execute Rich engine for reconstruction of events
+
+    :param fileIN: name of the file with raw data for the reconstruction
+    :param fileOUT: output file name of the reconstruction
+    :param yaml: yaml file for the configuration of the reconstruction
+    :return: None
+
+    '''
     f = os.path.basename(fileIN)
     if fileOUT is None:
         fileOUT = f
-    runnumber = t.getrunnumber(f)
 
-    command = "/work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yalm
-    stdout = t.runcommand(command)
-    print(stdout[0])
+    command = os.environ['COATJAVA'] + "/bin/recon-util -i " \
+              + fileIN + " -o " + fileOUT + " -y " + yaml
+    _ = t.runcommand(command)
+    # print(stdout[0])
 
     command = "mv " + fileOUT + " output/reco/"
-    stdout = t.runcommand(command)
+    _ = t.runcommand(command)
 
 
 if __name__ == "__main__":
-    runcommand(sys.argv[1], sys.argv[2])
+    if len(sys.argv) == 2:
+        runcommand(sys.argv[1])
+    else:
+        runcommand(sys.argv[1], sys.argv[2])

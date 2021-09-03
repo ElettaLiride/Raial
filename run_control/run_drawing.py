@@ -1,6 +1,6 @@
 import sys
 
-from database import tools as t
+from run_control import tools as t
 
 
 # executing Mirazita code for drawing

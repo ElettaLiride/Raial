@@ -1,8 +1,22 @@
-from costantini_code import parameters_setting as pm
-from costantini_code import ccdb_connection as cc
+import os
+
+from database import parameters_setting as pm
+from database import ccdb_connection as cc
 from run_control import run_plots
 from run_control import run_reco
-from functools import partial
+
+
+filterdir = "output/filter/"
+plotdir = "output/plots/"
+recodir = "output/reco/"
+fileforreco = filterdir + "rec_clas_5424_AIskim1_-1.hipo"
+fileforplot = recodir + "rec_clas_5424_AIskim1_-1.hipo"
+filefromplot = plotdir + "RichPlots_5424.out"
+
+calibration_connection = "sqlite:///database/ccdb_4.3.2.sqlite"
+calibration_table = "/calibration/rich/misalignments"
+variation = "default"
+user = "Costantini"
 
 
 def make_mean(file):
@@ -30,7 +44,43 @@ def pass_dict_param_to_table(dict, table):
     return table
 
 
-def objective(space):
+def obj_gp(space, names):
+
+    provider = cc.connecting_ccdb(calibration_connection, variation)
+
+    params = {names[i]: space[i] for i in range(len(space))}
+
+    # CHANGING PARAM ON CCDB
+    old_pars_table = cc.reading_ccdb(provider, calibration_table, variation)
+    old_pars_table = pass_dict_param_to_table(params, old_pars_table)
+    to_add = old_pars_table.values.tolist()
+    cc.adding_to_ccdb(to_add, provider, calibration_table, variation)
+
+    # start_time = time.time()
+    # RUN EVENTBUILDER
+    print("-----------------------------------------------------------------------------------------------")
+    print("----------------------------------- START RECO ------------------------------------------------")
+    print("-----------------------------------------------------------------------------------------------")
+    run_reco.runcommand(fileforreco)
+    # reco_time = int(time.time() - start_time)
+    # second_time = time.time()
+
+    # RUN ANGLE ANALYSIS
+    print("-----------------------------------------------------------------------------------------------")
+    print("----------------------------------- START PLOTTING --------------------------------------------")
+    print("-----------------------------------------------------------------------------------------------")
+
+    run_plots.runcommand(fileforplot)
+    # plot_time = int(time.time() - second_time)
+
+    # SCORING
+    score = make_mean(filefromplot)
+    # , reco_time, plot_time
+    print("score: ", score)
+    return score
+
+
+def obj_tpe(space):
     # COMPUTING SCORE
     params = {
         'dx_401': float(space['dx_401']),
@@ -55,9 +105,12 @@ def objective(space):
 
     # CHANGING PARAM ON CCDB
     old_pars_table = cc.reading_ccdb(provider, calibration_table, variation)
+    print('asked at ccdb')
     old_pars_table = pass_dict_param_to_table(params, old_pars_table)
+    print('converted param to table')
     toadd = old_pars_table.values.tolist()
     cc.adding_to_ccdb(toadd, provider, calibration_table, variation)
+    print('added new param to ccdb')
 
     # start_time = time.time()
     # RUN EVENTBUILDER
@@ -84,42 +137,43 @@ def objective(space):
     return score
 
 
-
 if __name__=="__main__":
-    maindir = os.getcwd() + "/"
-    filterdir = maindir + "output/filter/"
-    plotdir = maindir + "output/plots/"
-    recodir = maindir + "output/reco/"
-    fileforreco = filterdir + "rec_clas_5206_AIskim1_-1.hipo"
-    fileforplot = recodir + "rec_clas_5206_AIskim1_-1.hipo"
-    filefromplot = plotdir + "RichPlots_5206.out"
+    filterdir = "output/filter/"
+    plotdir = "output/plots/"
+    recodir = "output/reco/"
+    fileforreco = filterdir + "rec_clas_5424_AIskim1_-1.hipo"
+    fileforplot = recodir + "rec_clas_5424_AIskim1_-1.hipo"
+    filefromplot = plotdir + "RichPlots_5424.out"
 
-    calibration_connection = "sqlite:///../ccdb_4.3.2.sqlite"
+    calibration_connection = "sqlite:///database/ccdb_4.3.2.sqlite"
     calibration_table = "/calibration/rich/misalignments"
-    variation = "misalignments"
+    variation = "default"
     user = "Costantini"
 
     provider = cc.connecting_ccdb(calibration_connection, variation)
-    space = {
-        'dx_401': 0.,
-        'dy_401': 0.,
-        'dz_401': 0.,
-        'dthx_401': 0.,
-        'dthy_401': 0.,
-        'dthz_401': 0.,
-        'dx_201': 0.,
-        'dy_201': 0.,
-        'dz_201': 0.,
-        'dthx_201': 0.,
-        'dthy_201': 0.,
-        'dthz_201': 0.,
-        'dx_202': 0.,
-        'dy_202': 0.,
-        'dz_202': 0.,
-        'dthx_202': 0.,
-        'dthy_202': 0.,
-        'dthz_202': 0.
-    }
 
-    score=objective(space)
+    # space_tpe = {
+    #     'dx_401': 1.,
+    #     'dy_401': 0.,
+    #     'dz_401': 0.,
+    #     'dthx_401': 0.,
+    #     'dthy_401': 1.,
+    #     'dthz_401': 0.,
+    #     'dx_201': 0.,
+    #     'dy_201': 0.,
+    #     'dz_201': 1.,
+    #     'dthx_201': 1.,
+    #     'dthy_201': 0.,
+    #     'dthz_201': 0.,
+    #     'dx_202': 0.,
+    #     'dy_202': 0.,
+    #     'dz_202': 1.,
+    #     'dthx_202': 0.,
+    #     'dthy_202': 1.,
+    #     'dthz_202': 0.
+    # }
+    # score = obj_tpe(space_tpe)
+
+    space_gp = [0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.,0.]
+    score = obj_gp(space_gp)
     print("SCORE: ", score)

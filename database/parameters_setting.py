@@ -1,10 +1,16 @@
 import pandas as pd
-from database import tools as db
+from run_control import tools as db
 
 
-def changing_one_component_parameters(table, module=None, parameters=None):
-    if module is None:
-        module = [4, 0, 0]
+
+def changing_one_component_parameters(table, module, parameters):
+    '''
+
+    :param table:
+    :param module:
+    :param parameters:
+    :return:
+    '''
 
     sector = module[0]
     layer = module[1]
@@ -29,9 +35,15 @@ def changing_one_component_parameters(table, module=None, parameters=None):
     return table
 
 
-def changing_one_parameter(table, module=None, parameter=None):
-    if module is None:
-        module = [4, 0, 0]
+def changing_one_parameter(table, module, parameter):
+    """
+    change a parameter of the module in the ccdb table given.
+
+    :param table: pd.Dataframe describing the ccdb table (dataframe columns == table columns)
+    :param module: list of three int (sector, layer, component)
+    :param parameter: list of len 2, name of parameter value of parameter
+    :return: pd.Dataframe, the table changed
+    """
 
     sector = module[0]
     layer = module[1]
@@ -50,3 +62,4 @@ def changing_one_parameter(table, module=None, parameter=None):
         raise ValueError
 
     return table
+

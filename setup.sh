@@ -53,13 +53,13 @@ export CCDB_CONNECTION=sqlite:///$PATH_CCDB_t
 
 cd ../
 
-#praparing python env
-if [[ ! -d "raial-env" ]]
-then
-#  module load python3/3.9.5
-  pip3 install virtualenv --user
-  $HOME/.local/bin/virtualenv raial-env
-fi
-
-export PYTHONPATH="${PYTHONPATH}:${PWD}"
-# source raial-env/bin/activate.csh
+##praparing python env
+#if [[ ! -d "raial-env" ]]
+#then
+##  module load python3/3.9.5
+#  pip3 install virtualenv --user
+#  $HOME/.local/bin/virtualenv raial-env
+#fi
+#
+#export PYTHONPATH="${PYTHONPATH}:${PWD}"
+## source raial-env/bin/activate.csh
