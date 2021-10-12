@@ -30,14 +30,14 @@ fi
 #CCDB env
 cd database
 
-wget https://clasweb.jlab.org/clas12offline/sqlite/ccdb/LATEST
-lat=$(cat LATEST)
-
-if [[ ! -f ccdb_$lat.sqlite ]]
-then
-    wget https://clasweb.jlab.org/clas12offline/sqlite/ccdb/ccdb_$lat.sqlite
-fi
-rm LATEST
+#wget https://clasweb.jlab.org/clas12offline/sqlite/ccdb/LATEST
+#lat=$(cat LATEST)
+#
+#if [[ ! -f ccdb_$lat.sqlite ]]
+#then
+#    wget https://clasweb.jlab.org/clas12offline/sqlite/ccdb/ccdb_$lat.sqlite
+#fi
+#rm LATEST
 
 if [[ ! -f "ccdb_4.3.2.sqlite" ]]
 then
