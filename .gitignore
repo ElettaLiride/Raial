@@ -5,3 +5,4 @@ databese/*.sqlite
 scoring/hipo/**
 output/opt/*
 data/*
+space.yaml
