@@ -1,8 +1,23 @@
 import sys
 import os
 import re
-from run_control import tools as t
+import tools as t
 
+def run_file_list(fileList, runnumber, Layer="-1", eventsnumber=" "):
+    files = " "
+    fL = open(fileList, 'r')
+    for f in fL:
+        files = files + fL.readlines() + " "
+
+
+    command = "./scoring/RichAI_FilterC/filterHipo -n" + eventsnumber + " -R" + runnumber + " -L" \
+              + Layer + " " + files
+    _ = t.runcommand(command)
+    # print(stdout[0])
+
+    command = "mv rec_clas_" + runnumber + "_AIskim1.hipo output/filter/rec_clas_" + runnumber \
+              + "_AIskim1_" + Layer + ".hipo"
+    _ = t.runcommand(command)
 
 def runcommand(filetofilter, Layer="-1", eventsnumber=" "):
     '''
@@ -38,3 +53,4 @@ if __name__ == "__main__":
     else:
         nevents = sys.argv[3]
     runcommand(sys.argv[1], sys.argv[2], nevents)
+    # print(sys.argv)

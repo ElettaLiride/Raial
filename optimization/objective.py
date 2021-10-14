@@ -18,6 +18,21 @@ calibration_table = "/calibration/rich/misalignments"
 variation = "default"
 user = "Costantini"
 
+def make_mean(file):
+    f = open(file, "r")
+    nline = 0
+    mean = 0
+    lines = f.readlines()
+
+    for line in lines:
+        if nline==1:
+            chi2 = abs(float(line.split()[-1].split('=')[-1]))
+
+        mean = mean + abs(float(line.split()[-1].split('=')[-1]))
+        nline+=1
+    mean = mean/(nline-1) + chi2
+    f.close()
+    return mean
 
 def make_mean(file):
     f = open(file, "r")
@@ -45,6 +60,12 @@ def pass_dict_param_to_table(dict, table):
 
 
 def obj_gp(space, names):
+    """
+
+    :param space:
+    :param names:
+    :return:
+    """
 
     provider = cc.connecting_ccdb(calibration_connection, variation)
 

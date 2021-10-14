@@ -62,6 +62,15 @@ class BoRichGp:
         plt.savefig(self.dir + '/' + f'eval_{self.id}.png')
         plt.show()
 
+    def load_last_checkpoint(self, file_name):
+        res = load(self.dir + '/' + file_name)
+        x0 = res.x_iters
+        y0 = res.func_vals
+        for point in range(len(x0)):
+            self.opt.tell(x0[point], y0[point])
+
+        return res
+
     def _chek_last_checkpoint(self):
         file_number = 0
         check = False
@@ -78,14 +87,7 @@ class BoRichGp:
 
         return check, file_name, file_number + 1
 
-    def _load_last_checkpoint(self, file_name):
-        res = load(self.dir + '/' + file_name)
-        x0 = res.x_iters
-        y0 = res.func_vals
-        for point in range(len(x0)):
-            self.opt.tell(x0[point], y0[point])
 
-        return res
 
 
 if __name__=="__main__":
@@ -96,5 +98,5 @@ if __name__=="__main__":
     # opt.optimize()
     # opt.plot_conv()
 
-    opt._load_last_checkpoint('checkpoint_namedim_test_3')
+    opt.load_last_checkpoint('checkpoint_namedim_test_3')
     opt.plot_depend()
