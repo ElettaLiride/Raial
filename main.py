@@ -19,7 +19,7 @@ if __name__ == "__main__":
     # INIT CCDB
     cc.init_ccdb(provider, calibration_table, variation)
     # READING SPACE
-    space = Space.from_yaml('space.yaml')
+    space = Space.from_yaml('example_space.yaml')
     # OPTIMIZE
     bo_optimizer = BoRichGp(obj=obj_gp, space=space, n_call=10, dir='output/opt', id='test')
     bo_optimizer.optimize()

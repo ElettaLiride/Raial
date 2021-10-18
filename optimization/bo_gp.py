@@ -92,7 +92,7 @@ class BoRichGp:
 
 if __name__=="__main__":
 
-    SPACE = Space.from_yaml('space.yaml')
+    SPACE = Space.from_yaml('example_space.yaml')
     opt = BoRichGp(obj=obj_gp, space=SPACE, dir='output/opt', id='namedim_test', n_call=10)
 
     # opt.optimize()
