@@ -6,3 +6,4 @@ scoring/hipo/**
 output/opt/*
 data/*
 example_space.yaml
+scoring/rich.yaml
