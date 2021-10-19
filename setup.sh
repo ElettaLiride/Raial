@@ -1,8 +1,10 @@
 #!/bin/bash
 
-source /group/clas12/packages/setup.sh
-module load clas12/2.1
-# source mirazita_code/setenv.sh
+if [[ -d "/group/" ]]
+then
+  source /group/clas12/packages/setup.sh
+  module load clas12/2.1
+fi
 
 #installing mirazita code
 if [[ ! -d "scoring/hipo" ]]
@@ -55,16 +57,18 @@ export CCDB_CONNECTION=sqlite:///$PATH_CCDB_t
 cd ../
 
 
-##praparing python env
-if [[ ! -d "alignment-env" ]]
+##praparing python env in ifarm
+if [[ -d "/work/" ]]
 then
-  module load anaconda3
-  conda create -p alignment-env
-  conda activate 
-  pip install scikit-optimize
-  pip install pandas
-  pip install matplotplib
-else
-  source activate alignment-env
+  if [[ ! -d "alignment-env" ]]
+  then
+    module load anaconda3
+    conda create -p alignment-env
+    conda activate
+    pip install scikit-optimize
+    pip install pandas
+    pip install matplotplib
+  else
+    source activate alignment-env
+  fi
 fi
-

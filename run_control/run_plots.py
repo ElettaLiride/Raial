@@ -1,7 +1,7 @@
 import sys
 import os
 
-import tools as t
+from run_control import tools as t
 
 
 def runcommand(filetoread):

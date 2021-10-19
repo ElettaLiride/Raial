@@ -1,7 +1,7 @@
 import sys
 import os
 
-import tools as t
+from run_control import tools as t
 
 
 def runcommand(fileIN, fileOUT=None, yaml="scoring/rich.yaml"):
@@ -22,7 +22,7 @@ def runcommand(fileIN, fileOUT=None, yaml="scoring/rich.yaml"):
     #/cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v0/dst/recon
     command = os.environ['COATJAVA'] + "/bin/recon-util -i " \
               + fileIN + " -o " + fileOUT + " -y " + yaml
-    command = "/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yaml
+    #command = "/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yaml
     _ = t.runcommand(command)
     # print(stdout[0])
 
