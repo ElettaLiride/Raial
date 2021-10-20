@@ -5,10 +5,12 @@ from run_control import tools as t
 
 def run_file_list(fileList, runnumber, Layer="-1", eventsnumber=" "):
     files = " "
-    fL = open(fileList, 'r')
-    for f in fL:
-        files = files + fL.readlines() + " "
 
+    with open(fileList) as f:
+        lines = f.readlines()
+
+    for line in lines:
+        files = files + line + " "
 
     command = "./scoring/RichAI_FilterC/filterHipo -n" + eventsnumber + " -R" + runnumber + " -L" \
               + Layer + " " + files
