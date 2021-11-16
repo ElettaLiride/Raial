@@ -10,11 +10,6 @@ filterdir = "output/filter/"
 plotdir = "output/plots/"
 recodir = "output/reco/"
 
-filesforreco = os.listdir(filterdir)
-fileforreco = filterdir + "rec_clas_5424_AIskim1_-1.hipo"
-fileforplot = recodir + "rec_clas_5424_AIskim1_-1.hipo"
-filefromplot = plotdir + "RichPlots_5424.out"
-
 calibration_connection = "sqlite:///database/ccdb_4.3.2.sqlite"
 calibration_table = "/calibration/rich/misalignments"
 variation = "default"
@@ -84,7 +79,10 @@ def obj_gp(space, names):
     print("-----------------------------------------------------------------------------------------------")
     print("----------------------------------- START RECO ------------------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
-    run_reco.runcommand(fileforreco)
+    for file in os.listdir(recodir):
+        if os.path.isfile(recodir + file):
+            run_reco.runcommand(fileforreco)
+
     # reco_time = int(time.time() - start_time)
     # second_time = time.time()
 
@@ -93,7 +91,7 @@ def obj_gp(space, names):
     print("----------------------------------- START PLOTTING --------------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
 
-    run_plots.runcommand(plotdir)
+    run_plots.runcommand(recodir)
     # plot_time = int(time.time() - second_time)
 
     # SCORING

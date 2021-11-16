@@ -34,7 +34,7 @@ class BoRichGp:
     def optimize(self, keep=True):
         old, file, number = self._chek_last_checkpoint()
         if old:
-            self._load_last_checkpoint(file)
+            _ = self.load_last_checkpoint(file)
 
         start = time.time()
         for i in range(int(self.n_call)):
@@ -90,11 +90,11 @@ class BoRichGp:
 
 if __name__=="__main__":
 
-    SPACE = Space.from_yaml('example_space.yaml')
-    opt = BoRichGp(obj=obj_gp, space=SPACE, dir='output/opt', id='namedim_test', n_call=10)
+    SPACE = Space.from_yaml('SPM+201.yaml')
+    opt = BoRichGp(obj=obj_gp, space=SPACE, dir='output/opt', id='firstlayer', n_call=10)
 
-    # opt.optimize()
-    # opt.plot_conv()
+    opt.optimize()
+    opt.plot_conv()
 
     opt.load_last_checkpoint('checkpoint_namedim_test_3')
     opt.plot_depend()
