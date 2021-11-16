@@ -3,7 +3,7 @@
 if [[ -d "/group/" ]]
 then
   source /group/clas12/packages/setup.sh
-  module load clas12/2.1
+  module load clas12/pro
   module load anaconda3
 fi
 
@@ -64,12 +64,12 @@ then
   if [[ ! -d "alignment-env" ]]
   then
     module load anaconda3
-    conda create -p alignment-env
+    conda create -p optimization
     conda activate
     pip install scikit-optimize
     pip install pandas
     pip install matplotplib
   else
-    conda activate alignment-env
+    conda activate optimization
   fi
 fi
