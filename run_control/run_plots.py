@@ -14,9 +14,16 @@ def runcommand(filetoread):
     :return: None
 
     '''
+    if os.path.isdir(filetoread) :
+        for file in os.:
+            files += " "
+            files += file
+    else:
+        files = " " + filetoread
+
     runnumber = t.getrunnumber(os.path.basename(filetoread))
 
-    command = "./scoring/RichAI_Plots/richPlots" + " -R" + runnumber + " " + filetoread
+    command = "./scoring/RichAI_Plots/richPlots" + " -R" + runnumber + files
     _ = t.runcommand(command)
     # print(stdout[0])
 

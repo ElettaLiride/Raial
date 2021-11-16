@@ -64,10 +64,8 @@ class BoRichGp:
 
     def load_last_checkpoint(self, file_name):
         res = load(self.dir + '/' + file_name)
-        x0 = res.x_iters
-        y0 = res.func_vals
-        for point in range(len(x0)):
-            self.opt.tell(x0[point], y0[point])
+        self.opt.Xi = res.x_iters
+        self.opt.Yi = res.func_vals
 
         return res
 

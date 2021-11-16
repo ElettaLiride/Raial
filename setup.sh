@@ -4,6 +4,7 @@ if [[ -d "/group/" ]]
 then
   source /group/clas12/packages/setup.sh
   module load clas12/2.1
+  module load anaconda3
 fi
 
 #installing mirazita code
@@ -69,6 +70,6 @@ then
     pip install pandas
     pip install matplotplib
   else
-    source activate alignment-env
+    conda activate alignment-env
   fi
 fi

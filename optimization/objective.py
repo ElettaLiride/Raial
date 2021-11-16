@@ -9,6 +9,8 @@ from run_control import run_reco
 filterdir = "output/filter/"
 plotdir = "output/plots/"
 recodir = "output/reco/"
+
+filesforreco = os.listdir(filterdir)
 fileforreco = filterdir + "rec_clas_5424_AIskim1_-1.hipo"
 fileforplot = recodir + "rec_clas_5424_AIskim1_-1.hipo"
 filefromplot = plotdir + "RichPlots_5424.out"
@@ -91,7 +93,7 @@ def obj_gp(space, names):
     print("----------------------------------- START PLOTTING --------------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
 
-    run_plots.runcommand(fileforplot)
+    run_plots.runcommand(plotdir)
     # plot_time = int(time.time() - second_time)
 
     # SCORING
