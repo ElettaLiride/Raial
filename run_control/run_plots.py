@@ -31,9 +31,9 @@ def runcommand(filetoread):
     _ = t.runcommand(command)
     # print(stdout[0])
 
-    command = "mv RichPlots_" + runnumber + ".out output/plots/"
+    command = "mv RichPlots_" + "2010" + ".out output/plots/"
     _ = t.runcommand(command)
-    command = "mv RichPlots_" + runnumber + ".root output/plots/"
+    command = "mv RichPlots_" + "2010" + ".root output/plots/"
     _ = t.runcommand(command)
 
 

@@ -10,6 +10,7 @@ filterdir = "output/filter/"
 plotdir = "output/plots/"
 recodir = "output/reco/"
 
+filefromplot = plotdir + "RichPlots_2010.out"
 calibration_connection = "sqlite:///database/ccdb_4.3.2.sqlite"
 calibration_table = "/calibration/rich/misalignments"
 variation = "default"
@@ -19,6 +20,7 @@ def make_mean(file):
     f = open(file, "r")
     nline = 0
     mean = 0
+    chi2 = 0
     lines = f.readlines()
 
     for line in lines:
@@ -31,7 +33,7 @@ def make_mean(file):
     f.close()
     return mean
 
-def make_mean(file):
+def make_mean1(file):
     f = open(file, "r")
     nline = 0
     mean = 0
@@ -79,9 +81,9 @@ def obj_gp(space, names):
     print("-----------------------------------------------------------------------------------------------")
     print("----------------------------------- START RECO ------------------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
-    for file in os.listdir(recodir):
-        if os.path.isfile(recodir + file):
-            run_reco.runcommand(fileforreco)
+    for file in os.listdir(filterdir):
+        if os.path.isfile(filterdir + file):
+            run_reco.runcommand(file)
 
     # reco_time = int(time.time() - start_time)
     # second_time = time.time()
