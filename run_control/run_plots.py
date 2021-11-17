@@ -24,11 +24,11 @@ def runcommand(filetoread):
                 files += filetoread + file
     else:
         files = " " + filetoread
-    print(files)
+
     #runnumber = t.getrunnumber(os.path.basename(filetoread))
 
     command = "./scoring/RichAI_Plots/richPlots" + " -R2010" + files
-    output = t.runcommand(command)
+    #output = t.runcommand(command)
     print(output[0])
 
     command = "mv RichPlots_" + "2010" + ".out output/plots/"
