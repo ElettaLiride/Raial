@@ -83,7 +83,7 @@ def obj_gp(space, names):
     print("-----------------------------------------------------------------------------------------------")
     for file in os.listdir(filterdir):
         if os.path.isfile(filterdir + file):
-            run_reco.runcommand(file)
+            run_reco.runcommand(filterdir + file)
 
     # reco_time = int(time.time() - start_time)
     # second_time = time.time()
