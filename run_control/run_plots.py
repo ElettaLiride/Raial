@@ -21,7 +21,7 @@ def runcommand(filetoread):
         for file in os.listdir(filetoread):
             if os.path.isfile(filetoread + file):
                 files += " "
-                files += file
+                files += filetoread + file
     else:
         files = " " + filetoread
     print(files)
