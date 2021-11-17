@@ -29,7 +29,7 @@ def runcommand(filetoread):
 
     command = "./scoring/RichAI_Plots/richPlots" + " -R2010" + files
     output = t.runcommand(command)
-    print(stdout[0])
+    print(output[0])
 
     command = "mv RichPlots_" + "2010" + ".out output/plots/"
     _ = t.runcommand(command)
