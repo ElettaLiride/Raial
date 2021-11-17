@@ -28,8 +28,8 @@ def runcommand(filetoread):
     #runnumber = t.getrunnumber(os.path.basename(filetoread))
 
     command = "./scoring/RichAI_Plots/richPlots" + " -R2010" + files
-    _ = t.runcommand(command)
-    # print(stdout[0])
+    output = t.runcommand(command)
+    print(stdout[0])
 
     command = "mv RichPlots_" + "2010" + ".out output/plots/"
     _ = t.runcommand(command)
