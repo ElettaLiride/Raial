@@ -64,12 +64,12 @@ then
   if [[ ! -d "alignment-env" ]]
   then
     module load anaconda3
-    conda create -p alignment_env
+    conda create -p alignment-env
     conda activate
     pip install scikit-optimize
     pip install pandas
     pip install matplotplib
   else
-    conda activate alignment_env/
+    conda activate alignment-env/
   fi
 fi

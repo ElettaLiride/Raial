@@ -17,14 +17,14 @@ def runcommand(filetoread):
 
     files = ""
 
-    if os.path.isdir(filetoread) :
+    if os.path.isdir(filetoread):
         for file in os.listdir(filetoread):
             if os.path.isfile(filetoread + file):
                 files += " "
                 files += file
     else:
         files = " " + filetoread
-
+    print(files)
     #runnumber = t.getrunnumber(os.path.basename(filetoread))
 
     command = "./scoring/RichAI_Plots/richPlots" + " -R2010" + files
