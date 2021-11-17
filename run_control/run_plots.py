@@ -18,7 +18,7 @@ def runcommand(filetoread):
     files = ""
 
     if os.path.isdir(filetoread) :
-        for file in os.lisdir(filetoread):
+        for file in os.listdir(filetoread):
             if os.path.isfile(filetoread + file):
                 files += " "
                 files += file
