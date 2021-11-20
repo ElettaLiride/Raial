@@ -27,7 +27,7 @@ def runcommand(filetoread):
 
     #runnumber = t.getrunnumber(os.path.basename(filetoread))
 
-    command = "./scoring/RichAI_Plots/richPlots" + " -R2010" + files
+    command = "./scorin g/RichAI_Plots/richPlots" + " -R2010" + files
     output = t.runcommand(command)
     #print(output[0])
 
