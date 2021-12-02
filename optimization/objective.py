@@ -6,12 +6,12 @@ from run_control import run_plots
 from run_control import run_reco
 
 
-filterdir = "output/filter/"
-plotdir = "output/plots/"
-recodir = "output/reco/"
+filterdir = "/work/clas12/users/costantini/RICH_alignment/output/filter/rec_clas_27_AIskim1_-1.hipo"
+plotdir = "/work/clas12/users/costantini/RICH_alignment/output/plots/"
+recodir = "rec_clas_27_AIskim1_-1.hipo"
 
-filefromplot = plotdir + "RichPlots_2010.out"
-calibration_connection = "sqlite:///database/ccdb_4.3.2.sqlite"
+filefromplot = "RichPlots_2010.out"
+calibration_connection = "sqlite:////work/clas12/users/costantini/RICH_alignment/database/ccdb_4.3.2.sqlite"
 calibration_table = "/calibration/rich/misalignments"
 variation = "default"
 user = "Costantini"
@@ -81,10 +81,10 @@ def obj_gp(space, names):
     print("-----------------------------------------------------------------------------------------------")
     print("----------------------------------- START RECO ------------------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
-    for file in os.listdir(filterdir):
-        if os.path.isfile(filterdir + file):
-            run_reco.runcommand(filterdir + file)
-
+    #for file in os.listdir(filterdir):
+    #    if os.path.isfile(filterdir + file):
+    #        run_reco.runcommand(filterdir + file)
+    run_reco.runcommand(filterdir)
     # reco_time = int(time.time() - start_time)
     # second_time = time.time()
 
@@ -150,7 +150,7 @@ def obj_tpe(space):
     print("----------------------------------- START PLOTTING -----------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
 
-    run_plots.runcommand(fileforplot)
+    run_plots.runcommand(file)
     # plot_time = int(time.time() - second_time)
 
     # SCORING

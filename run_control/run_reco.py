@@ -4,7 +4,7 @@ import os
 from run_control import tools as t
 
 
-def runcommand(fileIN, fileOUT=None, yaml="scoring/rich.yaml"):
+def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_alignment/scoring/rich.yaml"):
     '''
 
     execute Rich engine for reconstruction of events
@@ -23,12 +23,12 @@ def runcommand(fileIN, fileOUT=None, yaml="scoring/rich.yaml"):
     #/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util
     #/cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v0/dst/recon
     #command = os.environ['COATJAVA'] + "/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yaml
-
+    
     command = "/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yaml
     _ = t.runcommand(command)
     # print(stdout[0])
 
-    command = "mv " + fileOUT + " output/reco/"
+    command = "cp " + fileOUT + " /work/clas12/users/costantini/RICH_alignment/output/reco/"
     _ = t.runcommand(command)
 
 

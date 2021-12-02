@@ -27,13 +27,13 @@ def runcommand(filetoread):
 
     #runnumber = t.getrunnumber(os.path.basename(filetoread))
 
-    command = "./scorin g/RichAI_Plots/richPlots" + " -R2010" + files
+    command = "/work/clas12/users/costantini/RICH_alignment/scoring/RichAI_Plots/richPlots" + " -R2010" + files
     output = t.runcommand(command)
     #print(output[0])
 
-    command = "mv RichPlots_" + "2010" + ".out output/plots/"
+    command = "cp RichPlots_" + "2010" + ".out /work/clas12/users/costantini/RICH_alignment/output/plots/"
     _ = t.runcommand(command)
-    command = "mv RichPlots_" + "2010" + ".root output/plots/"
+    command = "mv RichPlots_" + "2010" + ".root /work/clas12/users/costantini/RICH_alignment/output/plots/"
     _ = t.runcommand(command)
 
 

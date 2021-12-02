@@ -12,12 +12,12 @@ def run_file_list(fileList, runnumber, Layer="-1", eventsnumber=" "):
     for line in lines:
         files = files + line + " "
 
-    command = "./scoring/RichAI_FilterC/filterHipo -n" + eventsnumber + " -R" + runnumber + " -L" \
+    command = "/work/clas12/users/costantini/RICH_alignment/scoring/RichAI_FilterC/filterHipo -n" + eventsnumber + " -R" + runnumber + " -L" \
               + Layer + " " + files
     _ = t.runcommand(command)
     # print(stdout[0])
 
-    command = "mv rec_clas_" + runnumber + "_AIskim1.hipo output/filter/rec_clas_" + runnumber \
+    command = "mv rec_clas_" + runnumber + "_AIskim1.hipo /work/clas12/users/costantini/RICH_alignment/output/filter/rec_clas_" + runnumber \
               + "_AIskim1_" + Layer + ".hipo"
     _ = t.runcommand(command)
 
