@@ -28,13 +28,14 @@ def runcommand(filetoread):
     #runnumber = t.getrunnumber(os.path.basename(filetoread))
 
     command = "./scorin g/RichAI_Plots/richPlots" + " -R2010" + files
-    output = t.runcommand(command)
+    output, err = t.runcommand(command)
     #print(output[0])
 
     command = "mv RichPlots_" + "2010" + ".out output/plots/"
     _ = t.runcommand(command)
     command = "mv RichPlots_" + "2010" + ".root output/plots/"
     _ = t.runcommand(command)
+    return str(output)
 
 
 if __name__ == "__main__":

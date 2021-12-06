@@ -40,8 +40,8 @@ class BoRichGp:
                              acq_optimizer="sampling",
                              initial_point_generator='lhs')
 
-        if not os.path.isdir(self.dir):
-            _, _ = runcommand('mkdir ' + dir)
+        #if not os.path.isdir(self.dir):
+        #    _, _ = runcommand('mkdir ' + dir)
 
     def optimize(self, keep=True, call=None):
         """

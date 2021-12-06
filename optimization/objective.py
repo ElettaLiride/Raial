@@ -1,5 +1,7 @@
 import os
 
+import numpy as np
+
 from database import parameters_setting as pm
 from database import ccdb_connection as cc
 from run_control import run_plots
@@ -15,6 +17,18 @@ calibration_connection = "sqlite:///database/ccdb_4.3.2.sqlite"
 calibration_table = "/calibration/rich/misalignments"
 variation = "default"
 user = "Costantini"
+
+def read_output(string):
+    tiles = string.split('Layer')[1:]
+    chi = float(str(string).split('Layer')[0].split('chi2=')[1].split('\\')[0])
+    val = [float(tile.split('dEtaC=')[1].split('\\')[0]) for tile in tiles]
+    layer = [float(tile.split()[0]) for tile in tiles]
+    t = [float(tile.split()[2]) for tile in tiles]
+    nice_output = np.asarray([layer, t, val])
+
+    return nice_output, chi
+def compute_score(nice_output, chi):
+    return sum([abs(el) for el in nice_output]) / len(nice_output) + chi
 
 def make_mean(file):
     f = open(file, "r")
@@ -93,11 +107,12 @@ def obj_gp(space, names):
     print("----------------------------------- START PLOTTING --------------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
 
-    run_plots.runcommand(recodir)
+    output = run_plots.runcommand(recodir)
     # plot_time = int(time.time() - second_time)
 
     # SCORING
-    score = make_mean(filefromplot)
+    nice_output, chi = read_output(output)
+    score = compute_score(nice_output[2], chi)
     # , reco_time, plot_time
     print("score: ", score)
     return score
@@ -150,11 +165,11 @@ def obj_tpe(space):
     print("----------------------------------- START PLOTTING -----------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
 
-    run_plots.runcommand(fileforplot)
+    output = run_plots.runcommand(fileforplot)
     # plot_time = int(time.time() - second_time)
 
     # SCORING
-    score = make_mean(filefromplot)
+    score = make_mean(output)
     #, reco_time, plot_time
     print("score: ", score)
     return score
