@@ -1,22 +1,22 @@
 import os
 import numpy as np
-import numpy as np
 
 from database import parameters_setting as pm
 from database import ccdb_connection as cc
 from run_control import run_plots
 from run_control import run_reco
 
+RICHGEOAL = os.path.basename("RICHGEOAL")
 
-filterdir = "/work/clas12/users/costantini/RICH_alignment/output/filter/rec_clas_27_AIskim1_-1.hipo"
-plotdir = "/work/clas12/users/costantini/RICH_alignment/output/plots/"
-recodir = "rec_clas_27_AIskim1_-1.hipo"
+filterdir = RICHGEOAL + "/filter/"
+plotdir = RICHGEOAL + "/plots/"
+recodir = RICHGEOAL + "/reco/"
 
-filefromplot = "RichPlots_2010.out"
-calibration_connection = "sqlite:////work/clas12/users/costantini/RICH_alignment/database/ccdb_4.3.2.sqlite"
+calibration_connection = "sqlite:///" + RICHGEOAL + "/database/ccdb_4.3.2.sqlite"
 calibration_table = "/calibration/rich/misalignments"
 variation = "default"
 user = "Costantini"
+
 
 def read_output(string):
     tiles = string.split('Layer')[1:]
@@ -27,8 +27,11 @@ def read_output(string):
     nice_output = np.asarray([layer, t, val])
 
     return nice_output, chi
+
+
 def compute_score(nice_output, chi):
     return sum([abs(el) for el in nice_output]) / len(nice_output) + chi
+
 
 def make_mean(file):
     f = open(file, "r")
@@ -47,6 +50,7 @@ def make_mean(file):
     f.close()
     return mean
 
+
 def make_mean1(file):
     f = open(file, "r")
     nline = 0
@@ -63,8 +67,8 @@ def make_mean1(file):
     return mean
 
 
-def pass_dict_param_to_table(dict, table):
-    for layer, val in dict.items():
+def pass_dict_param_to_table(par_dict, table):
+    for layer, val in par_dict.items():
         module = [4, int(layer.split('_')[1]), 0]
         pars = [layer.split('_')[0], val]
         pm.changing_one_parameter(table, module, pars)
@@ -72,22 +76,24 @@ def pass_dict_param_to_table(dict, table):
     return table
 
 
-def obj_gp(space, names):
+def obj_gp(space, names, RN):
     """
 
     :param space:
     :param names:
     :return:
     """
+    global recodir, plotdir, calibration_table, calibration_connection, variation, user
+    filefromplot = "RichPlots_" + RN + ".out"
 
-    provider = cc.connecting_ccdb(calibration_connection, variation)
+    my_provider = cc.connecting_ccdb(calibration_connection, variation)
 
     params = {names[i]: space[i] for i in range(len(space))}
 
     # CHANGING PARAM ON CCDB
-    old_pars_table = cc.reading_ccdb(provider, calibration_table, variation)
-    old_pars_table = pass_dict_param_to_table(params, old_pars_table)
-    to_add = old_pars_table.values.tolist()
+    old_pars_table = cc.reading_ccdb(my_provider, calibration_table, variation)
+    new_table = pass_dict_param_to_table(params, old_pars_table)
+    to_add = new_table.values.tolist()
     cc.adding_to_ccdb(to_add, provider, calibration_table, variation)
 
     # start_time = time.time()
@@ -95,10 +101,13 @@ def obj_gp(space, names):
     print("-----------------------------------------------------------------------------------------------")
     print("----------------------------------- START RECO ------------------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
-    #for file in os.listdir(filterdir):
-    #    if os.path.isfile(filterdir + file):
-    #        run_reco.runcommand(filterdir + file)
-    run_reco.runcommand(filterdir)
+
+    for file in os.listdir(filterdir):
+        if os.path.isfile(filterdir + file):
+            run_reco.runcommand(filterdir + file)
+        else:
+            run_reco.runcommand(filterdir)
+
     # reco_time = int(time.time() - start_time)
     # second_time = time.time()
 
@@ -107,15 +116,16 @@ def obj_gp(space, names):
     print("----------------------------------- START PLOTTING --------------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
 
-    output = run_plots.runcommand(recodir)
+    _ = run_plots.runcommand(recodir, RN)
     # plot_time = int(time.time() - second_time)
 
     # SCORING
-    nice_output, chi = read_output(output)
-    score = compute_score(nice_output[2], chi)
+
+    obj_score = make_mean(filefromplot)
+
     # , reco_time, plot_time
-    print("score: ", score)
-    return score
+    print("score: ", obj_score)
+    return obj_score
 
 
 def obj_tpe(space):
@@ -165,11 +175,7 @@ def obj_tpe(space):
     print("----------------------------------- START PLOTTING -----------------------------------------")
     print("-----------------------------------------------------------------------------------------------")
 
-<<<<<<< HEAD
     output = run_plots.runcommand(fileforplot)
-=======
-    run_plots.runcommand(file)
->>>>>>> f396e906e19f3c480e7813ad5b26278ae8f2ffd4
     # plot_time = int(time.time() - second_time)
 
     # SCORING

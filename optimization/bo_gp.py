@@ -17,7 +17,7 @@ from objective import obj_gp
 np.random.seed(1234)
 
 class BoRichGp:
-    def __init__(self, obj, space, dir='.', n_call=10, id="test"):
+    def __init__(self, obj, space, opt_arg=None, dir='.', n_call=10, id="test"):
         """
         Class for applying bayesian optimization.
 
@@ -35,13 +35,13 @@ class BoRichGp:
         self.id = id
         self.res = None
 
-        self.opt = Optimizer(space, "GP",
-                             n_initial_points=3,
-                             acq_optimizer="sampling",
-                             initial_point_generator='lhs')
-
-        #if not os.path.isdir(self.dir):
-        #    _, _ = runcommand('mkdir ' + dir)
+        if opt_arg is not None:
+            self.init_optimizer(opt_arg)
+        else:
+            self.opt = Optimizer(space, "GP",
+                                 n_initial_points=3,
+                                 acq_optimizer="sampling",
+                                 initial_point_generator='lhs')
 
     def optimize(self, keep=True, call=None):
         """
@@ -77,7 +77,7 @@ class BoRichGp:
         self.res = self.opt.get_result()
 
     def init_optimizer(self, arg):
-        self.opt = Optimizer(**arg)
+        self.opt = Optimizer(self.space, **arg)
 
     def plot_conv(self):
         _ = plot_convergence(self.res)

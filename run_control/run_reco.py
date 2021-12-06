@@ -15,6 +15,7 @@ def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_al
     :return: None
 
     '''
+
     f = os.path.basename(fileIN)
 
     if fileOUT is None:
@@ -27,9 +28,6 @@ def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_al
     command = "/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yaml
     _ = t.runcommand(command)
     # print(stdout[0])
-
-    #command = "cp " + fileOUT + " /work/clas12/users/costantini/RICH_alignment/output/reco/"
-    #_ = t.runcommand(command)
 
 
 if __name__ == "__main__":

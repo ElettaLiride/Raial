@@ -2,8 +2,12 @@ output/filter/*
 output/plots/*
 output/reco/*
 databese/*.sqlite
-scoring/hipo/**
+scoring/hipo/*
 output/opt/*
 data/*
 example_space.yaml
 scoring/rich.yaml
+run_control/__pycache__/*
+database/__pycache__/*
+optimization/__pycache__/*
+.idea/*

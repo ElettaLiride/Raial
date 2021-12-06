@@ -3,9 +3,10 @@ import os
 
 from run_control import tools as t
 
+RICHGEOAL = os.path.basename("RICHGEOAL")
 
-def runcommand(filetoread):
-    '''
+def runcommand(filetoread, RN):
+    """
 
     execute Mirazita code for build histogram and computing differences from expected and
     computed Cherenkov angles for single tile of the Aerogel panel
@@ -13,39 +14,28 @@ def runcommand(filetoread):
     :param filetoread:  file to read for the analysis
     :return: None
 
-    '''
+    """
 
+    global RICHGEOAL
     files = ""
 
-    #if os.path.isdir(filetoread):
-    #    for file in os.listdir(filetoread):
-    #        if os.path.isfile(filetoread + file):
-    #            files += " "
-    #            files += filetoread + file
-    #else:
-    #files = " " + filetoread
+    if os.path.isdir(filetoread):
+        for file in os.listdir(filetoread):
+            if os.path.isfile(filetoread + file):
+                files += " "
+                files += filetoread + file
+    else:
+       files = " " + filetoread
 
-    #runnumber = t.getrunnumber(os.path.basename(filetoread))
-
-    command = "./scorin g/RichAI_Plots/richPlots" + " -R2010" + files
+    command = RICHGEOAL + "/scoring/RichAI_Plots/richPlots" + " -R" + RN + " " + files
     output, err = t.runcommand(command)
-    #print(output[0])
 
-    command = "mv RichPlots_" + "2010" + ".out output/plots/"
+    command = "mv RichPlots_" + RN + ".out " + RICHGEOAL + "/" + RN + "/output/plots/"
     _ = t.runcommand(command)
-    command = "mv RichPlots_" + "2010" + ".root output/plots/"
+    command = "mv RichPlots_" + RN + ".root " + RICHGEOAL + "/" + RN + "/output/plots/"
     _ = t.runcommand(command)
     return str(output)
 
-    command = "/work/clas12/users/costantini/RICH_alignment/scoring/RichAI_Plots/richPlots" + " -R2010 " + filetoread
-    output, err = t.runcommand(command)
-    #print(output[0])
-    #dir = os.getcwd()
-    #command = "cp RichPlots_" + "2010" + ".out /work/clas12/users/costantini/RICH_alignment/output/plots/"
-    #_ = t.runcommand(command)
-    #command = "mv RichPlots_" + "2010" + ".root /work/clas12/users/costantini/RICH_alignment/output/plots/"
-    #_ = t.runcommand(command)
-    return str(output)
 
 if __name__ == "__main__":
     _ = runcommand(sys.argv[1])
