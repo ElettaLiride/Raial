@@ -18,7 +18,7 @@ def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_al
     f = os.path.basename(fileIN)
 
     if fileOUT is None:
-        fileOUT = f
+        fileOUT = "out_" + f 
 
     #/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util
     #/cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v0/dst/recon
@@ -28,8 +28,8 @@ def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_al
     _ = t.runcommand(command)
     # print(stdout[0])
 
-    command = "cp " + fileOUT + " /work/clas12/users/costantini/RICH_alignment/output/reco/"
-    _ = t.runcommand(command)
+    #command = "cp " + fileOUT + " /work/clas12/users/costantini/RICH_alignment/output/reco/"
+    #_ = t.runcommand(command)
 
 
 if __name__ == "__main__":
