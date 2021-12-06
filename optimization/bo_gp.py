@@ -68,7 +68,7 @@ class BoRichGp:
         start = time.time()
         for i in range(int(self.n_call)):
             x = self.opt.ask()
-            y = self.obj(x)
+            y = self.obj(x, self.space.dimension_names)
             self.opt.tell(x, y)
             if keep:
                 dump(self.opt.get_result(), self.dir + '/' + f'checkpoint_{self.id}_{number}')

@@ -70,6 +70,6 @@ then
     pip install pandas
     pip install matplotplib
   else
-    conda activate alignment-env/
+    conda activate /w/hallb-scshelf2102/clas12/users/costantini/RICH_alignment/alignment-env/
   fi
 fi
