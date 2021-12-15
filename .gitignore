@@ -5,9 +5,9 @@ databese/*.sqlite
 scoring/hipo/*
 output/opt/*
 data/*
-example_space.yaml
+spaces/example_space.yaml
 scoring/rich.yaml
-run_control/__pycache__/*
+scripts/__pycache__/*
 database/__pycache__/*
 optimization/__pycache__/*
 .idea/*

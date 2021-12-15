@@ -10,8 +10,8 @@ from hyperopt import hp, tpe
 from hyperopt.fmin import fmin
 from database import ccdb_connection as cc, parameters_setting as pm
 
-from run_control import run_plots
-from run_control import run_reco
+from scripts import run_plots
+from scripts import run_reco
 from functools import partial
 
 

@@ -1,7 +1,7 @@
 import sys
 import os
 
-from run_control import tools as t
+from scripts import tools as t
 
 
 def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_alignment/scoring/rich.yaml"):

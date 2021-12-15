@@ -3,8 +3,8 @@ import numpy as np
 
 from database import parameters_setting as pm
 from database import ccdb_connection as cc
-from run_control import run_plots
-from run_control import run_reco
+from scripts import run_plots
+from scripts import run_reco
 
 RICHGEOAL = os.path.basename("RICHGEOAL")
 

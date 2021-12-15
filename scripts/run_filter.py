@@ -1,7 +1,7 @@
 import sys
 import os
 import re
-from run_control import tools as t
+from scripts import tools as t
 
 def run_file_list(fileList, runnumber, Layer="-1", eventsnumber=" "):
     files = " "
