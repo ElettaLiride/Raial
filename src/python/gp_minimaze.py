@@ -7,8 +7,8 @@ from skopt import Space
 from skopt.plots import plot_convergence
 from skopt.callbacks import CheckpointSaver
 
-from optimization.objective import obj_gp as obj
-from scripts.tools import read_check
+from src.python.objective import obj_gp as obj
+from src.python.tools import read_check
 
 if __name__ == "__main__":
 
