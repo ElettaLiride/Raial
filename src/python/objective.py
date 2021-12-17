@@ -75,14 +75,16 @@ def pass_dict_param_to_table(par_dict, table):
     return table
 
 
-def obj_gp(space, names, RN):
+def obj_gp(space):
     """
 
     :param space:
     :param names:
     :return:
     """
-    global recodir, plotdir, calibration_table, calibration_connection, variation, user
+
+    RN = 10
+    global recodir, plotdir, calibration_table, calibration_connection, variation, user, names
     filefromplot = "RichPlots_" + RN + ".out"
 
     my_provider = cc.connecting_ccdb(calibration_connection, variation)
