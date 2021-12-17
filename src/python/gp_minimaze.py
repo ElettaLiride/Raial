@@ -11,7 +11,8 @@ from src.python.objective import obj_gp as obj
 from src.python.tools import read_check
 
 s = Space.from_yaml(sys.argv[1])
-name
+names = s.dimension_names
+
 if __name__ == "__main__":
 
     """
@@ -35,7 +36,7 @@ if __name__ == "__main__":
 
     start = time.time()
 
-    res = gp_minimize(func=obj(names=s.dimension_names, RN=10),
+    res = gp_minimize(func=obj,
                       dimensions=s,
                       x0=x_old,
                       y0=y_old,
