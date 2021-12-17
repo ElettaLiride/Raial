@@ -34,7 +34,7 @@ if __name__ == "__main__":
 
     start = time.time()
 
-    res = gp_minimize(func=obj,
+    res = gp_minimize(func=obj(names=s.dimension_names, RN=10),
                       dimensions=s,
                       x0=x_old,
                       y0=y_old,
