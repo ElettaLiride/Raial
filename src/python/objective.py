@@ -83,7 +83,7 @@ def obj_gp(space):
     :return:
     """
 
-    RN = 10
+    RN = "10"
     global recodir, plotdir, calibration_table, calibration_connection, variation, user, names
     filefromplot = "RichPlots_" + RN + ".out"
 
