@@ -10,6 +10,8 @@ from skopt.callbacks import CheckpointSaver
 from src.python.objective import obj_gp as obj
 from src.python.tools import read_check
 
+s = Space.from_yaml(sys.argv[1])
+name
 if __name__ == "__main__":
 
     """
@@ -29,7 +31,6 @@ if __name__ == "__main__":
     checksaver = CheckpointSaver('opt/' + sys.argv[3] + '.pkl', compress=9)
 
 
-    s = Space.from_yaml(sys.argv[1])
     x_old, y_old = read_check(sys.argv[3])
 
     start = time.time()
