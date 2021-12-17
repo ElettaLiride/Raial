@@ -12,7 +12,7 @@ from skopt import  Optimizer
 from skopt import Space
 from skopt import dump, load
 
-from objective import obj_gp
+from src.python.objective import obj_gp
 
 np.random.seed(1234)
 

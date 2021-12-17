@@ -1,7 +1,7 @@
 import sys
 import os
 
-from scripts import tools as t
+from src.python import tools as t
 
 RICHGEOAL = os.path.basename("RICHGEOAL")
 

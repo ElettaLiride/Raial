@@ -1,10 +1,10 @@
 import sys
 import os
 
-from scripts import tools as t
+from src.python import tools as t
 
 
-def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_alignment/scoring/rich.yaml"):
+def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_alignment/config/rich.yaml"):
     '''
 
     execute Rich engine for reconstruction of events
@@ -21,13 +21,9 @@ def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_al
     if fileOUT is None:
         fileOUT = "out_" + f 
 
-    #/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util
-    #/cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v0/dst/recon
-    #command = os.environ['COATJAVA'] + "/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yaml
-    
-    command = "/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yaml
+    command = "/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/" \
+              "coatjava/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yaml
     _ = t.runcommand(command)
-    # print(stdout[0])
 
 
 if __name__ == "__main__":

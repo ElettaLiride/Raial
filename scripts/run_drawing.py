@@ -1,6 +1,6 @@
 import sys
 
-from scripts import tools as t
+from src.python import tools as t
 
 
 # executing Mirazita code for drawing

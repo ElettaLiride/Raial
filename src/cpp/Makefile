@@ -23,7 +23,7 @@ AR	  = ar
 ARFLAGS	  = -cvr #create,verbose,quick (don't check for replacement, otherwise use r instead)
 
 
-all:	filterHipo
+all:	filterHipo richPlots;
 
 %: %.o
 	$(CXX) -o $@ $< $(ROOTCFLAGS) $(ROOTLDFLAGS) $(HIPOLIBS) $(LZ4LIBS)  $(ROOTLIBS)
@@ -32,4 +32,4 @@ all:	filterHipo
 	$(CXX) $(CXXFLAGS) -c -o $@ $< $(ROOTCFLAGS) $(HIPOCFLAGS) $(LZ4INCLUDES) 
 
 clean:
-	rm filterHipo 
+	rm filterHipo richPlots

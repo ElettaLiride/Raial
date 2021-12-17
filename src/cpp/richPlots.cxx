@@ -8,6 +8,8 @@
 #include "TDatabasePDG.h"
 #include "TParticlePDG.h"
 #include <vector>
+#include <stdlib.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 //#include<TFile.h>
@@ -557,7 +559,11 @@ int LoadAerogelData()
   
   
   /* Reading the ccdb data */
-  FILE *fCCDB = fopen("Aerogel_ccdb.dat", "r");
+  string RICHGEOAL(getenv("RICHGEOAL"));
+  string aerogel_dat("config/Aerogel_ccdb.dat");
+  aerogel_dat = RICHGEOAL + aerogel_dat;
+
+  FILE *fCCDB = fopen(aerogel_dat.c_str(), "r");
   if (fCCDB) {
     printf("Reading aerogel CCDB\n");
     int layer, tile, sector, thick;

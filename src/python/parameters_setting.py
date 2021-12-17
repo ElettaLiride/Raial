@@ -1,6 +1,5 @@
 import pandas as pd
-from scripts import tools as db
-
+from src.python import tools as db
 
 
 def changing_one_component_parameters(table, module, parameters):
