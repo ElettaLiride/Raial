@@ -1,9 +1,7 @@
 import os
 import numpy as np
 
-from src.python import parameters_setting as pm, ccdb_connection as cc
-from scripts import run_plots
-from scripts import run_reco
+from src.python import parameters_setting as pm, ccdb_connection as cc, run_reco, run_plots
 
 RICHGEOAL = os.getenv("RICHGEOAL")
 
@@ -11,9 +9,9 @@ filterdir = RICHGEOAL + "/output/filter/"
 plotdir = RICHGEOAL + "/output/plots/"
 recodir = RICHGEOAL + "/output/reco/"
 
-calibration_connection = "sqlite:///" + RICHGEOAL + "/database/ccdb_4.3.2.sqlite"
+calibration_connection = "sqlite:///" + RICHGEOAL + "/config/ccdb_4.3.2.sqlite"
 calibration_table = "/calibration/rich/misalignments"
-variation = "default"
+variation = "subtest"
 user = "Costantini"
 
 
@@ -40,11 +38,11 @@ def make_mean_plus_chi2(file):
     lines = f.readlines()
 
     for line in lines:
-        if nline==1:
+        if nline==0:
             chi2 = abs(float(line.split()[-1].split('=')[-1]))
-
-        mean = mean + abs(float(line.split()[-1].split('=')[-1]))
-        nline+=1
+        else:
+            mean = mean + abs(float(line.split()[-1].split('=')[-1]))
+        nline = nline + 1
     mean = mean/(nline-1) + chi2
     f.close()
     return mean
@@ -75,7 +73,7 @@ def pass_dict_param_to_table(par_dict, table):
     return table
 
 
-def obj_gp(space):
+def obj_gp(**params):
     """
 
     :param space:
@@ -84,12 +82,9 @@ def obj_gp(space):
     """
 
     RN = "10"
-    global recodir, plotdir, calibration_table, calibration_connection, variation, user, names
     filefromplot = "RichPlots_" + RN + ".out"
 
     my_provider = cc.connecting_ccdb(calibration_connection, variation)
-
-    params = {names[i]: space[i] for i in range(len(space))}
 
     # CHANGING PARAM ON CCDB
     old_pars_table = cc.reading_ccdb(my_provider, calibration_table, variation)
@@ -97,33 +92,24 @@ def obj_gp(space):
     to_add = new_table.values.tolist()
     cc.adding_to_ccdb(to_add, my_provider, calibration_table, variation)
 
-    # start_time = time.time()
     # RUN EVENTBUILDER
-    print("-----------------------------------------------------------------------------------------------")
-    print("----------------------------------- START RECO ------------------------------------------------")
-    print("-----------------------------------------------------------------------------------------------")
-
     for file in os.listdir(filterdir):
         if os.path.isfile(filterdir + file):
             run_reco.runcommand(filterdir + file)
-        else:
-            run_reco.runcommand(filterdir)
-
-    # reco_time = int(time.time() - start_time)
-    # second_time = time.time()
-
     # RUN ANGLE ANALYSIS
-    print("-----------------------------------------------------------------------------------------------")
-    print("----------------------------------- START PLOTTING --------------------------------------------")
-    print("-----------------------------------------------------------------------------------------------")
-
     _ = run_plots.runcommand(recodir, RN)
-    # plot_time = int(time.time() - second_time)
-
     # SCORING
-
     obj_score = make_mean_plus_chi2(filefromplot)
 
-    # , reco_time, plot_time
     print("score: ", obj_score)
     return obj_score
+
+
+
+# print("-----------------------------------------------------------------------------------------------")
+# print("----------------------------------- START PLOTTING --------------------------------------------")
+# print("-----------------------------------------------------------------------------------------------")
+# print("-----------------------------------------------------------------------------------------------")
+# print("----------------------------------- START RECO ------------------------------------------------")
+# print("-----------------------------------------------------------------------------------------------")
+

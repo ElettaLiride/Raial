@@ -85,7 +85,6 @@ int main(int argc, char** argv) {
   /* output root file */
   char treeFile[256];
 
-
   /* ======================================== */
   /* Scanning the command line */
   char *argptr = NULL;

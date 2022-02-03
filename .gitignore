@@ -1,13 +1,11 @@
 output/filter/*
 output/plots/*
 output/reco/*
-databese/*.sqlite
-scoring/hipo/*
 output/opt/*
+config/*.sqlite
 data/*
-config/spaces/example_space.yaml
-config/rich.yaml
+config/spaces/*
 scripts/__pycache__/*
-database/__pycache__/*
-optimization/__pycache__/*
+config/__pycache__/*
+src/python/__pycache__/*
 .idea/*

@@ -3,8 +3,9 @@ import os
 
 from src.python import tools as t
 
+RICHGEOAL = os.getenv("RICHGEOAL")
 
-def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_alignment/config/rich.yaml"):
+def runcommand(fileIN, fileOUT=None, yaml="config/rich.yaml"):
     '''
 
     execute Rich engine for reconstruction of events
@@ -19,10 +20,11 @@ def runcommand(fileIN, fileOUT=None, yaml="/work/clas12/users/costantini/RICH_al
     f = os.path.basename(fileIN)
 
     if fileOUT is None:
-        fileOUT = "out_" + f 
+        fileOUT = "reco_" + f
 
-    command = "/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/" \
-              "coatjava/bin/recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yaml
+    command = "recon-util -i " + fileIN + " -o " + fileOUT + " -y " + yaml
+    _ = t.runcommand(command)
+    command = "mv " + fileOUT + " " + RICHGEOAL + "/output/reco/"
     _ = t.runcommand(command)
 
 

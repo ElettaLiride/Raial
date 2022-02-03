@@ -1,6 +1,10 @@
 import inspect
 import subprocess
 import os
+import functools
+import time
+
+from skopt.utils import load
 
 def line_numb():
     '''Returns the current line number in our program'''
@@ -20,7 +24,7 @@ def runcommand(bashCommand):
     return [output, error]
 
 
-def look_for_check(name, dir="opt/"):
+def look_for_check(name, dir="output/opt/"):
     res = None
     for file in os.listdir(dir):
         if file == name:
@@ -28,7 +32,7 @@ def look_for_check(name, dir="opt/"):
     return res
 
 
-def read_check(name, dir="opt/"):
+def read_check(name, dir="output/opt/"):
     old = look_for_check(name + '.pkl', dir=dir)
     x_old = None
     y_old = None
@@ -38,3 +42,21 @@ def read_check(name, dir="opt/"):
     return x_old, y_old
 
 
+
+def timer(func):
+    """Print the runtime of the decorated function"""
+    @functools.wraps(func)
+    def wrapper_timer(*args, **kwargs):
+        start_time = time.perf_counter()    # 1
+        value = func(*args, **kwargs)
+        end_time = time.perf_counter()      # 2
+        run_time = end_time - start_time    # 3
+        print(f"Finished {func.__name__!r} in {run_time:.4f} secs")
+        return value
+    return wrapper_timer
+
+def save_result(func):
+    """decorator for saving result of the function"""
+    @functools.wraps(func)
+    def wrapper_saver(*args, **kwargs):
+        pass

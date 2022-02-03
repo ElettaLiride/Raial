@@ -1,9 +1,10 @@
 import sys
 import os
+import time
 
 from src.python import tools as t
 
-RICHGEOAL = os.path.basename("RICHGEOAL")
+RICHGEOAL = os.getenv("RICHGEOAL")
 
 def runcommand(filetoread, RN):
     """
@@ -15,8 +16,6 @@ def runcommand(filetoread, RN):
     :return: None
 
     """
-
-    global RICHGEOAL
     files = ""
 
     if os.path.isdir(filetoread):
@@ -27,15 +26,17 @@ def runcommand(filetoread, RN):
     else:
        files = " " + filetoread
 
-    command = RICHGEOAL + "/scoring/RichAI_Plots/richPlots" + " -R" + RN + " " + files
+    command = RICHGEOAL + "/bin/richPlots" + " -R" + RN + " " + files
     output, err = t.runcommand(command)
-
-    command = "mv RichPlots_" + RN + ".out " + RICHGEOAL + "/" + RN + "/output/plots/"
+    tim = str(time.time())
+    command = "cp RichPlots_" + RN + ".out " + RICHGEOAL + "/output/plots/rich_" + RN + ".out"
     _ = t.runcommand(command)
-    command = "mv RichPlots_" + RN + ".root " + RICHGEOAL + "/" + RN + "/output/plots/"
+    command = "cp RichPlots_" + RN + ".root " + RICHGEOAL + "/output/plots/rich_" + RN + ".root"
     _ = t.runcommand(command)
+    # command = "mv RichPlots_" + RN + ".root " + RICHGEOAL + "/output/plots/"
+    # _ = t.runcommand(command)
     return str(output)
 
 
 if __name__ == "__main__":
-    _ = runcommand(sys.argv[1])
+    _ = runcommand(sys.argv[1], sys.argv[2])

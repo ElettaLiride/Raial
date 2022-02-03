@@ -34,14 +34,9 @@ def runcommand(filetofilter, runnumber, Layer="-1", eventsnumber=" "):
     '''
 
     f = os.path.basename(filetofilter)
-    #regex = re.compile(r'\d+')
-    #runnumber = str(int(regex.findall(f)[1]))
-    #runnumber = t.getrunnumber(f)
-    print(runnumber)
-    command = "./scoring/RichAI_FilterC/filterHipo -n" + eventsnumber + " -R" + runnumber + " -L" \
+    command = "bin/filterHipo -n" + eventsnumber + " -R" + runnumber + " -L" \
               + Layer + " " + filetofilter
     _ = t.runcommand(command)
-    # print(stdout[0])
 
     command = "mv rec_clas_" + runnumber + "_AIskim1.hipo output/filter/rec_clas_" + runnumber \
               + "_AIskim1_" + Layer + ".hipo"
@@ -55,5 +50,5 @@ if __name__ == "__main__":
         nevents = " "
     else:
         nevents = sys.argv[4]
-    #runcommand(sys.argv[1], sys.argv[2], sys.argv[3], nevents)
-    run_file_list(sys.argv[1], sys.argv[2], sys.argv[3], nevents)
+    runcommand(sys.argv[1], sys.argv[2], sys.argv[3], nevents)
+    #run_file_list(sys.argv[1], sys.argv[2], sys.argv[3], nevents)
