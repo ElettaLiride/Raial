@@ -29,9 +29,9 @@ def runcommand(filetoread, RN):
     command = RICHGEOAL + "/bin/richPlots" + " -R" + RN + " " + files
     output, err = t.runcommand(command)
     tim = str(time.time())
-    command = "cp RichPlots_" + RN + ".out " + RICHGEOAL + "/output/plots/rich_" + RN + ".out"
+    command = "cp RichPlots_" + RN + ".out " + RICHGEOAL + "/output/plots/rich_" + tim + ".out"
     _ = t.runcommand(command)
-    command = "cp RichPlots_" + RN + ".root " + RICHGEOAL + "/output/plots/rich_" + RN + ".root"
+    command = "cp RichPlots_" + RN + ".root " + RICHGEOAL + "/output/plots/rich_" + tim + ".root"
     _ = t.runcommand(command)
     # command = "mv RichPlots_" + RN + ".root " + RICHGEOAL + "/output/plots/"
     # _ = t.runcommand(command)
