@@ -29,6 +29,12 @@ def read_output(string):
 def compute_score(nice_output, chi):
     return sum([abs(el) for el in nice_output]) / len(nice_output) + chi
 
+def minimize_chi(file):
+    f = open(file, "r")
+    lines = f.readlines()
+    chi2 = abs(float(lines[0].split()[-1].split('=')[-1]))
+
+    return abs(1-chi2)
 
 def make_mean_plus_chi2(file):
     f = open(file, "r")
@@ -99,8 +105,8 @@ def obj_gp(**params):
     # RUN ANGLE ANALYSIS
     _ = run_plots.runcommand(recodir, RN)
     # SCORING
-    obj_score = make_mean_plus_chi2(filefromplot)
-
+    #obj_score = make_mean_plus_chi2(filefromplot)
+    obj_score = minimize_chi(filefromplot)
     print("score: ", obj_score)
     return obj_score
 
