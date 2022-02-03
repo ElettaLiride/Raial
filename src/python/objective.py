@@ -5,7 +5,7 @@ from src.python import parameters_setting as pm, ccdb_connection as cc, run_reco
 
 RICHGEOAL = os.getenv("RICHGEOAL")
 
-filterdir = RICHGEOAL + "/output/filter/"
+filterdir = RICHGEOAL + "/output/filter/layer0/"
 plotdir = RICHGEOAL + "/output/plots/"
 recodir = RICHGEOAL + "/output/reco/"
 

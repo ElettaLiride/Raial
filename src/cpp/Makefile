@@ -23,7 +23,7 @@ AR	  = ar
 ARFLAGS	  = -cvr #create,verbose,quick (don't check for replacement, otherwise use r instead)
 EXEDIR = $(RICHGEOAL)/bin
 
-all: $(EXEDIR)/filterHipo $(EXEDIR)/richPlots $(EXEDIR)/richPlots1;
+all: $(EXEDIR)/filterHipo $(EXEDIR)/richPlots;
 
 $(EXEDIR)/%: %.o
 	$(CXX) -o $@ $< $(ROOTCFLAGS) $(ROOTLDFLAGS) $(HIPOLIBS) $(LZ4LIBS)  $(ROOTLIBS)
@@ -32,4 +32,4 @@ $(EXEDIR)/%: %.o
 	$(CXX) $(CXXFLAGS) -c -o $@ $< $(ROOTCFLAGS) $(HIPOCFLAGS) $(LZ4INCLUDES) 
 
 clean:
-	rm richPlots filterHipo richPlots1
+	rm richPlots filterHipo
