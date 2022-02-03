@@ -21,15 +21,15 @@ LDFLAGS   := $(ROOTLDFLAGS)
 
 AR	  = ar
 ARFLAGS	  = -cvr #create,verbose,quick (don't check for replacement, otherwise use r instead)
+EXEDIR = /mnt/c/Users/gcost/Desktop/progetti/Raial/bin
 
+all: $(EXEDIR)/filterHipo $(EXEDIR)/richPlots $(EXEDIR)/richPlots1;
 
-all:	filterHipo
-
-%: %.o
+$(EXEDIR)/%: %.o
 	$(CXX) -o $@ $< $(ROOTCFLAGS) $(ROOTLDFLAGS) $(HIPOLIBS) $(LZ4LIBS)  $(ROOTLIBS)
 
 %.o: %.cxx
 	$(CXX) $(CXXFLAGS) -c -o $@ $< $(ROOTCFLAGS) $(HIPOCFLAGS) $(LZ4INCLUDES) 
 
 clean:
-	rm filterHipo 
+	rm richPlots filterHipo richPlots1

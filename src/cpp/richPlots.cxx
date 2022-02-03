@@ -8,6 +8,8 @@
 #include "TDatabasePDG.h"
 #include "TParticlePDG.h"
 #include <vector>
+//#include <stdlib.h>
+//#include <bits/stdc++.h>
 using namespace std;
 
 //#include<TFile.h>
@@ -138,6 +140,8 @@ int main(int argc, char** argv) {
 
       inputFiles[nFiles] = (char*)malloc(256*sizeof(char));
       sprintf(inputFiles[nFiles], "%s", inputFile);
+      printf("Hipo file name:  %s \n", inputFiles[nFiles]);
+
       nFiles++;
     }
     
@@ -183,12 +187,11 @@ int main(int argc, char** argv) {
   /* ====================================== */
   /* LOOP OVER THE HIPO FILES */
   for (int l=0; l<nFiles; l++) {
-    printf("==>> READING HIPO FILE: %s\n", inputFiles[l]);
- 
-    /* opening the hipo4 file */
-    //fReader->open(flist[f]);  TString input
     fReader->open(inputFiles[l]);
 
+    printf("==>> READING HIPO FILE: %s\n", inputFiles[l]);
+    /* opening the hipo4 file */
+    //fReader->open(flist[f]);  TString input
     /* Bank definition */
     fReader->readDictionary(*fFactory);
     InitBanks();
@@ -557,14 +560,17 @@ int LoadAerogelData()
   
   
   /* Reading the ccdb data */
-  FILE *fCCDB = fopen("Aerogel_ccdb.dat", "r");
+  string RICHGEOAL(getenv("RICHGEOAL"));
+  string aerogel_dat("/config/Aerogel_ccdb.dat");
+  aerogel_dat = RICHGEOAL + aerogel_dat;
+
+  FILE *fCCDB = fopen(aerogel_dat.c_str(), "r");
   if (fCCDB) {
     printf("Reading aerogel CCDB\n");
     int layer, tile, sector, thick;
     double val[12];
     while (fscanf(fCCDB, "%d %d %d %d", &sector, &layer, &tile, &thick) != EOF) {
-      
-      //for (int v=0; v<11; v++) fscanf(fCCDB, "%lf ", &val[v]);
+          //for (int v=0; v<11; v++) fscanf(fCCDB, "%lf ", &val[v]);
       for (int v=0; v<9; v++) fscanf(fCCDB, "%lf ", &val[v]);
       int l = layer - 201;
       int t = tile;
@@ -585,7 +591,6 @@ int LoadAerogelData()
   }
 
 
-  
 
   return 0;
 }

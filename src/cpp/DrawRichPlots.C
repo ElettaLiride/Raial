@@ -460,7 +460,7 @@ int LoadAerogelData()
   
   
   /* Reading the ccdb data */
-  FILE *fCCDB = fopen("Aerogel_ccdb.dat", "r");
+  FILE *fCCDB = fopen("config/Aerogel_ccdb.dat", "r");
   if (fCCDB) {
     printf("Reading aerogel CCDB\n");
     int layer, tile, sector, thick;

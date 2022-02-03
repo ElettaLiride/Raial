@@ -1,11 +1,11 @@
 import sys
 
-from run_control import tools as t
+from src.python import tools as t
 
 
 # executing Mirazita code for drawing
 def runcommand(runnumber):
-    command = "root -l -p -q mirazita_code/RichAI_plots/DrawRichPlots.C(\"RichPlots_" + runnumber + ".root\")"
+    command = "root -l -p -q src/cpp/DrawRichPlots.C(\"output/plots/RichPlots_" + runnumber + ".root\")"
     stdout = t.runcommand(command)
     print(stdout[0])
 

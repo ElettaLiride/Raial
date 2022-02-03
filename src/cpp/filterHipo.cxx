@@ -8,6 +8,8 @@
 #include "TDatabasePDG.h"
 #include "TParticlePDG.h"
 #include <vector>
+#include <stdlib.h>
+#include <bits/stdc++.h>
 using namespace std;
 
 //#include<TFile.h>
@@ -82,7 +84,6 @@ int main(int argc, char** argv) {
 
   /* output root file */
   char treeFile[256];
-
 
   /* ======================================== */
   /* Scanning the command line */
@@ -386,8 +387,14 @@ void LoadTilePobabilities(int run)
 
   /* Reading probabilities from file */
   char file[200];
-  if ( (5030 < run) && (run < 5422) ) sprintf(file, "TileWeights_IB.dat");
-  else if ( (5422 < run) && (run < 5670) ) sprintf(file, "TileWeights_OB.dat");
+  string RICHGEOAL(getenv("RICHGEOAL"));
+  string tile_IB("config/TileWeights_IB.dat");
+  string tile_OB("config/TileWeights_OB.dat");
+  tile_IB = RICHGEOAL + tile_IB;
+  tile_OB = RICHGEOAL + tile_OB;
+
+  if ( (5030 < run) && (run < 5422) ) sprintf(file, "%s", tile_IB.c_str());
+  else if ( (5422 < run) && (run < 5670) ) sprintf(file, "%s", tile_OB.c_str());
   else sprintf(file, "TileWeights.dat");
   
   FILE *fProb = fopen(&file[0], "r");
