@@ -21,7 +21,7 @@ LDFLAGS   := $(ROOTLDFLAGS)
 
 AR	  = ar
 ARFLAGS	  = -cvr #create,verbose,quick (don't check for replacement, otherwise use r instead)
-EXEDIR = /mnt/c/Users/gcost/Desktop/progetti/Raial/bin
+EXEDIR = $(RICHGEOAL)/bin
 
 all: $(EXEDIR)/filterHipo $(EXEDIR)/richPlots $(EXEDIR)/richPlots1;
 
