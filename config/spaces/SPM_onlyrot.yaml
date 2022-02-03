@@ -1,0 +1,12 @@
+- Real:
+    low: -4.
+    high: 4.
+    name: 'dthx_401'
+- Real:
+    low: -4.
+    high: 4.
+    name: 'dthy_401'
+- Real:
+    low: -4.
+    high: 4.
+    name: 'dthz_401'

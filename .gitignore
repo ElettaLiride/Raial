@@ -4,7 +4,6 @@ output/reco/*
 output/opt/*
 config/*.sqlite
 data/*
-config/spaces/*
 config/rich.yaml
 scripts/__pycache__/*
 config/__pycache__/*
