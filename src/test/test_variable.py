@@ -22,7 +22,7 @@ def test_richgeoal_onfarm():
 
 @tester
 def test_ccdbconnection_onfarm():
-    return globalpath.CALIBRATION_CONNECTION == '/work/clas12/users/costantini/Raial/config/ccdb_4.3.2.sqlite'
+    return globalpath.CALIBRATION_CONNECTION == 'sqlite:////work/clas12/users/costantini/Raial/config/ccdb_4.3.2.sqlite'
 
 
 @tester
