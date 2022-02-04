@@ -1,6 +1,8 @@
 #!/bin/bash
 export RICHGEOAL=$PWD
 export CCDB_CONNECTION=sqlite:///$RICHGEOAL/config/ccdb_4.3.2.sqlite
+export PYTHONPATH=$PYTHONPATH:$RICHGEOAL
+
 
 ## SetUp for jlab farm
 if [[ -d "/group/" ]]
@@ -15,7 +17,7 @@ source /w/hallb-scshelf2102/clas12/users/costantini/ccdb/environment.bash
 conda activate /w/hallb-scshelf2102/clas12/users/costantini/RICH_alignment/alignment-env/
 
 ## Setup for local env
-else
+el  se
 export PYTHONPATH=$PYTHONPATH:$RICHGEOAL
 
 fi
