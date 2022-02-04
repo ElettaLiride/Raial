@@ -26,10 +26,11 @@ def build_list_from_space(dict, call):
     return dict['name'], list
 
 if __name__ == "__main__":
-    yaml_space_file = sys.argv[1]
-    number_of_calls = int(sys.argv[2])
+    data_dir = sys.argv[1]
+    yaml_space_file = sys.argv[2]
+    number_of_calls = int(sys.argv[3])
 
-    t.init_opt(os.path.basename(yaml_space_file).split('.')[0], 1)
+    t.init_opt(data_dir, os.path.basename(yaml_space_file).split('.')[0], 1)
 
     file = open(yaml_space_file)
     code = yaml.load(file, Loader=yaml.FullLoader)

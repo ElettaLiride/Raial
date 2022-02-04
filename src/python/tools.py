@@ -47,12 +47,11 @@ def read_check(name, dir="output/opt/"):
 def mkdir(path):
     _ = runcommand(f'mkdir {path}')
 
-def init_opt(file_name, RN):
-    globalpath.PLOTDIR = f'{globalpath.PLOTDIR}/{file_name}'
-    globalpath.RECODIR = f'{globalpath.RECODIR}/{file_name}'
-    globalpath.FILTDIR = f'{globalpath.FILTDIR}/{file_name}'
+def init_opt(data_dir, yaml_file_name, RN):
+    globalpath.PLOTDIR = f'{globalpath.PLOTDIR}/{yaml_file_name}'
+    globalpath.RECODIR = f'{globalpath.RECODIR}/{yaml_file_name}'
+    globalpath.FILTDIR = f'{globalpath.FILTDIR}/{data_dir}'
 
-    mkdir(globalpath.FILTDIR)
     mkdir(globalpath.RECODIR)
     mkdir(globalpath.PLOTDIR)
 

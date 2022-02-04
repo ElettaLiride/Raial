@@ -4,8 +4,8 @@ import os
 RICHGEOAL = os.getenv("RICHGEOAL")
 
 FILTDIR = f'{RICHGEOAL}/output/filter'
-PLOTDIR = f'{RICHGEOAL}/output/plot'
-RECODIR = f'{RICHGEOAL}/output/dir'
+PLOTDIR = f'{RICHGEOAL}/output/plots'
+RECODIR = f'{RICHGEOAL}/output/reco'
 OPTIDIR = f'{RICHGEOAL}/output/opt'
 BINDIR = f'{RICHGEOAL}/bin'
 
