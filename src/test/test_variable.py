@@ -16,7 +16,7 @@ def tester(func):
 
 
 @tester
-def test_richgoal_onfarm():
+def test_richgeoal_onfarm():
     return globalpath.RICHGEOAL == '/work/clas12/users/costantini/Raial'
 
 
@@ -33,3 +33,7 @@ def test_richgeoal_local():
 @tester
 def test_ccdbconnection_local():
     return globalpath.CALIBRATION_CONNECTION == 'sqlite:////mnt/c/Users/gcost/Desktop/progetti/Raial/config/ccdb_4.3.2.sqlite'
+
+if __name__=="__main__":
+    test_richgeoal_onfarm()
+    test_ccdbconnection_onfarm()
