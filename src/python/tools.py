@@ -5,6 +5,8 @@ import functools
 import time
 
 from skopt.utils import load
+from config import globalpath
+
 
 def line_numb():
     '''Returns the current line number in our program'''
@@ -41,6 +43,20 @@ def read_check(name, dir="output/opt/"):
         y_old = old.func_vals
     return x_old, y_old
 
+
+def mkdir(path):
+    _ = runcommand(f'mkdir {path}')
+
+def init_opt(file_name, RN):
+    globalpath.PLOTDIR = f'{globalpath.PLOTDIR}/{file_name}'
+    globalpath.RECODIR = f'{globalpath.RECODIR}/{file_name}'
+    globalpath.FILTDIR = f'{globalpath.FILTDIR}/{file_name}'
+
+    mkdir(globalpath.FILTDIR)
+    mkdir(globalpath.RECODIR)
+    mkdir(globalpath.PLOTDIR)
+
+    globalpath.RN = RN
 
 
 def timer(func):

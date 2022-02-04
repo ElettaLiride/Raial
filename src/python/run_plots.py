@@ -1,12 +1,12 @@
 import sys
 import os
-import time
 
+from config import globalpath
 from src.python import tools as t
 
 RICHGEOAL = os.getenv("RICHGEOAL")
 
-def runcommand(filetoread, RN):
+def runcommand(input):
     """
 
     execute Mirazita code for build histogram and computing differences from expected and
@@ -18,24 +18,18 @@ def runcommand(filetoread, RN):
     """
     files = ""
 
-    if os.path.isdir(filetoread):
-        for file in os.listdir(filetoread):
-            if os.path.isfile(filetoread + file):
+    if os.path.isdir(input):
+        for file in os.listdir(input):
+            if os.path.isfile(input + file):
                 files += " "
-                files += filetoread + file
+                files += input + file
     else:
-       files = " " + filetoread
+       files = " " + input
 
-    command = RICHGEOAL + "/bin/richPlots" + " -R" + RN + " " + files
-    output, err = t.runcommand(command)
-    tim = str(time.time())
-    command = "cp RichPlots_" + RN + ".out " + RICHGEOAL + "/output/plots/rich_" + tim + ".out"
-    _ = t.runcommand(command)
-    command = "cp RichPlots_" + RN + ".root " + RICHGEOAL + "/output/plots/rich_" + tim + ".root"
-    _ = t.runcommand(command)
-    # command = "mv RichPlots_" + RN + ".root " + RICHGEOAL + "/output/plots/"
-    # _ = t.runcommand(command)
-    return str(output)
+    _ = t.runcommand(f"{globalpath.BINDIR}/richPlots -R{globalpath.RN} {files}")
+    _ = t.runcommand(f"mv RichPlots_{globalpath.RN}.out {globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out")
+    _ = t.runcommand(f"mv RichPlots_{globalpath.RN}.root {globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.root")
+
 
 
 if __name__ == "__main__":

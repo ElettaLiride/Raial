@@ -2,18 +2,36 @@ import os
 import numpy as np
 
 from src.python import parameters_setting as pm, ccdb_connection as cc, run_reco, run_plots
-
+from config import globalpath
 RICHGEOAL = os.getenv("RICHGEOAL")
 
-filterdir = RICHGEOAL + "/output/filter/layer0/"
-plotdir = RICHGEOAL + "/output/plots/"
-recodir = RICHGEOAL + "/output/reco/"
 
-calibration_connection = "sqlite:///" + RICHGEOAL + "/config/ccdb_4.3.2.sqlite"
-calibration_table = "/calibration/rich/misalignments"
-variation = "subtest"
-user = "Costantini"
 
+def main_obj(**params):
+    """
+
+    :param space:
+    :param names:
+    :return:
+    """
+    #UPDATE ITARATION NUMBER
+    globalpath.ITER = globalpath.ITER + 1
+
+    # CHANGING PARAM ON CCDB
+    my_provider = cc.connecting_ccdb(globalpath.CALIBRATION_CONNECTION, globalpath.VARIATION)
+
+    old_pars_table = cc.reading_ccdb(my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
+    new_table = pass_dict_param_to_table(params, old_pars_table)
+    to_add = new_table.values.tolist()
+
+    cc.adding_to_ccdb(to_add, my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
+
+    # RUN EVENTBUILDER
+    for file in os.listdir(globalpath.FILTDIR):
+        if os.path.isfile(f'{globalpath.FILTDIR}/{file}'):
+            run_reco.runcommand(f'{globalpath.FILTDIR}/{file}')
+    # RUN ANGLE ANALYSIS
+    run_plots.runcommand(globalpath.RECODIR)
 
 def read_output(string):
     tiles = string.split('Layer')[1:]
@@ -29,12 +47,14 @@ def read_output(string):
 def compute_score(nice_output, chi):
     return sum([abs(el) for el in nice_output]) / len(nice_output) + chi
 
+
 def minimize_chi(file):
     f = open(file, "r")
     lines = f.readlines()
     chi2 = abs(float(lines[0].split()[-1].split('=')[-1]))
 
     return abs(1-chi2)
+
 
 def make_mean_plus_chi2(file):
     f = open(file, "r")
@@ -79,43 +99,9 @@ def pass_dict_param_to_table(par_dict, table):
     return table
 
 
-def obj_gp(**params):
-    """
-
-    :param space:
-    :param names:
-    :return:
-    """
-
-    RN = "10"
-    filefromplot = "RichPlots_" + RN + ".out"
-
-    my_provider = cc.connecting_ccdb(calibration_connection, variation)
-
-    # CHANGING PARAM ON CCDB
-    old_pars_table = cc.reading_ccdb(my_provider, calibration_table, variation)
-    new_table = pass_dict_param_to_table(params, old_pars_table)
-    to_add = new_table.values.tolist()
-    cc.adding_to_ccdb(to_add, my_provider, calibration_table, variation)
-
-    # RUN EVENTBUILDER
-    for file in os.listdir(filterdir):
-        if os.path.isfile(filterdir + file):
-            run_reco.runcommand(filterdir + file)
-    # RUN ANGLE ANALYSIS
-    _ = run_plots.runcommand(recodir, RN)
-    # SCORING
-    #obj_score = make_mean_plus_chi2(filefromplot)
-    obj_score = minimize_chi(filefromplot)
+def obj_cluster_chi_square(**params):
+    main_obj(**params)
+    obj_score = minimize_chi(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
     print("score: ", obj_score)
     return obj_score
-
-
-
-# print("-----------------------------------------------------------------------------------------------")
-# print("----------------------------------- START PLOTTING --------------------------------------------")
-# print("-----------------------------------------------------------------------------------------------")
-# print("-----------------------------------------------------------------------------------------------")
-# print("----------------------------------- START RECO ------------------------------------------------")
-# print("-----------------------------------------------------------------------------------------------")
 

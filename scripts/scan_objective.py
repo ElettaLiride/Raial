@@ -8,16 +8,16 @@
     It takes as input
     1) the name of the yaml file for the hyperparameter space
     2) the number of calls for the search
-    3) the name of the checkpoint file (optional)
 
 """
-
+import os.path
 import sys
 import yaml
-from src.python.objective import obj_gp
 
-def fake_obj(**par):
-    print(par)
+from config import globalpath
+from src.python import tools as t
+from src.python.objective import obj_cluster_chi_square
+
 
 def build_list_from_space(dict, call):
     list = []
@@ -29,6 +29,8 @@ if __name__ == "__main__":
     yaml_space_file = sys.argv[1]
     number_of_calls = int(sys.argv[2])
 
+    t.init_opt(os.path.basename(yaml_space_file).split('.')[0], 1)
+
     file = open(yaml_space_file)
     code = yaml.load(file, Loader=yaml.FullLoader)
 
@@ -38,9 +40,9 @@ if __name__ == "__main__":
         for p1 in list1:
             for p2 in list2:
                 d = {par1: p1, par2: p2}
-                obj_gp(**d)
+                obj_cluster_chi_square(**d)
     else:
         par1, list1 = build_list_from_space(code[0]['Real'], number_of_calls)
         for p1 in list1:
             d = {par1: p1}
-            obj_gp(**d)
+            obj_cluster_chi_square(**d)
