@@ -14,4 +14,5 @@ ITER = 0
 CALIBRATION_TABLE = "/calibration/rich/misalignments"
 VARIATION = "subtest"
 USER = "Costantini"
-CALIBRATION_CONNECTION = os.getenv("CCDB_CONNECTION")
+#CALIBRATION_CONNECTION = os.getenv("CCDB_CONNECTION")
+CALIBRATION_CONNECTION = f'sqlite:///{RICHGEOAL}/config/ccdb_4.3.2.sqlite'
