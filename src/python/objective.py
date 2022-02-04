@@ -3,8 +3,6 @@ import numpy as np
 
 from src.python import parameters_setting as pm, ccdb_connection as cc, run_reco, run_plots
 from config import globalpath
-RICHGEOAL = os.getenv("RICHGEOAL")
-
 
 
 def main_obj(**params):
@@ -33,6 +31,80 @@ def main_obj(**params):
     # RUN ANGLE ANALYSIS
     run_plots.runcommand(globalpath.RECODIR)
 
+
+#### SCORING
+def minimize_chi(file):
+    f = open(file, "r")
+    lines = f.readlines()
+    chi2 = abs(float(lines[0].split()[-1].split('=')[-1]))
+
+    return abs(1 - chi2)
+
+
+def minimize_chi_and_diff(file):
+    f = open(file, "r")
+    nline = 0
+    mean = 0
+    chi2 = 0
+    lines = f.readlines()
+
+    for line in lines:
+        if nline == 0:
+            chi2 = abs(float(line.split()[-1].split('=')[-1]))
+        else:
+            mean = mean + abs(float(line.split()[-1].split('=')[-1]))
+        nline = nline + 1
+    f.close()
+
+    mean = mean / (nline - 1)
+    mean = 2 - np.exp(mean) - chi2
+
+    return mean
+
+
+def minimize_mean_diff(file):
+    f = open(file, "r")
+    nline = 0
+    mean = 0
+    lines = f.readlines()
+
+    for line in lines:
+        if nline == 0:
+            continue
+        else:
+            mean = mean + abs(float(line.split()[-1].split('=')[-1]))
+        nline = nline + 1
+    f.close()
+
+    mean = mean / (nline - 1)
+    mean = 1 - np.exp(mean)
+
+    return mean
+
+
+#### OBJECTIVE
+def obj_cluster_chi_square(**params):
+    main_obj(**params)
+    obj_score = minimize_chi(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
+    print("score: ", obj_score)
+    return obj_score
+
+
+def obj_chi_and_diff(**params):
+    main_obj(**params)
+    obj_score = minimize_chi(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
+    print("score: ", obj_score)
+    return obj_score
+
+
+def obj_diff(**params):
+    main_obj(**params)
+    obj_score = minimize_mean_diff(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
+    print("score: ", obj_score)
+    return obj_score
+
+
+#### OTHER THINGS
 def read_output(string):
     tiles = string.split('Layer')[1:]
     chi = float(str(string).split('Layer')[0].split('chi2=')[1].split('\\')[0])
@@ -46,14 +118,6 @@ def read_output(string):
 
 def compute_score(nice_output, chi):
     return sum([abs(el) for el in nice_output]) / len(nice_output) + chi
-
-
-def minimize_chi(file):
-    f = open(file, "r")
-    lines = f.readlines()
-    chi2 = abs(float(lines[0].split()[-1].split('=')[-1]))
-
-    return abs(1-chi2)
 
 
 def make_mean_plus_chi2(file):
@@ -99,9 +163,4 @@ def pass_dict_param_to_table(par_dict, table):
     return table
 
 
-def obj_cluster_chi_square(**params):
-    main_obj(**params)
-    obj_score = minimize_chi(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
-    print("score: ", obj_score)
-    return obj_score
 

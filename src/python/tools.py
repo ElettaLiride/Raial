@@ -47,6 +47,7 @@ def read_check(name, dir="output/opt/"):
 def mkdir(path):
     _ = runcommand(f'mkdir {path}')
 
+
 def init_opt(data_dir, yaml_file_name, RN):
     globalpath.PLOTDIR = f'{globalpath.PLOTDIR}/{yaml_file_name}'
     globalpath.RECODIR = f'{globalpath.RECODIR}/{yaml_file_name}'

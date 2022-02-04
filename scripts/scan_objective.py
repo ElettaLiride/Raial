@@ -17,7 +17,7 @@ import yaml
 from config import globalpath
 from src.python import tools as t
 from src.python.objective import obj_cluster_chi_square
-
+from src.python.objective import obj_chi_and_diff
 
 def build_list_from_space(dict, call):
     list = []
@@ -41,7 +41,7 @@ if __name__ == "__main__":
         for p1 in list1:
             for p2 in list2:
                 d = {par1: p1, par2: p2}
-                obj_cluster_chi_square(**d)
+                obj_chi_and_diff(**d)
     else:
         par1, list1 = build_list_from_space(code[0]['Real'], number_of_calls)
         for p1 in list1:
