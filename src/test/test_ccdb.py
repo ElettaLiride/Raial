@@ -20,13 +20,14 @@ def test_ccdb_adding():
 
 @tester
 def test_ccdb_reading():
-    globalpath.VARIATION = 'misalignments'
+    globalpath.VARIATION = 'ccdb_test'
     my_provider = cc.connecting_ccdb(globalpath.CALIBRATION_CONNECTION, globalpath.VARIATION)
-    test_ass = cc.reading_ccdb(my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION, 9548)
+    test_ass = cc.reading_ccdb(my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
     test_df = cc.convert_table_in_pd(test_ass)
-    return not bool((test_df[test_df.columns[3:]].astype(bool)).sum(axis=0).sum())
+    print(test_df)
+    return test_df[test_df.columns[3:]].astype(bool).sum(axis=0).sum() == 1
 
 
 if __name__ == "__main__":
-    test_ccdb_adding()
+#    test_ccdb_adding()
     test_ccdb_reading()
