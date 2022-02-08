@@ -1,9 +1,14 @@
 import pandas as pd
 import ccdb
 from src.python import tools as db
+from config import globalpath
 
 
-def connecting_ccdb(calibration_connection, variation, comment="", user="anonymous", parent="default"):
+def connecting_ccdb(calibration_connection=globalpath.CALIBRATION_CONNECTION,
+                    variation=globalpath.VARIATION,
+                    comment="",
+                    user=globalpath.USER,
+                    parent="default"):
     """
 
     connect to the ccdb
@@ -27,7 +32,7 @@ def connecting_ccdb(calibration_connection, variation, comment="", user="anonymo
     return provider
 
 
-def reading_ccdb(provider, mis_table, variation, run=0, id=None):
+def dumping_ccdb(mis_table=globalpath.CALIBRATION_TABLE, variation=globalpath.VARIATION, run=0, id=None):
 
     """
 
@@ -38,9 +43,10 @@ def reading_ccdb(provider, mis_table, variation, run=0, id=None):
     :param variation:
     :param run:
     :param id:
-    :return: pandas dataframe with a column for each column of the misalignment table in the ccdb
+    :return: a ccdb assignment object
 
     """
+    provider = connecting_ccdb(globalpath.CALIBRATION_CONNECTION, variation)
     variation = provider.get_variation(variation)
     table = provider.get_type_table(mis_table)
     if id is not None:
@@ -49,6 +55,11 @@ def reading_ccdb(provider, mis_table, variation, run=0, id=None):
     else:
         assignment = provider.get_assignment(table, run=run, variation=variation)
     return assignment
+
+
+def reading_ccdb(mis_table=globalpath.CALIBRATION_TABLE, variation=globalpath.VARIATION, run=0, id=None, comment=""):
+    assignment = dumping_ccdb(mis_table, variation, run=run, id=id)
+    return convert_table_in_pd(assignment)
 
 
 def convert_table_in_pd(assignment):
@@ -66,6 +77,11 @@ def convert_table_in_pd(assignment):
     return df
 
 
+def init_ccdb():
+    my_provider = connecting_ccdb(globalpath.CALIBRATION_CONNECTION, globalpath.VARIATION)
+    adding_to_ccdb(globalpath.STARTING_TABLE.values.tolist(), my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
+
+
 def adding_to_ccdb(parameters, provider, table, variation, comment='Test'):
     """
 
@@ -78,7 +94,7 @@ def adding_to_ccdb(parameters, provider, table, variation, comment='Test'):
     :param comment:
     :return:
     """
-
+    provider = connecting_ccdb(globalpath.CALIBRATION_CONNECTION, globalpath.VARIATION)
     if isinstance(parameters, list):
         provider.create_assignment(
             data=parameters,
@@ -94,7 +110,7 @@ def adding_to_ccdb(parameters, provider, table, variation, comment='Test'):
     return 0
 
 
-def init_ccdb(provider, calibration_table, variation):
+def old_init_ccdb(provider, calibration_table, variation):
     """
     set all the parameters in the calibration_table to 0
 

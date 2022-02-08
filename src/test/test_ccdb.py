@@ -8,24 +8,19 @@ from config import globalpath
 
 @tester
 def test_ccdb_adding():
-
     globalpath.VARIATION = "ccdb_test"
     my_provider = cc.connecting_ccdb(globalpath.CALIBRATION_CONNECTION, globalpath.VARIATION)
-    toadd = pd.read_table('config/allzero_python.txt', sep='-').values.tolist()
+    toadd = pd.read_table('config/ccdb_test.txt', sep='-').values.tolist()
     cc.adding_to_ccdb(toadd, my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
-    test_ass = cc.reading_ccdb(my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
-    test_df = cc.convert_table_in_pd(test_ass)
+    test_df = cc.reading_ccdb()
 
-    return (test_df[test_df.columns[3:]].astype(bool)).sum(axis=0).sum() == 1
+    return test_df['dthx'][7] == 1 and test_df['dy'][0] == 1 and test_df['dx'][7] == 1
 
 @tester
 def test_ccdb_reading():
     globalpath.VARIATION = 'ccdb_test'
-    my_provider = cc.connecting_ccdb(globalpath.CALIBRATION_CONNECTION, globalpath.VARIATION)
-    test_ass = cc.reading_ccdb(my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
-    test_df = cc.convert_table_in_pd(test_ass)
-    print(test_df)
-    return test_df[test_df.columns[3:]].astype(bool).sum(axis=0).sum() == 1
+    test_df = cc.reading_ccdb()
+    return test_df['dthx'][7] == 1 and test_df['dy'][0] == 1 and test_df['dx'][7] == 1
 
 
 if __name__ == "__main__":
