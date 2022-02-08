@@ -78,8 +78,7 @@ def convert_table_in_pd(assignment):
 
 
 def init_ccdb():
-    my_provider = connecting_ccdb(globalpath.CALIBRATION_CONNECTION, globalpath.VARIATION)
-    adding_to_ccdb(globalpath.STARTING_TABLE.values.tolist(), my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
+    adding_to_ccdb(globalpath.STARTING_TABLE.values.tolist(), globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
 
 
 def adding_to_ccdb(parameters, table=globalpath.CALIBRATION_TABLE, variation=globalpath.CALIBRATION_TABLE, comment='Test'):
