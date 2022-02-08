@@ -6,6 +6,13 @@ from config import globalpath
 
 
 #### OTHER THINGS
+def fake_obj(**d):
+    change_parameter_given_dir(d)
+    df = cc.reading_ccdb()
+    print(df)
+    print(df.info())
+
+
 def read_output(string):
     tiles = string.split('Layer')[1:]
     chi = float(str(string).split('Layer')[0].split('chi2=')[1].split('\\')[0])
@@ -65,11 +72,10 @@ def pass_dict_param_to_table(par_dict, table):
 
 def change_parameter_given_dir(params):
     # CHANGING PARAM ON CCDB
-    my_provider = cc.connecting_ccdb(globalpath.CALIBRATION_CONNECTION, globalpath.VARIATION)
     new_table = pass_dict_param_to_table(params, globalpath.STARTING_TABLE)
     to_add = new_table.values.tolist()
 
-    cc.adding_to_ccdb(to_add, my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
+    cc.adding_to_ccdb(to_add, comment=f'iteration {globalpath.ITER}')
 
 def main_obj(**params):
     """
@@ -82,13 +88,7 @@ def main_obj(**params):
     globalpath.ITER = globalpath.ITER + 1
 
     # CHANGING PARAM ON CCDB
-    my_provider = cc.connecting_ccdb(globalpath.CALIBRATION_CONNECTION, globalpath.VARIATION)
-
-    old_pars_table = cc.reading_ccdb(my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
-    new_table = pass_dict_param_to_table(params, old_pars_table)
-    to_add = new_table.values.tolist()
-
-    cc.adding_to_ccdb(to_add, my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
+    change_parameter_given_dir(params)
 
     # RUN EVENTBUILDER
     for file in os.listdir(globalpath.FILTDIR):

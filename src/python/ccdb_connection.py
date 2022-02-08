@@ -72,7 +72,7 @@ def convert_table_in_pd(assignment):
 
     columns = ['sector', 'layer', 'component', 'dx', 'dy', 'dz', 'dthx', 'dthy', 'dthz']
     df = pd.DataFrame(assignment.constant_set.data_table, columns=columns)
-    df[df.columns[:3]] = df[df.columns[:3]].astype(int)
+    df[df.columns[:3]] = df[df.columns[:3]].astype(float).astype(int)
     df[df.columns[3:]] = df[df.columns[3:]].astype(float)
     return df
 
@@ -82,7 +82,7 @@ def init_ccdb():
     adding_to_ccdb(globalpath.STARTING_TABLE.values.tolist(), my_provider, globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
 
 
-def adding_to_ccdb(parameters, provider, table, variation, comment='Test'):
+def adding_to_ccdb(parameters, table=globalpath.CALIBRATION_TABLE, variation=globalpath.CALIBRATION_TABLE, comment='Test'):
     """
 
     add to the ccdb a misalignment table with new parameters. The parameters have to be a list object
