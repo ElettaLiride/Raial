@@ -78,10 +78,12 @@ def convert_table_in_pd(assignment):
 
 
 def init_ccdb():
-    adding_to_ccdb(globalpath.STARTING_TABLE.values.tolist(), globalpath.CALIBRATION_TABLE, globalpath.VARIATION)
+    adding_to_ccdb(globalpath.STARTING_TABLE.values.tolist(),
+                   table=globalpath.CALIBRATION_TABLE,
+                   variation=globalpath.VARIATION)
 
 
-def adding_to_ccdb(parameters, table=globalpath.CALIBRATION_TABLE, variation=globalpath.CALIBRATION_TABLE, comment='Test'):
+def adding_to_ccdb(parameters, table=globalpath.CALIBRATION_TABLE, variation=globalpath.VARIATION, comment='Test'):
     """
 
     add to the ccdb a misalignment table with new parameters. The parameters have to be a list object
@@ -127,3 +129,6 @@ def old_init_ccdb(provider, calibration_table, variation):
             old_pars_table[col].values[:] = 0
     to_add = old_pars_table.values.tolist()
     adding_to_ccdb(to_add, provider, calibration_table, variation)
+
+if __name__=="__main__":
+    init_ccdb()
