@@ -18,7 +18,7 @@ import yaml
 
 from config import globalpath
 
-globalpath.VARIATION = "scan_variation"
+globalpath.VARIATION = f"scan_variation_{sys.argv[3]}"
 
 from src.python import tools as t
 from src.python.objective import obj_cluster_chi_square, obj_chi_and_diff, fake_obj
