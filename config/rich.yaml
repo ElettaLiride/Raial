@@ -14,8 +14,8 @@ configuration:
   io-services:
     writer:
       compression: 2
-      #schema_dir: /work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/etc/bankdefs/hipo4/singles/dst
-      schema_dir: /home/unico/clas12-offline-software/coatjava/etc/bankdefs/hipo4/singles/dst
+      schema_dir: /work/clas12/users/devita/clas12validation/clara-iss643-rich/plugins/clas12/etc/bankdefs/hipo4/singles/dst
+      #schema_dir: /home/unico/clas12-offline-software/coatjava/etc/bankdefs/hipo4/singles/dst
   services:
     MAGFIELDS:
       magfieldSolenoidMap: Symm_solenoid_r601_phi1_z1201_13June2018.dat
