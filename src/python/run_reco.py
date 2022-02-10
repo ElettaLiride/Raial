@@ -5,6 +5,7 @@ from src.python import tools as t
 from config import globalpath
 
 
+@t.timer
 def runcommand(fileIN, fileOUT=None, yaml="config/rich.yaml"):
 
     """

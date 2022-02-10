@@ -21,9 +21,9 @@ def getrunnumber(file):
 
 
 def runcommand(bashCommand):
-    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-    output, error = process.communicate()
-    return [output, error]
+    process = subprocess.run(bashCommand.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #output, error = process.communicate()
+    #return [output, error]
 
 
 def look_for_check(name, dir="output/opt/"):
@@ -42,6 +42,10 @@ def read_check(name, dir="output/opt/"):
         x_old = old.x_iters
         y_old = old.func_vals
     return x_old, y_old
+
+
+def check_if_dir():
+    pass
 
 
 def mkdir(path):

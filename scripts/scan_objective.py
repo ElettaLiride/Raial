@@ -17,10 +17,15 @@ import time
 import yaml
 
 from config import globalpath
+from src.python.tools import init_opt
 
 globalpath.VARIATION = f"scan_variation_{sys.argv[3]}"
+data_dir = sys.argv[1]
+yaml_space_file = sys.argv[2]
+number_of_calls = int(sys.argv[3])
 
-from src.python import tools as t
+init_opt(data_dir, os.path.basename(yaml_space_file).split('.')[0], 1)
+
 from src.python.objective import obj_cluster_chi_square, obj_chi_and_diff, fake_obj
 from src.python.objective import change_parameter_given_dir
 from src.python.ccdb_connection import init_ccdb, reading_ccdb, connecting_ccdb
@@ -35,11 +40,7 @@ def build_list_from_space(dict, call):
 
 
 if __name__ == "__main__":
-    data_dir = sys.argv[1]
-    yaml_space_file = sys.argv[2]
-    number_of_calls = int(sys.argv[3])
 
-    t.init_opt(data_dir, os.path.basename(yaml_space_file).split('.')[0], 1)
     init_ccdb()
 
 
@@ -53,12 +54,13 @@ if __name__ == "__main__":
             for p2 in list2:
                 d = {par1: p1, par2: p2}
                 time.sleep(2)
-                #fake_obj(**d)
-                obj_chi_and_diff(**d)
+                fake_obj(**d)
+                #obj_chi_and_diff(**d)
     else:
         par1, list1 = build_list_from_space(code[0]['Real'], number_of_calls)
         for p1 in list1:
             d = {par1: p1}
+            print(d)
             time.sleep(2)
             #fake_obj(**d)
             obj_cluster_chi_square(**d)

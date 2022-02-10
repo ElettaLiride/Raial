@@ -4,8 +4,8 @@ import os
 from config import globalpath
 from src.python import tools as t
 
-RICHGEOAL = os.getenv("RICHGEOAL")
 
+@t.timer
 def runcommand(input):
     """
 
@@ -20,12 +20,13 @@ def runcommand(input):
 
     if os.path.isdir(input):
         for file in os.listdir(input):
-            if os.path.isfile(input + file):
-                files += " "
-                files += input + file
+            if os.path.isfile(f'{input}/{file}'):
+                if int(file.split(sep='_')[4].split(sep='.')[0]) == globalpath.ITER:
+                    files += " "
+                    files += f'{input}/{file}'
     else:
        files = " " + input
-
+    print(files)
     _ = t.runcommand(f"{globalpath.BINDIR}/richPlots -R{globalpath.RN} {files}")
     _ = t.runcommand(f"mv RichPlots_{globalpath.RN}.out {globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out")
     _ = t.runcommand(f"mv RichPlots_{globalpath.RN}.root {globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.root")
@@ -33,4 +34,4 @@ def runcommand(input):
 
 
 if __name__ == "__main__":
-    _ = runcommand(sys.argv[1], sys.argv[2])
+    _ = runcommand(sys.argv[1])

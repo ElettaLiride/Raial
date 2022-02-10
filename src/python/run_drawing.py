@@ -4,8 +4,8 @@ from src.python import tools as t
 
 
 # executing Mirazita code for drawing
-def runcommand(runnumber):
-    command = "root -l -p -q src/cpp/DrawRichPlots.C(\"output/plots/RichPlots_" + runnumber + ".root\")"
+def runcommand(file):
+    command = f"root -l -p -q src/cpp/DrawRichPlots.C(\"{file}\")"
     stdout = t.runcommand(command)
     print(stdout[0])
 
