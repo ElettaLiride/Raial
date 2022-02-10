@@ -17,14 +17,14 @@ import time
 import yaml
 
 from config import globalpath
-from src.python.tools import init_opt
 
-globalpath.VARIATION = f"scan_variation_{sys.argv[3]}"
+globalpath.VARIATION = f"scan_variation_{sys.argv[4]}"
 data_dir = sys.argv[1]
 yaml_space_file = sys.argv[2]
 number_of_calls = int(sys.argv[3])
 
-init_opt(data_dir, os.path.basename(yaml_space_file).split('.')[0], 1)
+from src.python.tools import init_opt
+init_opt(data_dir, os.path.basename(yaml_space_file).split('.')[0], 1, globalpath.VARIATION)
 
 from src.python.objective import obj_cluster_chi_square, obj_chi_and_diff, fake_obj
 from src.python.objective import change_parameter_given_dir
@@ -43,7 +43,6 @@ if __name__ == "__main__":
 
     init_ccdb()
 
-
     file = open(yaml_space_file)
     code = yaml.load(file, Loader=yaml.FullLoader)
 
@@ -60,7 +59,6 @@ if __name__ == "__main__":
         par1, list1 = build_list_from_space(code[0]['Real'], number_of_calls)
         for p1 in list1:
             d = {par1: p1}
-            print(d)
             time.sleep(2)
             #fake_obj(**d)
             obj_cluster_chi_square(**d)

@@ -6,7 +6,7 @@ from config import globalpath
 
 
 @t.timer
-def runcommand(fileIN, fileOUT=None, yaml="config/rich.yaml"):
+def runcommand(fileIN, fileOUT=None, yaml=globalpath.RICHYAML):
 
     """
     execute Rich engine for reconstruction of events
@@ -22,8 +22,8 @@ def runcommand(fileIN, fileOUT=None, yaml="config/rich.yaml"):
     if fileOUT is None:
         fileOUT = f'{f}_{globalpath.ITER}.hipo'
 
-    _ = t.runcommand(f"{globalpath.RECODIR} -i {fileIN} -o {fileOUT} -y {yaml}")
-    _ = t.runcommand(f"mv {fileOUT} {globalpath.RECODIR}/")
+    t.runcommand(f"{globalpath.RECOUTIL} -i {fileIN} -o {fileOUT} -y {yaml}")
+    t.runcommand(f"mv {fileOUT} {globalpath.RECODIR}/")
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@ import subprocess
 import os
 import functools
 import time
+import yaml
 
 from skopt.utils import load
 from config import globalpath
@@ -49,14 +50,28 @@ def check_if_dir():
 
 
 def mkdir(path):
-    _ = runcommand(f'mkdir {path}')
+    if not os.path.exists(path):
+        runcommand(f'mkdir {path}')
 
 
-def init_opt(data_dir, yaml_file_name, RN):
+def change_variation_for_reco(variation):
+    with open(globalpath.RICHYAML, 'r') as file:
+        code = yaml.load(file, Loader=yaml.FullLoader)
+
+    code['configuration']['services']['RICH']['variation'] = variation
+
+    with open(f'{globalpath.VARIATION}.yml', 'w') as outfile:
+        yaml.dump(code, outfile, default_flow_style=False)
+
+    globalpath.RICHYAML = f'{globalpath.VARIATION}.yml'
+
+
+def init_opt(data_dir, yaml_file_name, RN, variation):
     globalpath.PLOTDIR = f'{globalpath.PLOTDIR}/{yaml_file_name}'
     globalpath.RECODIR = f'{globalpath.RECODIR}/{yaml_file_name}'
     globalpath.FILTDIR = f'{globalpath.FILTDIR}/{data_dir}'
 
+    change_variation_for_reco(globalpath.VARIATION)
     mkdir(globalpath.RECODIR)
     mkdir(globalpath.PLOTDIR)
 
