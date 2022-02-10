@@ -16,6 +16,7 @@ if RICHGEOAL.split(sep='/')[1] == 'work':
 else:
     RECOUTIL = 'recon-util'
 
+RICHYAML = f'{RICHGEOAL}/config/rich.yaml'
 # calibration connection
 CALIBRATION_TABLE = "/calibration/rich/misalignments"
 VARIATION = "subtest"
