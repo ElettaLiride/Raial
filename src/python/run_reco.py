@@ -22,7 +22,7 @@ def runcommand(fileIN, fileOUT=None, yaml="config/rich.yaml"):
     if fileOUT is None:
         fileOUT = f'{f}_{globalpath.ITER}.hipo'
 
-    _ = t.runcommand(f"recon-util -i {fileIN} -o {fileOUT} -y {yaml}")
+    _ = t.runcommand(f"{globalpath.RECODIR} -i {fileIN} -o {fileOUT} -y {yaml}")
     _ = t.runcommand(f"mv {fileOUT} {globalpath.RECODIR}/")
 
 

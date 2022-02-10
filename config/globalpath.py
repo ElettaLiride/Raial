@@ -11,6 +11,11 @@ RECODIR = f'{RICHGEOAL}/output/reco'
 OPTIDIR = f'{RICHGEOAL}/output/opt'
 BINDIR = f'{RICHGEOAL}/bin'
 
+if RICHGEOAL.split(sep='/')[1] == 'work':
+    RECOUTIL = '/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util'
+else:
+    RECOUTIL = 'recon-util'
+
 # calibration connection
 CALIBRATION_TABLE = "/calibration/rich/misalignments"
 VARIATION = "subtest"
