@@ -71,7 +71,7 @@ def init_opt(data_dir, yaml_file_name, RN, variation):
     globalpath.RECODIR = f'{globalpath.RECODIR}/{yaml_file_name}'
     globalpath.FILTDIR = f'{globalpath.FILTDIR}/{data_dir}'
 
-    change_variation_for_reco(globalpath.VARIATION)
+    #change_variation_for_reco(globalpath.VARIATION)
     mkdir(globalpath.RECODIR)
     mkdir(globalpath.PLOTDIR)
 
