@@ -86,7 +86,6 @@ def main_obj(**params):
     """
     #UPDATE ITARATION NUMBER
     globalpath.ITER = globalpath.ITER + 1
-    print(params)
     # CHANGING PARAM ON CCDB
     change_parameter_given_dir(params)
 
@@ -95,10 +94,9 @@ def main_obj(**params):
         print(file)
         if os.path.isfile(f'{globalpath.FILTDIR}/{file}'):
             print(f'{globalpath.FILTDIR}/{file}')
-            run_reco.runcommand(f'{globalpath.FILTDIR}/{file}')
+            run_reco.run_reco(f'{globalpath.FILTDIR}/{file}')
     # RUN ANGLE ANALYSIS
-    print(globalpath.RECODIR)
-    run_plots.runcommand(globalpath.RECODIR)
+    run_plots.run_plot(globalpath.RECODIR)
 
 
 #### SCORING

@@ -6,7 +6,7 @@ from src.python import tools as t
 
 
 @t.timer
-def runcommand(input):
+def run_plot(input):
     """
 
     execute Mirazita code for build histogram and computing differences from expected and

@@ -19,7 +19,7 @@ else:
 RICHYAML = f'{RICHGEOAL}/config/rich.yaml'
 # calibration connection
 CALIBRATION_TABLE = "/calibration/rich/misalignments"
-VARIATION = "subtest"
+VARIATION = "default"
 USER = "anonymous"
 CALIBRATION_CONNECTION = f'sqlite:///{RICHGEOAL}/config/ccdb_4.3.2.sqlite'
 

@@ -6,7 +6,7 @@ from config import globalpath
 
 
 @t.timer
-def runcommand(fileIN, fileOUT=None, yaml=globalpath.RICHYAML):
+def run_reco(fileIN, fileOUT=None, yaml=globalpath.RICHYAML):
 
     """
     execute Rich engine for reconstruction of events

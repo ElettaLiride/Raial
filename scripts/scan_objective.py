@@ -18,7 +18,6 @@ import yaml
 
 from config import globalpath
 
-globalpath.VARIATION = f"scan_variation_{sys.argv[4]}"
 data_dir = sys.argv[1]
 yaml_space_file = sys.argv[2]
 number_of_calls = int(sys.argv[3])
@@ -53,8 +52,8 @@ if __name__ == "__main__":
             for p2 in list2:
                 d = {par1: p1, par2: p2}
                 time.sleep(2)
-                fake_obj(**d)
-                #obj_chi_and_diff(**d)
+                #fake_obj(**d)
+                obj_chi_and_diff(**d)
     else:
         par1, list1 = build_list_from_space(code[0]['Real'], number_of_calls)
         for p1 in list1:
