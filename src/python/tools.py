@@ -21,9 +21,12 @@ def getrunnumber(file):
     return r
 
 
-def runcommand(bashCommand):
-    process = subprocess.run(bashCommand.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    #output, error = process.communicate()
+def runcommand(bashCommand, output=False, error=True):
+    _ = subprocess.run(bashCommand.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    #if output:
+    #    output, _ = process.communicate()
+    #if error:
+    #    _, error = process.communicate()
     #return [output, error]
 
 

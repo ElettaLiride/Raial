@@ -34,4 +34,4 @@ def run_plot(input):
 
 
 if __name__ == "__main__":
-    _ = runcommand(sys.argv[1])
+    _ = run_plot(sys.argv[1])

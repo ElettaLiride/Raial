@@ -4,6 +4,14 @@ from src.python import tools as db
 from config import globalpath
 
 
+def new_add():
+    pass
+
+
+def new_read():
+    pass
+
+
 def connecting_ccdb(calibration_connection=globalpath.CALIBRATION_CONNECTION,
                     variation=globalpath.VARIATION,
                     comment="",

@@ -73,10 +73,12 @@ def pass_dict_param_to_table(par_dict, table):
 def change_parameter_given_dir(params):
     # CHANGING PARAM ON CCDB
     new_table = pass_dict_param_to_table(params, globalpath.STARTING_TABLE)
-    to_add = new_table.values.tolist()
-
+    #to_add = new_table.values.tolist()
+    to_add = list(map(list, new_table.itertuples(index=False)))
     cc.adding_to_ccdb(to_add, comment=f'iteration {globalpath.ITER}')
 
+
+#list(map(list, new_table.itertuples(index=False)))
 def main_obj(**params):
     """
 
@@ -91,9 +93,7 @@ def main_obj(**params):
 
     # RUN EVENTBUILDER
     for file in os.listdir(globalpath.FILTDIR):
-        print(file)
         if os.path.isfile(f'{globalpath.FILTDIR}/{file}'):
-            print(f'{globalpath.FILTDIR}/{file}')
             run_reco.run_reco(f'{globalpath.FILTDIR}/{file}')
     # RUN ANGLE ANALYSIS
     run_plots.run_plot(globalpath.RECODIR)
@@ -124,7 +124,7 @@ def minimize_chi_and_diff(file):
     f.close()
 
     mean = mean / (nline - 1)
-    mean = 2 - np.exp(mean) - chi2
+    mean = np.exp(-1/mean) + chi2
 
     return mean
 
@@ -159,7 +159,7 @@ def obj_cluster_chi_square(**params):
 
 def obj_chi_and_diff(**params):
     main_obj(**params)
-    obj_score = minimize_chi(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
+    obj_score = minimize_chi_and_diff(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
     print("score: ", obj_score)
     return obj_score
 

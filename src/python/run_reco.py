@@ -28,6 +28,6 @@ def run_reco(fileIN, fileOUT=None, yaml=globalpath.RICHYAML):
 
 if __name__ == "__main__":
     if len(sys.argv) == 2:
-        runcommand(sys.argv[1])
+        run_reco(sys.argv[1])
     else:
-        runcommand(sys.argv[1], sys.argv[2])
+        run_reco(sys.argv[1], sys.argv[2])

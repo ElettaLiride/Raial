@@ -2,8 +2,9 @@ import pandas as pd
 
 from src.test.test_util import tester
 
+from src.python import tools as t
 from src.python import ccdb_connection as cc
-from src.python.objective import pass_dict_param_to_table
+from src.python.objective import change_parameter_given_dir
 from config import globalpath
 
 @tester
@@ -22,7 +23,13 @@ def test_ccdb_reading():
     test_df = cc.reading_ccdb()
     return test_df['dthx'][7] == 1 and test_df['dy'][0] == 1 and test_df['dx'][7] == 1
 
+def look_ccdb():
+    par = {'dy_201': 1.8, 'dx_202': 2.412}
+    change_parameter_given_dir(par)
+    t.runcommand('ccdb dump calibration/rich/misalignments')
+
 
 if __name__ == "__main__":
+    look_ccdb()
 #    test_ccdb_adding()
-    test_ccdb_reading()
+#    test_ccdb_reading()
