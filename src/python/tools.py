@@ -22,12 +22,15 @@ def getrunnumber(file):
 
 
 def runcommand(bashCommand, output=False, error=True):
-    _ = subprocess.run(bashCommand.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    #if output:
-    #    output, _ = process.communicate()
-    #if error:
-    #    _, error = process.communicate()
-    #return [output, error]
+    subprocess.run(bashCommand.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    if output and error:
+        subprocess.run(bashCommand.split())
+    elif error:
+        subprocess.run(bashCommand.split(), stdout=subprocess.DEVNULL)
+    elif output:
+        subprocess.run(bashCommand.split(), stderr=subprocess.DEVNULL)
+    else:
+        subprocess.run(bashCommand.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
 def look_for_check(name, dir="output/opt/"):
