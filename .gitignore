@@ -5,6 +5,7 @@ output/opt/*
 config/*.sqlite
 data/*
 config/rich.yaml
+config/globalpath.py
 scripts/__pycache__/*
 config/__pycache__/*
 src/python/__pycache__/*
