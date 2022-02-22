@@ -21,14 +21,9 @@ def getrunnumber(file):
     return r
 
 
-def runcommand(bashCommand, output=False, error=True):
-    subprocess.run(bashCommand.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-    if output and error:
+def runcommand(bashCommand, output=False):
+    if output:
         subprocess.run(bashCommand.split())
-    elif error:
-        subprocess.run(bashCommand.split(), stdout=subprocess.DEVNULL)
-    elif output:
-        subprocess.run(bashCommand.split(), stderr=subprocess.DEVNULL)
     else:
         subprocess.run(bashCommand.split(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
