@@ -22,4 +22,5 @@ conda activate /w/hallb-scshelf2102/clas12/users/costantini/RICH_alignment/align
 
 fi
 
-export CCDB_CONNECTION=sqlite:///$RICHGEOAL/config/ccdb_4.3.2.sqlite
+#export CCDB_CONNECTION=sqlite:///$RICHGEOAL/config/ccdb_4.3.2.sqlite
+export CCDB_CONNECTION=sqlite:///$1
