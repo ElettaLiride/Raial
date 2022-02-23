@@ -50,7 +50,6 @@ if __name__ == "__main__":
     dimension = use_named_args(space)
     obj = dimension(obj_cluster_chi_square())
 
-    gp_minimize = timer(gp_minimize)
     checksaver = CheckpointSaver(checkpoint_path='output/opt/' + checkpoint_file + '.pkl', store_objective=False)
     res = gp_minimize(func=obj,
                       dimensions=space,
