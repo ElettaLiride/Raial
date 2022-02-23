@@ -14,25 +14,32 @@
 """
 
 import sys
-from matplotlib import pyplot as plt
+import os
+
+from config import globalpath
+
+data_dir = sys.argv[1]
+yaml_space_file = sys.argv[2]
+number_of_calls = int(sys.argv[3])
+
+from src.python.tools import init_opt
+init_opt(data_dir, os.path.basename(yaml_space_file).split('.')[0], 1, globalpath.VARIATION)
+from src.python.objective import obj_cluster_chi_square, obj_chi_and_diff, obj_diff
+from src.python.tools import read_check, init_opt, timer
+
 
 from skopt import gp_minimize
 from skopt import Space
-from skopt.plots import plot_convergence
 from skopt.callbacks import CheckpointSaver
 from skopt.utils import use_named_args
-from src.python.objective import obj_gp as obj
-from src.python.tools import read_check
-from src.python.tools import timer
+
 
 if __name__ == "__main__":
-    yaml_space_file = sys.argv[1]
-    number_of_calls = int(sys.argv[2])
 
-    if len(sys.argv) < 4:
+    if len(sys.argv) < 5:
         checkpoint_file = 'Test'
-    elif len(sys.argv) == 4:
-        checkpoint_file = sys.argv[3]
+    elif len(sys.argv) == 5:
+        checkpoint_file = sys.argv[4]
     else:
         print('Too many arguments')
         sys.exit()
@@ -41,7 +48,7 @@ if __name__ == "__main__":
 
     space = list(Space.from_yaml(yaml_space_file))
     dimension = use_named_args(space)
-    obj = dimension(obj)
+    obj = dimension(obj_cluster_chi_square())
 
     gp_minimize = timer(gp_minimize)
     checksaver = CheckpointSaver(checkpoint_path='output/opt/' + checkpoint_file + '.pkl', store_objective=False)
