@@ -37,7 +37,7 @@ from skopt.utils import use_named_args
 if __name__ == "__main__":
 
     if len(sys.argv) < 5:
-        checkpoint_file = 'Test'
+        checkpoint_file = 'tt'
     elif len(sys.argv) == 5:
         checkpoint_file = sys.argv[4]
     else:
@@ -47,8 +47,9 @@ if __name__ == "__main__":
     x_old, y_old = read_check(checkpoint_file)
 
     space = list(Space.from_yaml(yaml_space_file))
+    print(space)
     dimension = use_named_args(space)
-    obj = dimension(obj_cluster_chi_square())
+    obj = dimension(obj_cluster_chi_square)
 
     checksaver = CheckpointSaver(checkpoint_path='output/opt/' + checkpoint_file + '.pkl', store_objective=False)
     res = gp_minimize(func=obj,
@@ -56,7 +57,8 @@ if __name__ == "__main__":
                       x0=x_old,
                       y0=y_old,
                       n_calls=number_of_calls,
-                      callback=[checksaver],
+                      n_initial_points=1,
+                      #callback=[checksaver],
                       acq_optimizer="sampling",
                       initial_point_generator='lhs')
 
