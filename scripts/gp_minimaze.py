@@ -58,7 +58,7 @@ if __name__ == "__main__":
                       y0=y_old,
                       n_calls=number_of_calls,
                       n_initial_points=1,
-                      #callback=[checksaver],
+                      callback=[checksaver],
                       acq_optimizer="sampling",
                       initial_point_generator='lhs')
 
