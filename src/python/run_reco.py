@@ -20,7 +20,7 @@ def run_reco(fileIN, fileOUT=None, yaml=globalpath.RICHYAML):
     f = os.path.basename(fileIN).split('.')[0]
 
     if fileOUT is None:
-        fileOUT = f'{f}_{globalpath.ITER}.hipo'
+        fileOUT = f'{f}_{globalpath.ITER}_{globalpath.RN}.hipo'
 
     t.runcommand(f"{globalpath.RECOUTIL} -i {fileIN} -o {fileOUT} -y {yaml}", output=globalpath.PRINTreco)
     t.runcommand(f"mv {fileOUT} {globalpath.RECODIR}/")

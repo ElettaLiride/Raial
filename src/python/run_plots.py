@@ -26,7 +26,7 @@ def run_plot(input):
                     files += f'{input}/{file}'
     else:
        files = " " + input
-    print(files)
+    #print(files)
     _ = t.runcommand(f"{globalpath.BINDIR}/richPlots -R{globalpath.RN} {files}", output=globalpath.PRINTplot)
     _ = t.runcommand(f"mv RichPlots_{globalpath.RN}.out {globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out")
     _ = t.runcommand(f"mv RichPlots_{globalpath.RN}.root {globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.root")
