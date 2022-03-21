@@ -12,7 +12,7 @@ phase = "0"
 track = "debug"
 
 aerogel_dat = RICHGEOAL + "/Aerogel_ccdb.dat"
-ccdb_file = RICHGEOAL + "/database/ccdb_4.3.2.sqlite"
+ccdb_file = RICHGEOAL + "/database/ccdb_4.3.2_old.sqlite"
 ccdb_set_file = RICHGEOAL + "/../ccdb/environment.bash"
 set_file = RICHGEOAL + "setup.sh"
 python_reco = RICHGEOAL + "/scripts/run_reco.py"
@@ -76,18 +76,18 @@ if __name__=="__main__":
     # -input runfilteronfarm.sh file:$PWD/runfilteronfarm.sh
     # -input setup.sh file:$PWD/setup.sh
     # -input environment.bash file:$PWD/../ccdb/environment.bash
-    # -input ccdb_4.3.2.sqlite file:$PWD/database/ccdb_4.3.2.sqlite
+    # -input ccdb_4.3.2_old.sqlite file:$PWD/database/ccdb_4.3.2_old.sqlite
     # -input test.txt file:$PWD/output/test.txt -stderr file:$PWD/err.txt
     # ./runfilteronfarm.sh /work/clas12/users/costantini/RICH_alignment/output/test.txt 27 -1
 
     # for filter
-    # swif add-job -workflow AL_test -ram 1500mb -project clas12 -time 6h -track debug -phase 0 -name test_2 -shell /bin/bash -input run_filter.py file:$PWD/run_control/run_filter.py -input filterHipo file:$PWD/scoring/RichAI_FilterC/filterHipo -input rec_clas_005032.evio.00085-00089.hipo file:/cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v0/dst/recon/005032/rec_clas_005032.evio.00085-00089.hipo -input runfilteronfarm.sh file:$PWD/runfilteronfarm.sh -input setup.sh file:$PWD/setup.sh -input environment.bash file:$PWD/../ccdb/environment.bash -input ccdb_4.3.2.sqlite file:$PWD/database/ccdb_4.3.2.sqlite -input test.txt file:$PWD/output/test.txt -stderr file:$PWD/err.txt ./runfilteronfarm.sh /work/clas12/users/costantini/RICH_alignment/output/test.txt 27 -1
-    # swif2 add-job -workflow AL_test -ram 1500mb -account clas12 -time 6h -partition debug -phase 0 -name test_2 -shell /bin/bash -input run_filter.py file:$PWD/run_control/run_filter.py -input filterHipo file:$PWD/scoring/RichAI_FilterC/filterHipo -input rec_clas_005032.evio.00085-00089.hipo file:/cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v0/dst/recon/005032/rec_clas_005032.evio.00085-00089.hipo -input runfilteronfarm.sh file:$PWD/runfilteronfarm.sh -input setup.sh file:$PWD/setup.sh -input environment.bash file:$PWD/../ccdb/environment.bash -input ccdb_4.3.2.sqlite file:$PWD/database/ccdb_4.3.2.sqlite -input test.txt file:$PWD/output/test.txt -stderr file:$PWD/err.txt ./runfilteronfarm.sh /work/clas12/users/costantini/RICH_alignment/output/test.txt 27 -1
+    # swif add-job -workflow AL_test -ram 1500mb -project clas12 -time 6h -track debug -phase 0 -name test_2 -shell /bin/bash -input run_filter.py file:$PWD/run_control/run_filter.py -input filterHipo file:$PWD/scoring/RichAI_FilterC/filterHipo -input rec_clas_005032.evio.00085-00089.hipo file:/cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v0/dst/recon/005032/rec_clas_005032.evio.00085-00089.hipo -input runfilteronfarm.sh file:$PWD/runfilteronfarm.sh -input setup.sh file:$PWD/setup.sh -input environment.bash file:$PWD/../ccdb/environment.bash -input ccdb_4.3.2_old.sqlite file:$PWD/database/ccdb_4.3.2_old.sqlite -input test.txt file:$PWD/output/test.txt -stderr file:$PWD/err.txt ./runfilteronfarm.sh /work/clas12/users/costantini/RICH_alignment/output/test.txt 27 -1
+    # swif2 add-job -workflow AL_test -ram 1500mb -account clas12 -time 6h -partition debug -phase 0 -name test_2 -shell /bin/bash -input run_filter.py file:$PWD/run_control/run_filter.py -input filterHipo file:$PWD/scoring/RichAI_FilterC/filterHipo -input rec_clas_005032.evio.00085-00089.hipo file:/cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v0/dst/recon/005032/rec_clas_005032.evio.00085-00089.hipo -input runfilteronfarm.sh file:$PWD/runfilteronfarm.sh -input setup.sh file:$PWD/setup.sh -input environment.bash file:$PWD/../ccdb/environment.bash -input ccdb_4.3.2_old.sqlite file:$PWD/database/ccdb_4.3.2_old.sqlite -input test.txt file:$PWD/output/test.txt -stderr file:$PWD/err.txt ./runfilteronfarm.sh /work/clas12/users/costantini/RICH_alignment/output/test.txt 27 -1
 
-    # swif2 add-job -workflow AL_test -ram 1500mb -account clas12 -time 6h -partition debug -phase 0 -name test_2 -shell /bin/bash -input run_filter.py file:$VOLPATH/scripts/run_filter.py -input filterHipo file:$VOLPATH/bin/filterHipo -input rec_clas_005032.evio.00085-00089.hipo file:/cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v0/dst/recon/005032/rec_clas_005032.evio.00085-00089.hipo -input runfilteronfarm.sh file:$VOLPATH/bin/runfilteronfarm.sh -input setup.sh file:$VOLPATH/setup.sh -input environment.bash file:$VOLPATH/../ccdb/environment.bash -input ccdb_4.3.2.sqlite file:$VOLPATH/database/ccdb_4.3.2.sqlite -input test.txt file:$VOLPATH/output/test.txt -stderr file:$VOLPATH/err.txt ./$VOLPATH/bin/runfilteronfarm.sh $VOLPATH/output/test.txt 27 -1
+    # swif2 add-job -workflow AL_test -ram 1500mb -account clas12 -time 6h -partition debug -phase 0 -name test_2 -shell /bin/bash -input run_filter.py file:$VOLPATH/scripts/run_filter.py -input filterHipo file:$VOLPATH/bin/filterHipo -input rec_clas_005032.evio.00085-00089.hipo file:/cache/clas12/rg-a/production/recon/fall2018/torus-1/pass1/v0/dst/recon/005032/rec_clas_005032.evio.00085-00089.hipo -input runfilteronfarm.sh file:$VOLPATH/bin/runfilteronfarm.sh -input setup.sh file:$VOLPATH/setup.sh -input environment.bash file:$VOLPATH/../ccdb/environment.bash -input ccdb_4.3.2_old.sqlite file:$VOLPATH/database/ccdb_4.3.2_old.sqlite -input test.txt file:$VOLPATH/output/test.txt -stderr file:$VOLPATH/err.txt ./$VOLPATH/bin/runfilteronfarm.sh $VOLPATH/output/test.txt 27 -1
 
     ##for reco
-    # swif add-job -workflow reco_test -ram 1500mb -project clas12 -time 6h -track debug -phase 0 -name test_reco -shell /bin/bash -input run_reco.py file:$PWD/run_control/run_reco.py -input recon_util file:/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util -input rec_clas_27_AIskim1_-1.hipo file:$PWD/output/filter/rec_clas_27_AIskim1_-1.hipo -input runrecoonfarm.sh file:$PWD/runrecoonfarm.sh -input setup.sh file:$PWD/setup.sh -input environment.bash file:$PWD/../ccdb/environment.bash -input ccdb_4.3.2.sqlite file:$PWD/database/ccdb_4.3.2.sqlite -input test.txt file:$PWD/output/test.txt -stderr file:$PWD/err.txt ./runrecoonfarm.sh rec_clas_27_AIskim1_-1.hipo
+    # swif add-job -workflow reco_test -ram 1500mb -project clas12 -time 6h -track debug -phase 0 -name test_reco -shell /bin/bash -input run_reco.py file:$PWD/run_control/run_reco.py -input recon_util file:/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util -input rec_clas_27_AIskim1_-1.hipo file:$PWD/output/filter/rec_clas_27_AIskim1_-1.hipo -input runrecoonfarm.sh file:$PWD/runrecoonfarm.sh -input setup.sh file:$PWD/setup.sh -input environment.bash file:$PWD/../ccdb/environment.bash -input ccdb_4.3.2_old.sqlite file:$PWD/database/ccdb_4.3.2_old.sqlite -input test.txt file:$PWD/output/test.txt -stderr file:$PWD/err.txt ./runrecoonfarm.sh rec_clas_27_AIskim1_-1.hipo
 
     ## for plot
     # swif add-job
@@ -106,10 +106,10 @@ if __name__=="__main__":
     # -input runplotonfarm.sh file:$PWD/runplotonfarm.sh
     # -input setup.sh file:$PWD/setup.sh
     # -input environment.bash file:$PWD/../ccdb/environment.bash
-    # -input ccdb_4.3.2.sqlite file:$PWD/database/ccdb_4.3.2.sqlite
+    # -input ccdb_4.3.2_old.sqlite file:$PWD/database/ccdb_4.3.2_old.sqlite
     # -stderr file:$PWD/err_plot.txt
     # ./runplotonfarm.sh /work/clas12/users/costantini/RICH_alignment/output/reco/rec_clas_27_AIskim1_-1.hipo
-    # swif add-job -workflow AL_test -ram 1500mb -project clas12 -time 6h -track debug -phase 0 -name test_plot -shell /bin/bash -input run_plots.py file:$PWD/run_control/run_plots.py -input richPlots file:/work/clas12/users/costantini/RICH_alignment/scoring/RichAI_Plots/richPlots -input rec_clas_27_AIskim1_-1.hipo file:$PWD/output/reco/rec_clas_27_AIskim1_-1.hipo -input runplotonfarm.sh file:$PWD/runplotonfarm.sh -input setup.sh file:$PWD/setup.sh -input environment.bash file:$PWD/../ccdb/environment.bash -input ccdb_4.3.2.sqlite file:$PWD/database/ccdb_4.3.2.sqlite -stderr file:$PWD/err_plot.txt ./runplotonfarm.sh /work/clas12/users/costantini/RICH_alignment/output/reco/rec_clas_27_AIskim1_-1.hipo
+    # swif add-job -workflow AL_test -ram 1500mb -project clas12 -time 6h -track debug -phase 0 -name test_plot -shell /bin/bash -input run_plots.py file:$PWD/run_control/run_plots.py -input richPlots file:/work/clas12/users/costantini/RICH_alignment/scoring/RichAI_Plots/richPlots -input rec_clas_27_AIskim1_-1.hipo file:$PWD/output/reco/rec_clas_27_AIskim1_-1.hipo -input runplotonfarm.sh file:$PWD/runplotonfarm.sh -input setup.sh file:$PWD/setup.sh -input environment.bash file:$PWD/../ccdb/environment.bash -input ccdb_4.3.2_old.sqlite file:$PWD/database/ccdb_4.3.2_old.sqlite -stderr file:$PWD/err_plot.txt ./runplotonfarm.sh /work/clas12/users/costantini/RICH_alignment/output/reco/rec_clas_27_AIskim1_-1.hipo
     ##QUELLA FINALE:
     # swif
     # add-job
@@ -125,7 +125,7 @@ if __name__=="__main__":
     # -input rec_clas_27_AIskim1_-1.hipo file:$PWD/output/filter/rec_clas_27_AIskim1_-1.hipo
     # -input setup.sh file:$PWD/setup.sh
     # -input environment.bash file:$PWD/../ccdb/environment.bash
-    # -input ccdb_4.3.2.sqlite file:$PWD/database/ccdb_4.3.2.sqlite
+    # -input ccdb_4.3.2_old.sqlite file:$PWD/database/ccdb_4.3.2_old.sqlite
     # -input run_reco.py file:$PWD/run_control/run_reco.py
     # -input run_plot.py file:$PWD/run_control/run_plots.py
     # -input recon_util file:/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util
@@ -135,7 +135,7 @@ if __name__=="__main__":
     # -stderr file:$PWD/err_plot.txt
     # ./runplotonfarm.sh /work/clas12/users/costantini/RICH_alignment/output/reco/rec_clas_27_AIskim1_-1.hipo
 
-    # swif add-job -workflow AL_test -ram 1500mb -project clas12 -time 6h -track debug -phase 0 -name test_all -shell /bin/bash -input opt_firstlayer.py file:$PWD/optimization/opt_firstlayer.py -input recon_util file:/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util -input rec_clas_27_AIskim1_-1.hipo file:$PWD/output/filter/rec_clas_27_AIskim1_-1.hipo -input richPlots file:$PWD/scoring/RichAI_Plots/richPlots -input runallprocedure.sh file:$PWD/runallprocedure.sh -input setup.sh file:$PWD/setup.sh -input environment.bash file:$PWD/../ccdb/environment.bash -input ccdb_4.3.2.sqlite file:$PWD/database/ccdb_4.3.2.sqlite -stderr file:$PWD/err_all.txt ./runallprocedure.sh
+    # swif add-job -workflow AL_test -ram 1500mb -project clas12 -time 6h -track debug -phase 0 -name test_all -shell /bin/bash -input opt_firstlayer.py file:$PWD/optimization/opt_firstlayer.py -input recon_util file:/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util -input rec_clas_27_AIskim1_-1.hipo file:$PWD/output/filter/rec_clas_27_AIskim1_-1.hipo -input richPlots file:$PWD/scoring/RichAI_Plots/richPlots -input runallprocedure.sh file:$PWD/runallprocedure.sh -input setup.sh file:$PWD/setup.sh -input environment.bash file:$PWD/../ccdb/environment.bash -input ccdb_4.3.2_old.sqlite file:$PWD/database/ccdb_4.3.2_old.sqlite -stderr file:$PWD/err_all.txt ./runallprocedure.sh
 
 
 
