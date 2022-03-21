@@ -86,7 +86,7 @@ def convert_table_in_pd(assignment):
 
 
 def init_ccdb():
-    adding_to_ccdb(globalpath.STARTING_TABLE.values.tolist(),
+    adding_to_ccdb(list(map(list, globalpath.STARTING_TABLE.itertuples(index=False))),
                    table=globalpath.CALIBRATION_TABLE,
                    variation=globalpath.VARIATION)
 
