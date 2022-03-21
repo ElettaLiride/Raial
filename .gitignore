@@ -2,7 +2,7 @@ output/filter/*
 output/plots/*
 output/reco/*
 output/opt/*
-config/*.sqlite
+config/ccdbsnapshot/*.sqlite
 data/*
 config/rich.yaml
 config/globalpath.py
