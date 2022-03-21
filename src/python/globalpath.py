@@ -31,4 +31,4 @@ CALIBRATION_CONNECTION = f'sqlite:///{RICHGEOAL}/config/ccdb_4.3.2.sqlite'
 # Optimization configuration
 RN = 1
 ITER = 0
-STARTING_TABLE = pd.read_table('config/starting_table_python.txt', sep='-')
+STARTING_TABLE = pd.read_table('config/webccdb_python.txt', sep='-')
