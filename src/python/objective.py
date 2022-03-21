@@ -3,6 +3,7 @@ import numpy as np
 
 from src.python import parameters_setting as pm, ccdb_connection as cc, run_reco, run_plots
 from config import globalpath
+from src.python import tools
 
 
 #### OTHER THINGS
@@ -70,6 +71,7 @@ def pass_dict_param_to_table(par_dict, table):
 
     return table
 
+
 def change_parameter_given_dir(params):
     # CHANGING PARAM ON CCDB
     new_table = pass_dict_param_to_table(params, globalpath.STARTING_TABLE)
@@ -78,7 +80,7 @@ def change_parameter_given_dir(params):
     cc.adding_to_ccdb(to_add, comment=f'iteration {globalpath.ITER}')
 
 
-#list(map(list, new_table.itertuples(index=False)))
+### MAIN
 def main_obj(**params):
     """
 
@@ -99,15 +101,36 @@ def main_obj(**params):
     run_plots.run_plot(globalpath.RECODIR)
 
 
+def applyscore(func):
+    """Apply the score to the main objective"""
+    @functools.wraps(func)
+    def wrapper_score(**kwargs):
+        main_obj(**kwargs)
+        value = func(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
+        return value
+    return applyscore
+
+
 #### SCORING
+def runthescore(datadir):
+    tools.init_opt(datadir, 'test', 1, globalpath.VARIATION)
+    for file in os.listdir(globalpath.FILTDIR):
+        if os.path.isfile(f'{globalpath.FILTDIR}/{file}'):
+            run_reco.run_reco(f'{globalpath.FILTDIR}/{file}')
+    # RUN ANGLE ANALYSIS
+    run_plots.run_plot(globalpath.RECODIR)
+
+
+@applyscore
 def minimize_chi(file):
     f = open(file, "r")
     lines = f.readlines()
     chi2 = abs(float(lines[0].split()[-1].split('=')[-1]))
 
-    return abs(1 - chi2)
+    return chi2
 
 
+@applyscore
 def minimize_chi_and_diff(file):
     f = open(file, "r")
     nline = 0
@@ -129,6 +152,7 @@ def minimize_chi_and_diff(file):
     return mean
 
 
+@applyscore
 def minimize_mean_diff(file):
     f = open(file, "r")
     nline = 0
@@ -150,6 +174,8 @@ def minimize_mean_diff(file):
 
 
 #### OBJECTIVE
+
+
 def obj_cluster_chi_square(**params):
     main_obj(**params)
     obj_score = minimize_chi(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
@@ -172,5 +198,7 @@ def obj_diff(**params):
 
 
 
-
+if __name__ == "__main__":
+    import sys
+    runthescore(sys.argv[1])
 
