@@ -26,7 +26,7 @@ else:
 CALIBRATION_TABLE = "/calibration/rich/misalignments"
 VARIATION = "default"
 USER = "anonymous"
-CALIBRATION_CONNECTION = f'sqlite:///{RICHGEOAL}/config/ccdb_4.3.2.sqlite'
+CALIBRATION_CONNECTION = f'{os.getenv(CCDB_CONNECTION)}'
 
 # Optimization configuration
 RN = 1
