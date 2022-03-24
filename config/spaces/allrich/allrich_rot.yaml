@@ -1,0 +1,12 @@
+- Real:
+    low: -6.
+    high: 6.
+    name: 'dthx_0'
+- Real:
+    low: -6.
+    high: 6.
+    name: 'dthy_0'
+- Real:
+    low: -6.
+    high: 6.
+    name: 'dthz_0'

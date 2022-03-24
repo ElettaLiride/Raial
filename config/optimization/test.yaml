@@ -1,0 +1,6 @@
+data_dir: layer0
+space: config/spaces/allrich/allrich_allpar.yaml
+total_calls: 100
+random_calls: 1
+id_number:
+pickle_file: test-100
