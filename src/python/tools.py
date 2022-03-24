@@ -6,7 +6,7 @@ import time
 import yaml
 
 from skopt.utils import load
-from config import globalpath
+from src.python import globalpath
 
 
 def line_numb():

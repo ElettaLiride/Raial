@@ -2,7 +2,7 @@ import sys
 import os
 
 from src.python import tools as t
-from config import globalpath
+from src.python import globalpath
 
 
 @t.timer

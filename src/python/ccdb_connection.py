@@ -1,7 +1,7 @@
 import pandas as pd
 import ccdb
 from src.python import tools as db
-from config import globalpath
+from src.python import globalpath
 
 
 def new_add():

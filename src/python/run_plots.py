@@ -1,11 +1,14 @@
 import sys
 import os
 
-from config import globalpath
+from src.python import globalpath
 from src.python import tools as t
 
 
 @t.timer
+def prova():
+    print(globalpath.PLOTDIR)
+
 def run_plot(input):
     """
 

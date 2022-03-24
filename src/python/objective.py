@@ -1,8 +1,9 @@
 import os
 import numpy as np
+import functools
 
 from src.python import parameters_setting as pm, ccdb_connection as cc, run_reco, run_plots
-from config import globalpath
+from src.python import globalpath
 from src.python import tools
 
 
