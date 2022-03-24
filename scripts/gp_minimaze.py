@@ -16,7 +16,7 @@
 import sys
 import os
 
-from config import globalpath
+from src.python import globalpath
 
 from yaml import load, BaseLoader
 from skopt import gp_minimize
@@ -27,7 +27,7 @@ from skopt.utils import use_named_args
 
 from src.python.tools import init_opt
 from src.python.objective import obj_cluster_chi_square, obj_chi_and_diff, obj_diff
-from src.python.tools import read_check, init_opt, timer
+from src.python.tools import read_check, init_opt, timer, missing_input
 
 
 
@@ -36,19 +36,15 @@ if __name__ == "__main__":
     with open(sys.argv[1]) as file:
         inputs = load(file, BaseLoader)
 
+    for key, val in inputs:
+        missing_input(val, key)
+
     data_dir = inputs['data_dir']
     yaml_space_file = inputs['space']
     number_of_calls = inputs['total_calls']
     initial_random_calls = inputs['random_calls']
     id_number = inputs['id_number']
-
-    if len(inputs) < 7:
-        checkpoint_file = 'random_test'
-    elif len(inputs) == 7:
-        checkpoint_file = inputs['pickle_file']
-    else:
-        print('Too many arguments')
-        sys.exit()
+    checkpoint_file = inputs['pickle_file']
 
     init_opt(data_dir, os.path.basename(sys.argv[1]).split('.')[0], id_number)
 

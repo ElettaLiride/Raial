@@ -45,6 +45,11 @@ def read_check(name, dir="output/opt/"):
         y_old = old.func_vals
     return x_old, y_old
 
+def missing_input(inp, key):
+    if inp == '':
+        print(f'MISSING {key} input')
+        exit()
+
 
 def check_if_dir():
     pass
