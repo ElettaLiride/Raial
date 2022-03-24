@@ -24,7 +24,7 @@ def run_plot(input):
     if os.path.isdir(input):
         for file in os.listdir(input):
             if os.path.isfile(f'{input}/{file}'):
-                if int(file.split(sep='_')[4].split(sep='.')[0]) == globalpath.ITER:
+                if int(file.split(sep='_')[4]) == globalpath.ITER:
                     files += " "
                     files += f'{input}/{file}'
     else:
