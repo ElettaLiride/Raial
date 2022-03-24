@@ -26,7 +26,8 @@ else:
 CALIBRATION_TABLE = "/calibration/rich/misalignments"
 VARIATION = "default"
 USER = "anonymous"
-CALIBRATION_CONNECTION = f'{os.getenv(CCDB_CONNECTION)}'
+CCDBenv = os.getenv('CCDB_CONNECTION')
+CALIBRATION_CONNECTION = f'{CCDBenv}'
 
 # Optimization configuration
 RN = 1
