@@ -8,5 +8,6 @@ config/rich.yaml
 config/globalpath.py
 scripts/__pycache__/*
 config/__pycache__/*
+config/optimization/*
 src/python/__pycache__/*
 .idea/*
