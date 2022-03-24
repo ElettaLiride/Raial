@@ -67,7 +67,7 @@ def change_variation_for_reco(variation):
     globalpath.RICHYAML = f'{globalpath.VARIATION}.yml'
 
 
-def init_opt(data_dir, yaml_file_name, RN, variation):
+def init_opt(data_dir, yaml_file_name, RN):
     globalpath.PLOTDIR = f'{globalpath.PLOTDIR}/{yaml_file_name}'
     globalpath.RECODIR = f'{globalpath.RECODIR}/{yaml_file_name}'
     globalpath.FILTDIR = f'{globalpath.FILTDIR}/{data_dir}'
