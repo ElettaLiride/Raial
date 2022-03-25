@@ -3,7 +3,7 @@ export RICHGEOAL=$PWD
 export PYTHONPATH=$PYTHONPATH:$RICHGEOAL
 export PATH=$PATH:/$RICHGEOAL/bin
 
-if [[ ! -f "$RICHGEOAL/config/ccdbsnapshot/ccdb_4.3.2.sqlite"]]
+if [[ ! -f "$RICHGEOAL/config/ccdbsnapshot/ccdb_4.3.2.sqlite" ]]
 then
   wget https://clasweb.jlab.org/clas12offline/sqlite/ccdb/clas12tags/cccdb_4.3.2.sqlite
   mv cccdb_4.3.2.sqlite $RICHGEOAL/config/ccdbsnapshot
