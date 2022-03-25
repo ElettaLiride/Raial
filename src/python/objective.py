@@ -91,6 +91,7 @@ def minimize_chi():
     lines = f.readlines()
     chi2 = abs(float(lines[0].split()[-1].split('=')[-1]))
 
+    print(f'Computed score for iteration {globalpath.ITER}: {chi2}')
     return chi2
 
 
@@ -114,6 +115,7 @@ def minimize_chi_and_diff():
     mean = mean / (nline - 1)
     mean = np.exp(-1/mean) + chi2
 
+    print(f'Computed score for iteration {globalpath.ITER}: {mean}')
     return mean
 
 
@@ -135,6 +137,8 @@ def minimize_mean_diff():
 
     mean = mean / (nline - 1)
     mean = 1 - np.exp(mean)
+
+    print(f'Computed score for iteration {globalpath.ITER}: {mean}')
 
     return mean
 

@@ -5,7 +5,7 @@ from src.python import tools as t
 from src.python import globalpath
 
 
-@t.timer
+#@t.timer
 def run_reco(fileIN, fileOUT=None, yaml=globalpath.RICHYAML):
 
     """

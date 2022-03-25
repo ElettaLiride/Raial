@@ -5,7 +5,7 @@ from src.python import globalpath
 from src.python import tools as t
 
 
-@t.timer
+#@t.timer
 def run_plot(input):
     """
 
