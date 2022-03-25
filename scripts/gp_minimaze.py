@@ -26,7 +26,7 @@ from skopt.utils import use_named_args
 
 
 from src.python.tools import init_opt
-from src.python.objective import minimize_chi, obj_chi_and_diff, obj_diff
+from src.python.objective import minimize_chi
 from src.python.tools import read_check, init_opt, timer, missing_input
 
 
