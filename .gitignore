@@ -5,7 +5,7 @@ output/opt/*
 config/ccdbsnapshot/*.sqlite
 data/*
 config/rich.yaml
-config/globalpath.py
+src/python/globalpath.py
 scripts/__pycache__/*
 config/__pycache__/*
 config/optimization/*
