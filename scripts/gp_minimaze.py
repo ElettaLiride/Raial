@@ -26,7 +26,7 @@ from skopt.utils import use_named_args
 
 
 from src.python.tools import init_opt
-from src.python.objective import obj_cluster_chi_square, obj_chi_and_diff, obj_diff
+from src.python.objective import minimize_chi, obj_chi_and_diff, obj_diff
 from src.python.tools import read_check, init_opt, timer, missing_input
 
 
@@ -36,13 +36,13 @@ if __name__ == "__main__":
     with open(sys.argv[1]) as file:
         inputs = load(file, BaseLoader)
 
-    for key, val in inputs:
+    for key, val in inputs.items():
         missing_input(val, key)
 
     data_dir = inputs['data_dir']
     yaml_space_file = inputs['space']
-    number_of_calls = inputs['total_calls']
-    initial_random_calls = inputs['random_calls']
+    number_of_calls = int(inputs['total_calls'])
+    initial_random_calls = int(inputs['random_calls'])
     id_number = inputs['id_number']
     checkpoint_file = inputs['pickle_file']
 
@@ -52,7 +52,7 @@ if __name__ == "__main__":
 
     space = list(Space.from_yaml(yaml_space_file))
     dimension = use_named_args(space)
-    obj = dimension(obj_cluster_chi_square)
+    obj = dimension(minimize_chi)
 
     checksaver = CheckpointSaver(checkpoint_path='output/opt/' + checkpoint_file + '.pkl', store_objective=False)
     res = gp_minimize(func=obj,
