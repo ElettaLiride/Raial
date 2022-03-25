@@ -26,44 +26,6 @@ def read_output(string):
     return nice_output, chi
 
 
-def compute_score(nice_output, chi):
-    return sum([abs(el) for el in nice_output]) / len(nice_output) + chi
-
-
-def make_mean_plus_chi2(file):
-    f = open(file, "r")
-    nline = 0
-    mean = 0
-    chi2 = 0
-    lines = f.readlines()
-
-    for line in lines:
-        if nline==0:
-            chi2 = abs(float(line.split()[-1].split('=')[-1]))
-        else:
-            mean = mean + abs(float(line.split()[-1].split('=')[-1]))
-        nline = nline + 1
-    mean = mean/(nline-1) + chi2
-    f.close()
-    return mean
-
-
-def make_mean_all(file):
-    f = open(file, "r")
-    nline = 0
-    mean = 0
-    while (True):
-        nline += 1
-        line = f.readline()
-        if not line:
-            break
-
-        mean = mean + abs(float(line.split()[-1].split('=')[-1]))
-    mean = mean / nline
-    f.close()
-    return mean
-
-
 def pass_dict_param_to_table(par_dict, table):
     for layer, val in par_dict.items():
         module = [4, int(layer.split('_')[1]), 0]
@@ -105,16 +67,16 @@ def main_obj(**params):
 def applyscore(func):
     """Apply the score to the main objective"""
     @functools.wraps(func)
-    def wrapper_score(**kwargs):
+    def wrapper_score(*args, **kwargs):
         main_obj(**kwargs)
-        value = func(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
+        value = func()
         return value
-    return applyscore
+    return wrapper_score
 
 
 #### SCORING
 def runthescore(datadir):
-    tools.init_opt(datadir, 'test', 1, globalpath.VARIATION)
+    tools.init_opt(datadir, 'test', globalpath.RN)
     for file in os.listdir(globalpath.FILTDIR):
         if os.path.isfile(f'{globalpath.FILTDIR}/{file}'):
             run_reco.run_reco(f'{globalpath.FILTDIR}/{file}')
@@ -123,7 +85,8 @@ def runthescore(datadir):
 
 
 @applyscore
-def minimize_chi(file):
+def minimize_chi():
+    file = f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out'
     f = open(file, "r")
     lines = f.readlines()
     chi2 = abs(float(lines[0].split()[-1].split('=')[-1]))
@@ -132,7 +95,8 @@ def minimize_chi(file):
 
 
 @applyscore
-def minimize_chi_and_diff(file):
+def minimize_chi_and_diff():
+    file = f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out'
     f = open(file, "r")
     nline = 0
     mean = 0
@@ -154,7 +118,8 @@ def minimize_chi_and_diff(file):
 
 
 @applyscore
-def minimize_mean_diff(file):
+def minimize_mean_diff():
+    file = f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out'
     f = open(file, "r")
     nline = 0
     mean = 0
@@ -172,30 +137,6 @@ def minimize_mean_diff(file):
     mean = 1 - np.exp(mean)
 
     return mean
-
-
-#### OBJECTIVE
-
-
-def obj_cluster_chi_square(**params):
-    main_obj(**params)
-    obj_score = minimize_chi(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
-    print("score: ", obj_score)
-    return obj_score
-
-
-def obj_chi_and_diff(**params):
-    main_obj(**params)
-    obj_score = minimize_chi_and_diff(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
-    print("score: ", obj_score)
-    return obj_score
-
-
-def obj_diff(**params):
-    main_obj(**params)
-    obj_score = minimize_mean_diff(f'{globalpath.PLOTDIR}/result_{globalpath.RN}_{globalpath.ITER}.out')
-    print("score: ", obj_score)
-    return obj_score
 
 
 
