@@ -9,8 +9,6 @@ then
   mv cccdb_4.3.2.sqlite $RICHGEOAL/config/ccdbsnapshot
 fi
 
-cp $RICHGEOAL/config/ccdbsnapshot/ccdb_4.3.2.sqlite $RICHGEOAL/config/ccdbsnapshot/ccdb_$1.sqlite
-export CCDB_CONNECTION=sqlite:///$RICHGEOAL/config/ccdbsnapshot/ccdb_$1.sqlite
 
 ## SetUp for jlab farm
 if [[ -d "/group/" ]]
@@ -31,3 +29,5 @@ export HIPO4LIB=$HIPO4ROOT/lib
 export HIPO4INC=$HIPO4ROOT/hipo4
 export LZ4DIR=$HIPO4ROOT/lz4
 
+cp $RICHGEOAL/config/ccdbsnapshot/ccdb_4.3.2.sqlite $RICHGEOAL/config/ccdbsnapshot/ccdb_$1.sqlite
+export CCDB_CONNECTION=sqlite:///$RICHGEOAL/config/ccdbsnapshot/ccdb_$1.sqlite
