@@ -45,6 +45,7 @@ if __name__ == "__main__":
     initial_random_calls = int(inputs['random_calls'])
     id_number = inputs['id_number']
     checkpoint_file = inputs['pickle_file']
+    globalpath.STARTING_TABLE = inputs['starting_table']
 
     init_opt(data_dir, os.path.basename(sys.argv[1]).split('.')[0], id_number)
 

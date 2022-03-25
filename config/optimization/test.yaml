@@ -4,3 +4,4 @@ total_calls: 1
 random_calls: 1
 id_number: 101
 pickle_file: test-100
+starting_table: config/table/python/webccdb_python.txt
