@@ -65,12 +65,14 @@ def change_variation_for_reco(variation):
 def init_opt(data_dir, yaml_file_name, RN):
     globalpath.PLOTDIR = f'{globalpath.PLOTDIR}/{yaml_file_name}'
     globalpath.RECODIR = f'{globalpath.RECODIR}/{yaml_file_name}'
-    globalpath.FILTDIR = f'{globalpath.FILTDIR}/{data_dir}'
+    globalpath.FILTDIR = f'{globalpath.FILTDIR}/{yaml_file_name}'
 
     #change_variation_for_reco(globalpath.VARIATION)
     mkdir(globalpath.RECODIR)
     mkdir(globalpath.PLOTDIR)
+    mkdir(globalpath.FILTDIR)
 
+    runcommand(f'cp {globalpath.RICHGEOAL}/filter/layer0/* {globalpath.FILTDIR}')
     globalpath.RN = RN
 
 
