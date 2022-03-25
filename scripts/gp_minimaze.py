@@ -16,15 +16,14 @@
 import sys
 import os
 
-from src.python import globalpath
-
+import pandas as pd
 from yaml import load, BaseLoader
 from skopt import gp_minimize
 from skopt import Space
 from skopt.callbacks import CheckpointSaver
 from skopt.utils import use_named_args
 
-
+from src.python import globalpath
 from src.python.tools import init_opt
 from src.python.objective import minimize_chi
 from src.python.tools import read_check, init_opt, timer, missing_input
@@ -45,7 +44,7 @@ if __name__ == "__main__":
     initial_random_calls = int(inputs['random_calls'])
     id_number = inputs['id_number']
     checkpoint_file = inputs['pickle_file']
-    globalpath.STARTING_TABLE = inputs['starting_table']
+    globalpath.STARTING_TABLE = pd.read_table(inputs['starting_table'], sep='-')
 
     init_opt(data_dir, os.path.basename(sys.argv[1]).split('.')[0], id_number)
 

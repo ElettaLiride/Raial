@@ -67,13 +67,16 @@ def init_opt(data_dir, yaml_file_name, RN):
     globalpath.RECODIR = f'{globalpath.RECODIR}/{yaml_file_name}'
     globalpath.FILTDIR = f'{globalpath.FILTDIR}/{yaml_file_name}'
 
-    #change_variation_for_reco(globalpath.VARIATION)
+    data_dir_path = f'{globalpath.RICHGEOAL}/output/filter/{data_dir}'
+
     mkdir(globalpath.RECODIR)
     mkdir(globalpath.PLOTDIR)
     mkdir(globalpath.FILTDIR)
 
-    runcommand(f'cp {globalpath.RICHGEOAL}/filter/layer0/* {globalpath.FILTDIR}')
-    globalpath.RN = RN
+    for f in os.listdir(f'{data_dir_path}'):
+        runcommand(f'cp {data_dir_path}/{f} {globalpath.FILTDIR}', output=True)
+
+        globalpath.RN = RN
 
 
 def timer(func):
