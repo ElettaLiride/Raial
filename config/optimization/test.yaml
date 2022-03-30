@@ -1,7 +1,7 @@
 data_dir: layer0
 space: config/spaces/allrich/allrich_allpar.yaml
-total_calls: 1
+total_calls: 3
 random_calls: 1
 id_number: 101
 pickle_file: test-100
-starting_table: config/table/python/webccdb_python.txt
+starting_table: config/table/python/starting_table_python.txt

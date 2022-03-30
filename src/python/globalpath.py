@@ -11,8 +11,8 @@ RECODIR = f'{RICHGEOAL}/output/reco'
 OPTIDIR = f'{RICHGEOAL}/output/opt'
 BINDIR = f'{RICHGEOAL}/bin'
 
-PRINTplot = True
-PRINTreco = True
+PRINTplot = False
+PRINTreco = False
 
 # Reco configuration
 RICHYAML = f'{RICHGEOAL}/config/rich.yaml'

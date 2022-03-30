@@ -61,6 +61,30 @@ def change_variation_for_reco(variation):
 
     globalpath.RICHYAML = f'{globalpath.VARIATION}.yml'
 
+def init_optimization(data_dir, yaml_file, RN):
+    mkdir(path=f'test_{RN}')
+
+    for f in os.listdir(f'config'):
+        if os.path.isfile(f'config/{f}'):
+            runcommand(f'cp config/{f} test_{RN}', output=True)
+
+    runcommand(f'cp {yaml_file} test_{RN}')
+
+    globalpath.PLOTDIR = f'test_{RN}/plot'
+    globalpath.RECODIR = f'test_{RN}/reco'
+    globalpath.FILTDIR = f'test_{RN}/filter'
+
+    data_dir_path = f'{globalpath.RICHGEOAL}/output/filter/{data_dir}'
+
+    mkdir(globalpath.RECODIR)
+    mkdir(globalpath.PLOTDIR)
+    mkdir(globalpath.FILTDIR)
+
+    for f in os.listdir(f'{data_dir_path}'):
+        runcommand(f'cp {data_dir_path}/{f} {globalpath.FILTDIR}', output=True)
+
+        globalpath.RN = RN
+
 
 def init_opt(data_dir, yaml_file_name, RN):
     globalpath.PLOTDIR = f'{globalpath.PLOTDIR}/{yaml_file_name}'
