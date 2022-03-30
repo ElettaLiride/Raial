@@ -11,8 +11,8 @@ RECODIR = f'{RICHGEOAL}/output/reco'
 OPTIDIR = f'{RICHGEOAL}/output/opt'
 BINDIR = f'{RICHGEOAL}/bin'
 
-PRINTplot = False
-PRINTreco = False
+PRINTplot = True
+PRINTreco = True
 
 # Reco configuration
 RICHYAML = f'{RICHGEOAL}/config/rich.yaml'
@@ -21,6 +21,7 @@ if RICHGEOAL.split(sep='/')[1] == 'work':
     RECOUTIL = '/work/clas12/users/devita/rich/oldVersionWithNewGeo/clas12-offline-software/coatjava/bin/recon-util'
 else:
     RECOUTIL = 'recon-util'
+RICHPLOTBIN = os.getenv('RICHPLOTBIN')
 
 # Calibration connection
 CALIBRATION_TABLE = "/calibration/rich/misalignments"

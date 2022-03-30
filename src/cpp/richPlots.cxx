@@ -566,7 +566,7 @@ int LoadAerogelData()
 
   FILE *fCCDB = fopen(aerogel_dat.c_str(), "r");
   if (fCCDB) {
-    printf("Reading aerogel CCDB\n");
+    printf("Reading aerogel CCDB %s \n", aerogel_dat.c_str());
     int layer, tile, sector, thick;
     double val[12];
     while (fscanf(fCCDB, "%d %d %d %d", &sector, &layer, &tile, &thick) != EOF) {

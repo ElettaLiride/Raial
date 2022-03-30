@@ -31,3 +31,15 @@ export LZ4DIR=$HIPO4ROOT/lz4
 
 cp $RICHGEOAL/config/ccdbsnapshot/ccdb_4.3.2.sqlite $RICHGEOAL/config/ccdbsnapshot/ccdb_$1.sqlite
 export CCDB_CONNECTION=sqlite:///$RICHGEOAL/config/ccdbsnapshot/ccdb_$1.sqlite
+
+# changing Aerogel data reading creating a new file
+cp config/Aerogel_ccdb.dat config/Aerogel_ccdb_$1.dat
+cd src/cpp
+cp richPlots.cxx richPlots_$1.cxx
+sed -i "s|Aerogel_ccdb.dat|Aerogel_ccdb_$1.dat|" richPlots_$1.cxx
+sed -i "s|richPlots|richPlots_$1|" Makefile
+make
+sed -i "s|richPlots_$1|richPlots|" Makefile
+rm richPlots_$1.cxx
+cd $RICHGEOAL
+export RICHPLOTBIN=richPlots_$1
