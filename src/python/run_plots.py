@@ -26,7 +26,7 @@ def run_plot(input):
                 print(file.split(sep='_')[5].split('.')[0])
                 print(globalpath.ITER)
                 print(globalpath.RN)
-                if int(file.split(sep='_')[4]) == globalpath.ITER and int(file.split(sep='_')[5].split('.')[0]) == globalpath.RN:
+                if int(file.split(sep='_')[4]) == globalpath.ITER and int(file.split(sep='_')[5].split('.')[0]) == int(globalpath.RN):
                     files += " "
                     files += f'{input}/{file}'
     else:
@@ -40,4 +40,7 @@ def run_plot(input):
 
 
 if __name__ == "__main__":
+    globalpath.ITER=1
+    globalpath.RN=101
+    globalpath.PRINTplot=True
     _ = run_plot(sys.argv[1])

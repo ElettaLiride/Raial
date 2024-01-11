@@ -2,6 +2,8 @@ import os
 import sys
 
 from src.python import tools as t
+from src.python import globalpath
+
 
 RICHGEOAL = os.getenv("RICHGEOAL")
 
@@ -20,6 +22,49 @@ recon_util = RICHGEOAL + "/work/clas12/users/devita/rich/oldVersionWithNewGeo/cl
                          "/bin/recon-util"
 python_plot = RICHGEOAL + "/scripts/run_plots.py"
 rich_plot = RICHGEOAL + "/work/clas12/users/costantini/RICH_alignment/scoring/RichAI_Plots/richPlots"
+
+
+def add_job_1(WF, filelist, RN, space_yaml, config_yaml):
+    size = 0
+    for fname in filelist:
+        size += os.path.getsize(fname)/1024./1024.*1.15
+    cmd = "swif add-job " +  "-workflow " + WF
+    cmd += " -ram " + ram
+    cmd += " -track " + track
+    cmd += " -disk " + "{0:.0f}".format(size)
+    cmd += " -project clas12"
+    cmd += " -phase " + phase
+    cmd += " -name " + name
+    cmd += " -time " + time
+    cmd += " -shell /bin/bash"
+    cmd += " -input " + " file:" + aerogel_dat
+    cmd += " -input " + " file:" + ccdb_file
+    cmd += " -input " + " file:" + set_file
+    cmd += " -input " + " file:" + python_reco
+    cmd += " -input " + " file:" + recon_util
+    cmd += " -input " + " file:" + python_plot
+    cmd += " -input " + " file:" + rich_plot
+
+    cmd += " -input " + " file:" + yaml_opt
+    cmd += " -input " + " file:" + yaml_space
+    cmd += " -input " + " file:" + yaml_reco
+    cmd += " -input " + " file:" + ccdb_sqlite
+    cmd += " -input " + " file:" + aerogel_dat
+
+    cmd += " -input " + " file:" + rich_plot
+    cmd += " -input " + " file:" + rich_reco
+    cmd += " -input " + " file:" + rich_objective
+    cmd += " -input " + " file:" + rich_global
+    cmd += " -input " + " file:" + rich_util
+
+    cmd += " -input " + " file:" + bash_script
+
+
+    for fname in filelist:
+        cmd += " -input " + os.path.basename(fname) + " file:" + fname
+
+    cmd += " ./run_opt " + filelist + " " + RN + " " + yaml
+    _ = t.runcommand(cmd)
 
 def add_job(WF, filelist, RN, yaml):
     size = 0
